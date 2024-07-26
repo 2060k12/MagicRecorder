@@ -1,21 +1,28 @@
 //
-//  HomeViewController.swift
+//  ProfileViewController.swift
 //  Magic Recorder
 //
 //  Created by Pranish Pathak on 26/7/2024.
 //
 
 import UIKit
-import AVFoundation
-class HomeViewController: UIViewController {
 
-  
+class ProfileViewController: UIViewController {
+
+    // initializing Profile repository
     
-    @IBOutlet weak var recordButtonOnPressed: UIButton!
+    
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    @IBOutlet weak var currentUserName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
+        let repository = ProfileRepository()
+        repository.getCurrentUserProfileInfo()
+        let currentUserDetails = repository.userDetails
+        
+        currentUserName.text = currentUserDetails?.fullName
         
         
     }

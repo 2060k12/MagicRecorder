@@ -67,6 +67,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ybY-cj-dwg">
+                                <rect key="frame" x="186" y="416" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -75,6 +79,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="hib-tL-7HN" id="FrD-cp-9pV"/>
                         <outlet property="passwordTextField" destination="cEk-pZ-qnA" id="Etz-TD-7e0"/>
+                        <outlet property="progressIndicator" destination="ybY-cj-dwg" id="IVj-Kx-8jM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -137,17 +142,23 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
                             </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="jZL-xy-CdQ">
+                                <rect key="frame" x="186" y="372" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1xA-NH-ZXh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ked-PH-bpp"/>
                     <connections>
+                        <outlet property="confirmPasswordTextFIeld" destination="w8Y-bD-hXB" id="a6L-1q-rlf"/>
                         <outlet property="confirmPasswordTextField" destination="w8Y-bD-hXB" id="LlF-I8-bkc"/>
-                        <outlet property="emailTextField" destination="eRN-ez-hGq" id="eba-Lv-a4t"/>
-                        <outlet property="fullNameTextField" destination="Awy-aH-QCP" id="zVI-tI-IZN"/>
+                        <outlet property="emailTextField" destination="eRN-ez-hGq" id="vSx-Cc-Is8"/>
+                        <outlet property="fullNameTextField" destination="Awy-aH-QCP" id="Jcq-In-bQT"/>
                         <outlet property="passwordTextField" destination="wvP-0z-bvA" id="3LH-Ov-392"/>
-                        <outlet property="phoneTextField" destination="Ryh-IY-ffo" id="fKM-YD-asZ"/>
+                        <outlet property="phoneTextField" destination="Ryh-IY-ffo" id="chX-Xp-Cqm"/>
+                        <outlet property="progressIndicator" destination="jZL-xy-CdQ" id="f7Y-cN-2KA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XDr-lh-Mzq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -170,10 +181,10 @@
             </objects>
             <point key="canvasLocation" x="1815" y="859"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="qfR-fl-AMm">
             <objects>
-                <viewController id="uPw-rz-vYN" sceneMemberID="viewController">
+                <viewController id="uPw-rz-vYN" customClass="ProfileViewController" customModule="Magic_Recorder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bvf-HB-1JL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -223,6 +234,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="person" catalog="system" id="BD1-w9-uZg"/>
                     <navigationItem key="navigationItem" id="uAF-J1-bb7"/>
+                    <connections>
+                        <outlet property="currentUserName" destination="REl-ko-Js1" id="WcI-NF-abv"/>
+                        <outlet property="profileImage" destination="FxL-Ka-MPh" id="obf-KT-VH7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b7Z-yE-K68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -333,6 +348,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="house" catalog="system" id="M3I-z4-qvU"/>
                     <navigationItem key="navigationItem" id="dDb-UR-ee0"/>
+                    <connections>
+                        <outlet property="recordButtonOnPressed" destination="v6Z-xJ-IG5" id="iZP-7t-RnP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rsv-XE-epa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

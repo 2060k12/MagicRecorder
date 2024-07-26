@@ -20,8 +20,6 @@ extension Optional where Wrapped == String {
     
 }
 
-
-
 extension String{
     var isWhiteSpace : Bool {
         return self.trimmingCharacters(in: .whitespaces).isEmpty
