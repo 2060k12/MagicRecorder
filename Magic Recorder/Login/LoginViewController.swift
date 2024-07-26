@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     // initializing repository
@@ -19,14 +19,21 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
 
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set the delicate
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
+    
     
     
     // function which will show alert Message in the screen
     func alert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default))
                         self.present(alert, animated: true, completion: nil)}
     
@@ -72,7 +79,18 @@ class LoginViewController: UIViewController {
     @IBAction func registerButtonOnTap(_ sender: Any) {
     }
     
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if(textField == emailTextField){
+            passwordTextField.becomeFirstResponder()
+        }
+        else if(textField == passwordTextField){
+            passwordTextField.resignFirstResponder()
+        }
+    
+        return true
+    }
+    
     
     // MARK: - Navigation
 

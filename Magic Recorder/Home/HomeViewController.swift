@@ -10,15 +10,15 @@ import AVFoundation
 class HomeViewController: UIViewController {
 
   
-    
     @IBOutlet weak var recordButtonOnPressed: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
+        
         
         
     }
+    
+
     
 
     /*

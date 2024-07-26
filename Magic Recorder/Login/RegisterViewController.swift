@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
 //    var receivedContacts : Contacts!
     
     // initializing repository class
@@ -27,17 +27,42 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // setting the delegates
+        fullNameTextField.delegate = self
+        passwordTextField.delegate = self
+        emailTextField.delegate = self
+        phoneTextField.delegate = self
+        confirmPasswordTextField.delegate = self
+        
+        
     }
     
     
     // function which will show alert Message in the screen
     func alert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default))
                         self.present(alert, animated: true, completion: nil)}
     
     
+    
+    
     // Functions for all buttons
+    
+    
+    // both button here exits the Modal
+    // Takes to the login screen
+    
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+
+    @IBAction func backToLoginButtonOnPressed(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    
+    
     @IBAction func registerButtonOnPressed(_ sender: Any) {
         progressIndicator.startAnimating()
         // unwrapping values
@@ -103,6 +128,24 @@ class RegisterViewController: UIViewController {
     
    
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if(textField == fullNameTextField){
+            phoneTextField.becomeFirstResponder()
+        }
+        else if(textField == phoneTextField){
+            emailTextField.becomeFirstResponder()
+        }
+        else if(textField == emailTextField){
+            passwordTextField.becomeFirstResponder()
+        }
+        else if(textField == passwordTextField){
+            confirmPasswordTextField.becomeFirstResponder()
+        }else if(textField == confirmPasswordTextField){
+            confirmPasswordTextField.resignFirstResponder()
+        }
+        
+        return true
+    }
     
     
     

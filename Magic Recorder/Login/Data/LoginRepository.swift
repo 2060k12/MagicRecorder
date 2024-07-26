@@ -19,7 +19,7 @@ class LoginRepository{
     func registerUser(user: Profile, password : String, callBack : @escaping(Bool) -> Void){
         
                 // user details which will bestored in a firestore database
-                var userDetail : [String: Any ] = [
+                let userDetail : [String: Any ] = [
                     "fullName" :user.fullName,
                     "email": user.email!,
                     "phoneNumber" : user.phoneNumber,
@@ -39,7 +39,7 @@ class LoginRepository{
                         .setData(userDetail){
                             error in
                             if let error = error {
-                            
+                                print(error.localizedDescription)
                                 callBack(false)
                             }
                         }

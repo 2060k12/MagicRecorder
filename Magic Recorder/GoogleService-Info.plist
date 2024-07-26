@@ -3,29 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-<string>YOUR_API_KEY_HERE</string>
-<key>GCM_SENDER_ID</key>
-<string>YOUR_GCM_SENDER_ID_HERE</string>
-<key>PLIST_VERSION</key>
-<string>1</string>
-<key>BUNDLE_ID</key>
-<string>com.yourcompany.yourapp</string>
-<key>PROJECT_ID</key>
-<string>your-project-id</string>
-<key>STORAGE_BUCKET</key>
-<string>your-storage-bucket.appspot.com</string>
-<key>IS_ADS_ENABLED</key>
-<false></false>
-<key>IS_ANALYTICS_ENABLED</key>
-<false></false>
-<key>IS_APPINVITE_ENABLED</key>
-<true></true>
-<key>IS_GCM_ENABLED</key>
-<true></true>
-<key>IS_SIGNIN_ENABLED</key>
-<true></true>
-<key>GOOGLE_APP_ID</key>
-<string>YOUR_GOOGLE_APP_ID_HERE</string>
-
+	<string>AIzaSyBjB3zJnDxK2MYME7zaTUW2nenXu979uls</string>
+	<key>GCM_SENDER_ID</key>
+	<string>993178783395</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.pranish.Magic-Recorder</string>
+	<key>PROJECT_ID</key>
+	<string>magicrecorder-caabb</string>
+	<key>STORAGE_BUCKET</key>
+	<string>magicrecorder-caabb.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:993178783395:ios:f40d80b45ad6a32f1db916</string>
 </dict>
 </plist>
