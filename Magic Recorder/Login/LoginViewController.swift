@@ -9,6 +9,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    
+    // initializing repository
+    let repository = LoginRepository()
+    
     // All UI elements
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -33,6 +37,18 @@ class LoginViewController: UIViewController {
     
     // when login button is pressed
     @IBAction func loginButtonOnTap(_ sender: Any) {
+        repository.login(email: emailTextField.text, password: passwordTextField.text){
+            success in
+            if(success){
+                let mainViewController = self.storyboard?.instantiateViewController(identifier: "MainViewController") as?
+                UITabBarController
+                self.view.window?.rootViewController = mainViewController
+                self.view.window?.makeKeyAndVisible()
+            }
+            else {
+                print("Something went Wrong")
+            }
+        }
     }
     
     // when registerButton is Pressed
@@ -49,10 +65,10 @@ class LoginViewController: UIViewController {
         }
         
     }
-    @IBAction func unwindToLoginViewController(_ unwindSegue: UIStoryboardSegue) {
-        let sourceViewController = unwindSegue.source
-        // Use data from the view controller which initiated the unwind segue
-    }
+//    @IBAction func unwindToLoginViewController(_ unwindSegue: UIStoryboardSegue) {
+//        let sourceViewController = unwindSegue.source
+//        // Use data from the view controller which initiated the unwind segue
+//    }
     
 
 }
