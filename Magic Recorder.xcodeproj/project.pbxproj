@@ -12,6 +12,8 @@
 		CE0B9EEF2C5138F500CEE369 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CE0B9EEE2C5138F500CEE369 /* Base */; };
 		CE0B9EF12C5138F600CEE369 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0B9EF02C5138F600CEE369 /* Assets.xcassets */; };
 		CE0B9EF42C5138F600CEE369 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CE0B9EF32C5138F600CEE369 /* Base */; };
+		CE0C707C2C58C16000E7933C /* GallaryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C707B2C58C16000E7933C /* GallaryTVC.swift */; };
+		CE0C707E2C58C1BD00E7933C /* EditScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C707D2C58C1BD00E7933C /* EditScreenVC.swift */; };
 		CE1B5E2E2C536F0A00133B40 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE1B5E2D2C536F0A00133B40 /* FirebaseAuth */; };
 		CE1B5E302C536F0A00133B40 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE1B5E2F2C536F0A00133B40 /* FirebaseFirestore */; };
 		CE1B5E322C536F0A00133B40 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CE1B5E312C536F0A00133B40 /* FirebaseStorage */; };
@@ -39,6 +41,8 @@
 		CE0B9EF02C5138F600CEE369 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE0B9EF32C5138F600CEE369 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE0B9EF52C5138F600CEE369 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE0C707B2C58C16000E7933C /* GallaryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryTVC.swift; sourceTree = "<group>"; };
+		CE0C707D2C58C1BD00E7933C /* EditScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScreenVC.swift; sourceTree = "<group>"; };
 		CE1B5E332C538D8400133B40 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		CE1B5E352C53974C00133B40 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CE1B5E372C53A3B900133B40 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				CE1B5E352C53974C00133B40 /* HomeViewController.swift */,
+				CE0C707D2C58C1BD00E7933C /* EditScreenVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 		CEB2E5CF2C514C65005099A5 /* Gallary */ = {
 			isa = PBXGroup;
 			children = (
+				CE0C707B2C58C16000E7933C /* GallaryTVC.swift */,
 			);
 			path = Gallary;
 			sourceTree = "<group>";
@@ -267,6 +273,7 @@
 			files = (
 				CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */,
 				CE1B5E3C2C53A68F00133B40 /* Profile.swift in Sources */,
+				CE0C707C2C58C16000E7933C /* GallaryTVC.swift in Sources */,
 				CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */,
 				CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */,
 				CE2507EF2C53E223002A905D /* Theme.swift in Sources */,
@@ -276,6 +283,7 @@
 				CE1B5E362C53974C00133B40 /* HomeViewController.swift in Sources */,
 				CE1B5E342C538D8400133B40 /* LoginRepository.swift in Sources */,
 				CE0B9EE82C5138F500CEE369 /* AppDelegate.swift in Sources */,
+				CE0C707E2C58C1BD00E7933C /* EditScreenVC.swift in Sources */,
 				CE2507ED2C53E03C002A905D /* StoreRepository.swift in Sources */,
 				CE1B5E382C53A3B900133B40 /* ProfileViewController.swift in Sources */,
 				CE0B9EEA2C5138F500CEE369 /* SceneDelegate.swift in Sources */,
