@@ -28,6 +28,8 @@
 		CE2507EF2C53E223002A905D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2507EE2C53E223002A905D /* Theme.swift */; };
 		CE2507F22C53F3C9002A905D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE2507F12C53F3C9002A905D /* Kingfisher */; };
 		CE2507F62C53FE13002A905D /* StoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2507F52C53FE13002A905D /* StoreTableViewCell.swift */; };
+		CE776F592C5D0A8B008B0CC7 /* StoreDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776F582C5D0A8B008B0CC7 /* StoreDetailVC.swift */; };
+		CE776F5B2C5D2EDD008B0CC7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776F5A2C5D2EDD008B0CC7 /* Constants.swift */; };
 		CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */; };
 		CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */; };
 		CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5D32C51EDDB005099A5 /* Extensions.swift */; };
@@ -53,6 +55,8 @@
 		CE2507EC2C53E03C002A905D /* StoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreRepository.swift; sourceTree = "<group>"; };
 		CE2507EE2C53E223002A905D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CE2507F52C53FE13002A905D /* StoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableViewCell.swift; sourceTree = "<group>"; };
+		CE776F582C5D0A8B008B0CC7 /* StoreDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailVC.swift; sourceTree = "<group>"; };
+		CE776F5A2C5D2EDD008B0CC7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		CEB2E5D32C51EDDB005099A5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 				CE2507EA2C53E020002A905D /* Data */,
 				CE2507E82C53DFE9002A905D /* StoreTableVC.swift */,
 				CE2507F52C53FE13002A905D /* StoreTableViewCell.swift */,
+				CE776F582C5D0A8B008B0CC7 /* StoreDetailVC.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				CEB2E5D32C51EDDB005099A5 /* Extensions.swift */,
+				CE776F5A2C5D2EDD008B0CC7 /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -273,6 +279,7 @@
 			files = (
 				CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */,
 				CE1B5E3C2C53A68F00133B40 /* Profile.swift in Sources */,
+				CE776F592C5D0A8B008B0CC7 /* StoreDetailVC.swift in Sources */,
 				CE0C707C2C58C16000E7933C /* GallaryTVC.swift in Sources */,
 				CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */,
 				CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */,
@@ -287,6 +294,7 @@
 				CE2507ED2C53E03C002A905D /* StoreRepository.swift in Sources */,
 				CE1B5E382C53A3B900133B40 /* ProfileViewController.swift in Sources */,
 				CE0B9EEA2C5138F500CEE369 /* SceneDelegate.swift in Sources */,
+				CE776F5B2C5D2EDD008B0CC7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
