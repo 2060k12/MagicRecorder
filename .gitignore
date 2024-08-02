@@ -11,6 +11,8 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
+GoogleService-Info
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
