@@ -471,7 +471,7 @@
                                 <rect key="frame" x="0.0" y="68.666666666666686" width="430" height="795"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="h4v-Hl-pep">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="eachCell" id="h4v-Hl-pep" customClass="EachRecordingCell" customModule="Magic_Recorder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="430" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h4v-Hl-pep" id="EPH-LP-Ygg">
@@ -499,6 +499,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="recordingLengthLabel" destination="U9g-3X-4Lk" id="FQG-4r-4pk"/>
+                                            <outlet property="recordingNameLabel" destination="gSy-7G-vxM" id="rw4-vb-zFs"/>
                                             <segue destination="aoj-yd-wjG" kind="show" id="nUk-qV-3fb"/>
                                         </connections>
                                     </tableViewCell>
@@ -508,6 +510,17 @@
                                 <rect key="frame" x="192.66666666666666" y="848" width="45" height="34"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="mic" catalog="system" title=""/>
+                                <connections>
+                                    <action selector="recordButton_onPressed:" destination="jLf-0p-aRf" eventType="touchUpInside" id="1BL-kI-9Yk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zd6-XE-cpP">
+                                <rect key="frame" x="185" y="448.66666666666669" width="60" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Stop"/>
+                                <connections>
+                                    <action selector="stopButton_onPressed:" destination="jLf-0p-aRf" eventType="touchUpInside" id="pVy-xx-JAt"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2V0-xD-9Xi"/>
@@ -516,6 +529,8 @@
                             <constraint firstItem="RWP-SO-2NG" firstAttribute="centerY" secondItem="jZ7-zP-EAY" secondAttribute="centerY" id="5ZK-B4-lbW"/>
                             <constraint firstItem="RWP-SO-2NG" firstAttribute="height" secondItem="2V0-xD-9Xi" secondAttribute="height" id="CSx-AI-P3G"/>
                             <constraint firstItem="v6Z-xJ-IG5" firstAttribute="centerX" secondItem="jZ7-zP-EAY" secondAttribute="centerX" id="MES-EL-gpO"/>
+                            <constraint firstItem="Zd6-XE-cpP" firstAttribute="centerY" secondItem="jZ7-zP-EAY" secondAttribute="centerY" id="VIt-fG-1vP"/>
+                            <constraint firstItem="Zd6-XE-cpP" firstAttribute="centerX" secondItem="jZ7-zP-EAY" secondAttribute="centerX" id="awT-jg-eAd"/>
                             <constraint firstItem="2V0-xD-9Xi" firstAttribute="bottom" secondItem="v6Z-xJ-IG5" secondAttribute="bottom" constant="16" id="hEx-uB-oXa"/>
                             <constraint firstItem="RWP-SO-2NG" firstAttribute="width" secondItem="2V0-xD-9Xi" secondAttribute="width" id="ofe-G8-gRm"/>
                             <constraint firstItem="RWP-SO-2NG" firstAttribute="centerX" secondItem="jZ7-zP-EAY" secondAttribute="centerX" id="pm5-76-g2V"/>
@@ -524,7 +539,7 @@
                     <tabBarItem key="tabBarItem" title="" image="house" catalog="system" id="M3I-z4-qvU"/>
                     <navigationItem key="navigationItem" id="dDb-UR-ee0"/>
                     <connections>
-                        <outlet property="recordButtonOnPressed" destination="v6Z-xJ-IG5" id="iZP-7t-RnP"/>
+                        <outlet property="recordingsTableView" destination="RWP-SO-2NG" id="f7u-oe-njw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rsv-XE-epa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -660,7 +675,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="l1I-Er-u3S"/>
+        <segue reference="VTd-kY-q4X"/>
         <segue reference="Hul-ba-8dh"/>
         <segue reference="Zrg-Wd-jd0"/>
         <segue reference="fSu-ey-dhb"/>

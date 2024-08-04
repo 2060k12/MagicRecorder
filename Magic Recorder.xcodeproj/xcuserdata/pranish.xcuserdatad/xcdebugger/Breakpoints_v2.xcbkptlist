@@ -3,4 +3,26 @@
    uuid = "88961860-56CE-4C93-9EA1-C8ECBFA731F5"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.AddressBreakpoint">
+         <BreakpointContent
+            uuid = "8D4C5CF6-8E1F-4C46-ADB1-4CCE0C37D0FB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = "*0x1e36cf340">
+            <Locations>
+               <Location
+                  uuid = "8D4C5CF6-8E1F-4C46-ADB1-4CCE0C37D0FB - 5b8038364b92c3d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "*0x1e36cf340"
+                  usesParentBreakpointCondition = "Yes">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

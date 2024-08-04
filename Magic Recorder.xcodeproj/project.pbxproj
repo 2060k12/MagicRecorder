@@ -31,6 +31,8 @@
 		CE776F5F2C5D3A00008B0CC7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE776F5E2C5D3A00008B0CC7 /* GoogleService-Info.plist */; };
 		CE776F622C5E67FD008B0CC7 /* StoreTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE776F612C5E67FD008B0CC7 /* StoreTVCell.xib */; };
 		CE776F632C5E67FD008B0CC7 /* StoreTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776F602C5E67FD008B0CC7 /* StoreTVCell.swift */; };
+		CE776F682C5FC9F6008B0CC7 /* EachRecordingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE776F672C5FC9F6008B0CC7 /* EachRecordingCell.xib */; };
+		CE776F692C5FC9F6008B0CC7 /* EachRecordingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776F662C5FC9F6008B0CC7 /* EachRecordingCell.swift */; };
 		CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */; };
 		CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */; };
 		CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5D32C51EDDB005099A5 /* Extensions.swift */; };
@@ -59,6 +61,8 @@
 		CE776F5E2C5D3A00008B0CC7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE776F602C5E67FD008B0CC7 /* StoreTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTVCell.swift; sourceTree = "<group>"; };
 		CE776F612C5E67FD008B0CC7 /* StoreTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreTVCell.xib; sourceTree = "<group>"; };
+		CE776F662C5FC9F6008B0CC7 /* EachRecordingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EachRecordingCell.swift; sourceTree = "<group>"; };
+		CE776F672C5FC9F6008B0CC7 /* EachRecordingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EachRecordingCell.xib; sourceTree = "<group>"; };
 		CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		CEB2E5D32C51EDDB005099A5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 			children = (
 				CE1B5E352C53974C00133B40 /* HomeViewController.swift */,
 				CE0C707D2C58C1BD00E7933C /* EditScreenVC.swift */,
+				CE776F662C5FC9F6008B0CC7 /* EachRecordingCell.swift */,
+				CE776F672C5FC9F6008B0CC7 /* EachRecordingCell.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -270,6 +276,7 @@
 				CE776F5F2C5D3A00008B0CC7 /* GoogleService-Info.plist in Resources */,
 				CE0B9EF42C5138F600CEE369 /* Base in Resources */,
 				CE0B9EEF2C5138F500CEE369 /* Base in Resources */,
+				CE776F682C5FC9F6008B0CC7 /* EachRecordingCell.xib in Resources */,
 				CE776F622C5E67FD008B0CC7 /* StoreTVCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +296,7 @@
 				CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */,
 				CE2507EF2C53E223002A905D /* Theme.swift in Sources */,
 				CE1B5E3A2C53A3D000133B40 /* ProfileRepository.swift in Sources */,
+				CE776F692C5FC9F6008B0CC7 /* EachRecordingCell.swift in Sources */,
 				CE2507E92C53DFE9002A905D /* StoreTableVC.swift in Sources */,
 				CE1B5E362C53974C00133B40 /* HomeViewController.swift in Sources */,
 				CE1B5E342C538D8400133B40 /* LoginRepository.swift in Sources */,

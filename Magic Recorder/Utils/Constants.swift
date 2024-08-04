@@ -11,4 +11,5 @@ import Foundation
 struct const {
     static let StoreCell = "StoreTVCell"
     static let StoreCellReuse = "reusableIdentifierStoreCell"
+    static let EachRecordingCell  = "eachCell"
 }
