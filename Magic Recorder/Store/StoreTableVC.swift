@@ -19,6 +19,8 @@ class StoreTableVC: UITableViewController {
     // when the view loads
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.register(UINib(nibName: const.StoreCell, bundle: nil), forCellReuseIdentifier: const.StoreCellReuse)
 
         
         
@@ -46,7 +48,7 @@ class StoreTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: const.StoreCell, for: indexPath) as! StoreTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: const.StoreCellReuse, for: indexPath) as! StoreTVCell
         let item = listOfThemes[indexPath.row]
         cell.themeNameLabel.text = item.themeName
         
@@ -71,20 +73,15 @@ class StoreTableVC: UITableViewController {
     // when an item is pressed
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         pressedItem = listOfThemes[indexPath.row]
-    }
-    
-    
-    // MARK: - Navigation
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let destinationVC = self.storyboard?.instantiateViewController(withIdentifier: "StoreDetailVC") as? StoreDetailVC{
+            destinationVC.theme = pressedItem
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   
-        if segue.identifier == "storeDetailView" {
-            let destincationVC = segue.destination as! StoreDetailVC
-            destincationVC.theme = pressedItem
+            self.navigationController?.pushViewController(destinationVC, animated: true)
+            
         }
         
         
     }
-    
-
+   
 }

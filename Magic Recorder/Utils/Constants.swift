@@ -9,5 +9,6 @@ import Foundation
 
 
 struct const {
-    static let StoreCell = "storeCell"
+    static let StoreCell = "StoreTVCell"
+    static let StoreCellReuse = "reusableIdentifierStoreCell"
 }

@@ -22,14 +22,15 @@
 		CE1B5E382C53A3B900133B40 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B5E372C53A3B900133B40 /* ProfileViewController.swift */; };
 		CE1B5E3A2C53A3D000133B40 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B5E392C53A3D000133B40 /* ProfileRepository.swift */; };
 		CE1B5E3C2C53A68F00133B40 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B5E3B2C53A68F00133B40 /* Profile.swift */; };
-		CE2507E52C53CD95002A905D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2507E42C53CD95002A905D /* GoogleService-Info.plist */; };
 		CE2507E92C53DFE9002A905D /* StoreTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2507E82C53DFE9002A905D /* StoreTableVC.swift */; };
 		CE2507ED2C53E03C002A905D /* StoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2507EC2C53E03C002A905D /* StoreRepository.swift */; };
 		CE2507EF2C53E223002A905D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2507EE2C53E223002A905D /* Theme.swift */; };
 		CE2507F22C53F3C9002A905D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE2507F12C53F3C9002A905D /* Kingfisher */; };
-		CE2507F62C53FE13002A905D /* StoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2507F52C53FE13002A905D /* StoreTableViewCell.swift */; };
 		CE776F592C5D0A8B008B0CC7 /* StoreDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776F582C5D0A8B008B0CC7 /* StoreDetailVC.swift */; };
 		CE776F5B2C5D2EDD008B0CC7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776F5A2C5D2EDD008B0CC7 /* Constants.swift */; };
+		CE776F5F2C5D3A00008B0CC7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE776F5E2C5D3A00008B0CC7 /* GoogleService-Info.plist */; };
+		CE776F622C5E67FD008B0CC7 /* StoreTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE776F612C5E67FD008B0CC7 /* StoreTVCell.xib */; };
+		CE776F632C5E67FD008B0CC7 /* StoreTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776F602C5E67FD008B0CC7 /* StoreTVCell.swift */; };
 		CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */; };
 		CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */; };
 		CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5D32C51EDDB005099A5 /* Extensions.swift */; };
@@ -50,13 +51,14 @@
 		CE1B5E372C53A3B900133B40 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE1B5E392C53A3D000133B40 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		CE1B5E3B2C53A68F00133B40 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		CE2507E42C53CD95002A905D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE2507E82C53DFE9002A905D /* StoreTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableVC.swift; sourceTree = "<group>"; };
 		CE2507EC2C53E03C002A905D /* StoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreRepository.swift; sourceTree = "<group>"; };
 		CE2507EE2C53E223002A905D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		CE2507F52C53FE13002A905D /* StoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableViewCell.swift; sourceTree = "<group>"; };
 		CE776F582C5D0A8B008B0CC7 /* StoreDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailVC.swift; sourceTree = "<group>"; };
 		CE776F5A2C5D2EDD008B0CC7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CE776F5E2C5D3A00008B0CC7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE776F602C5E67FD008B0CC7 /* StoreTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTVCell.swift; sourceTree = "<group>"; };
+		CE776F612C5E67FD008B0CC7 /* StoreTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreTVCell.xib; sourceTree = "<group>"; };
 		CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		CEB2E5D32C51EDDB005099A5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -96,7 +98,7 @@
 		CE0B9EE62C5138F500CEE369 /* Magic Recorder */ = {
 			isa = PBXGroup;
 			children = (
-				CE2507E42C53CD95002A905D /* GoogleService-Info.plist */,
+				CE776F5E2C5D3A00008B0CC7 /* GoogleService-Info.plist */,
 				CEB2E5D22C51EDCE005099A5 /* Utils */,
 				CEB2E5CF2C514C65005099A5 /* Gallary */,
 				CEB2E5CE2C514C5B005099A5 /* Store */,
@@ -172,8 +174,9 @@
 			children = (
 				CE2507EA2C53E020002A905D /* Data */,
 				CE2507E82C53DFE9002A905D /* StoreTableVC.swift */,
-				CE2507F52C53FE13002A905D /* StoreTableViewCell.swift */,
 				CE776F582C5D0A8B008B0CC7 /* StoreDetailVC.swift */,
+				CE776F602C5E67FD008B0CC7 /* StoreTVCell.swift */,
+				CE776F612C5E67FD008B0CC7 /* StoreTVCell.xib */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -264,9 +267,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE0B9EF12C5138F600CEE369 /* Assets.xcassets in Resources */,
-				CE2507E52C53CD95002A905D /* GoogleService-Info.plist in Resources */,
+				CE776F5F2C5D3A00008B0CC7 /* GoogleService-Info.plist in Resources */,
 				CE0B9EF42C5138F600CEE369 /* Base in Resources */,
 				CE0B9EEF2C5138F500CEE369 /* Base in Resources */,
+				CE776F622C5E67FD008B0CC7 /* StoreTVCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +288,6 @@
 				CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */,
 				CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */,
 				CE2507EF2C53E223002A905D /* Theme.swift in Sources */,
-				CE2507F62C53FE13002A905D /* StoreTableViewCell.swift in Sources */,
 				CE1B5E3A2C53A3D000133B40 /* ProfileRepository.swift in Sources */,
 				CE2507E92C53DFE9002A905D /* StoreTableVC.swift in Sources */,
 				CE1B5E362C53974C00133B40 /* HomeViewController.swift in Sources */,
@@ -293,6 +296,7 @@
 				CE0C707E2C58C1BD00E7933C /* EditScreenVC.swift in Sources */,
 				CE2507ED2C53E03C002A905D /* StoreRepository.swift in Sources */,
 				CE1B5E382C53A3B900133B40 /* ProfileViewController.swift in Sources */,
+				CE776F632C5E67FD008B0CC7 /* StoreTVCell.swift in Sources */,
 				CE0B9EEA2C5138F500CEE369 /* SceneDelegate.swift in Sources */,
 				CE776F5B2C5D2EDD008B0CC7 /* Constants.swift in Sources */,
 			);
