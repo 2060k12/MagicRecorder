@@ -96,6 +96,9 @@
                                         <rect key="frame" x="158.5" y="0.0" width="86" height="34"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="play.fill" catalog="system" title=""/>
+                                        <connections>
+                                            <action selector="playButton_onClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fto-Js-8jU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S9c-0p-4AT">
                                         <rect key="frame" x="316.5" y="0.0" width="86.5" height="34"/>

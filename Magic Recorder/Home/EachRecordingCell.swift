@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import AVFoundation
 
-class EachRecordingCell: UITableViewCell {
+class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     
+
+    
+    var audioPlayer: AVAudioPlayer!
+    var currentRecording : URL!
     
     @IBOutlet weak var recordingUiView: UIView!
     
@@ -40,4 +45,33 @@ class EachRecordingCell: UITableViewCell {
         
      }
     
-}
+    @IBAction func playButton_onClick(_ sender: Any) {
+        
+        playRecording()
+    }
+    
+    
+    func playRecording() {
+            // Convert NSURL to URL if needed
+            guard let url = currentRecording else {
+                print("No recording URL set")
+                return
+            }
+            
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: url)
+                audioPlayer?.delegate = self
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch let error as NSError {
+                print("Error initializing AVAudioPlayer: \(error.localizedDescription)")
+            }
+        }
+        
+            
+        }
+    
+    
+    
+    
+

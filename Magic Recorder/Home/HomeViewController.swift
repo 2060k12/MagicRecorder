@@ -51,6 +51,8 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     // when record button ios pressed
     @IBAction func recordButton_onPressed(_ sender: UIButton) {
         setUpRecorder()
+        audioRecorder.delegate = self
+
         audioRecorder.record()
         //        meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
     }
@@ -59,6 +61,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     @IBAction func stopButton_onPressed(_ sender: UIButton) {
        
             audioRecorder.stop()
+            print(audioRecorder.currentTime)
             audioRecorder = nil
             print("Successfully done")
             recordingsTableView.reloadData()
@@ -123,9 +126,9 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
                     // audio setting of recorded audio
                     let setting  = [
                         AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                                      AVSampleRateKey: 44100,
-                                      AVNumberOfChannelsKey: 2,
-                                      AVEncoderAudioQualityKey:AVAudioQuality.high.rawValue
+                        AVSampleRateKey: 44100,
+                        AVNumberOfChannelsKey: 2,
+                        AVEncoderAudioQualityKey:AVAudioQuality.high.rawValue
                     ]
                     audioRecorder = try AVAudioRecorder(url: getFileUrl(), settings: setting)
                     audioRecorder.delegate = self
@@ -168,11 +171,13 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
                let recording = listOfRecordings[indexPath.row]
                cell.recordingLengthLabel.text = "0:00"
                cell.recordingNameLabel.text = recording.absoluteString
+               cell.currentRecording = recording
 
            } else {
                // Handle the case where the index is out of bounds
                cell.recordingLengthLabel.text = "Unknown"
            }
+        
 
         return cell
     }
@@ -196,6 +201,10 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     }
     
     
+    
+    
+        
+        
     
         
     
