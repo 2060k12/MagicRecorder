@@ -29,7 +29,6 @@ class StoreTableVC: UITableViewController {
             themes in
             self.listOfThemes = themes
             self.storeTableView.reloadData()
-            
         }
 
         for theme in listOfThemes {
@@ -64,8 +63,6 @@ class StoreTableVC: UITableViewController {
         }
         return cell
        
-
-
     }
     
  

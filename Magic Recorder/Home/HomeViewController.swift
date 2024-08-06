@@ -9,8 +9,25 @@ import UIKit
 import AVFoundation
 class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate {
     
+    var listOfRecordings : [URL]!
+    @IBOutlet weak var recordingsTableView: UITableView!
+    
+    var audioRecorder : AVAudioRecorder!
+    var audioPlayer : AVAudioPlayer!
+    var audioRecordingPermission : Bool!
+    var isRecordin = false
+    var isPlaying = false
+    var meterTimer:Timer!
+    
+    var selectedIndexPath: IndexPath?
+
+
+    
+    // This runs before user is able to see the screen
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         listOfRecordings = getAlItems(url: savedDirectory())
 
         Task{
@@ -21,67 +38,15 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             }
         }
         
-        
         recordingsTableView.reloadData()
         recordingsTableView.dataSource = self
         recordingsTableView.delegate = self
+        recordingsTableView.register(UINib(nibName: const.EachRecordingCell, bundle: nil), forCellReuseIdentifier: const.EachRecordingCellReuse)
         
     }
     
-    var listOfRecordings : [URL]!
-    @IBOutlet weak var recordingsTableView: UITableView!
-    
-    
-    // for table view
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return listOfRecordings.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: const.EachRecordingCell, for: indexPath) as! EachRecordingCell
-        // Safely access the listOfRecordings array
-           if indexPath.row < listOfRecordings.count {
-               let recording = listOfRecordings[indexPath.row]
-               cell.recordingLengthLabel.text = recording.absoluteString
-           } else {
-               // Handle the case where the index is out of bounds
-               cell.recordingLengthLabel.text = "Unknown"
-           }
-
-        return cell
-    }
-    
-    
-    func savedDirectory() ->URL {
-        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentDirectory = path[0]
-        return documentDirectory
-    }
-    
-    func getAlItems (url : URL) -> [URL] {
-        let fileManager = FileManager.default
-        do {
-            let items = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [])
-        return items
-        }
-        catch {
-            print("\(error.localizedDescription)")
-            return []
-        }
-    }
-    
-
-  
-    
-    var audioRecorder : AVAudioRecorder!
-    var audioPlayer : AVAudioPlayer!
-    var audioRecordingPermission : Bool!
-    var isRecordin = false
-    var isPlaying = false
-    var meterTimer:Timer!
-
    
+    
     
     // when record button ios pressed
     @IBAction func recordButton_onPressed(_ sender: UIButton) {
@@ -149,9 +114,8 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             return filePath
         }
 
-        
+        // todo:: check permission first
         func setUpRecorder() {
-//            if(audioRecordingPermission) {
                 let session = AVAudioSession.sharedInstance()
                 
                 do {
@@ -171,12 +135,68 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
                 }catch {
                     print ("\(error.localizedDescription)")
                 }
-//            }
-//            else {
-//                print("NO access to microphone")
-//            }
         }
         
+    
+    func savedDirectory() ->URL {
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = path[0]
+        return documentDirectory
+    }
+    
+    func getAlItems (url : URL) -> [URL] {
+        let fileManager = FileManager.default
+        do {
+            let items = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [])
+        return items
+        }
+        catch {
+            print("\(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    // for table view
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return listOfRecordings.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: const.EachRecordingCellReuse, for: indexPath) as! EachRecordingCell
+        // Safely access the listOfRecordings array
+           if indexPath.row < listOfRecordings.count {
+               let recording = listOfRecordings[indexPath.row]
+               cell.recordingLengthLabel.text = "0:00"
+               cell.recordingNameLabel.text = recording.absoluteString
+
+           } else {
+               // Handle the case where the index is out of bounds
+               cell.recordingLengthLabel.text = "Unknown"
+           }
+
+        return cell
+    }
+    
+    // changes the height of the selected row
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let selectedIndexPath = selectedIndexPath, selectedIndexPath == indexPath {
+                   return 200 // Height when selected
+               }
+               return 50 // Initial height
+    }
+    
+    
+    
+    // when any row is selected it updates "selectedIndexPath" variable
+    // which then will be used to change the height of the row
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
+             tableView.beginUpdates()
+             tableView.endUpdates()
+    }
+    
+    
+    
         
     
 

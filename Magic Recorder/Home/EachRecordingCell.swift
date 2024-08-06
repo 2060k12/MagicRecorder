@@ -10,20 +10,34 @@ import UIKit
 class EachRecordingCell: UITableViewCell {
     
     
+    @IBOutlet weak var recordingUiView: UIView!
     
     @IBOutlet weak var recordingNameLabel: UILabel!
     @IBOutlet weak var recordingLengthLabel: UILabel!
     
+    @IBOutlet weak var goBackwardButton: UIButton!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet weak var playPauseButton: UIButton!
+    
+    @IBOutlet weak var goForwardButton: UIButton!
+    
+    @IBOutlet weak var recordingSlider: UISlider!
+    
+    @IBOutlet weak var editRecordingButton: UIButton!
+    
+    @IBOutlet weak var moreMenuButton: UIButton!
+    
+    @IBOutlet weak var sliderMaxLengthLabel: UILabel!
+    
+    
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+     override func awakeFromNib() {
+         super.awakeFromNib()
+      
+     }
 
-        // Configure the view for the selected state
-    }
+     override func setSelected(_ selected: Bool, animated: Bool) {
+        
+     }
     
 }

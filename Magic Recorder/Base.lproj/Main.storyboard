@@ -384,7 +384,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKA-WF-vxO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4940.9302325581393" y="2.5751072961373391"/>
+            <point key="canvasLocation" x="5209" y="-64"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bgA-Jl-dC6">
@@ -470,41 +470,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RWP-SO-2NG">
                                 <rect key="frame" x="0.0" y="68.666666666666686" width="430" height="795"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="eachCell" id="h4v-Hl-pep" customClass="EachRecordingCell" customModule="Magic_Recorder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="430" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h4v-Hl-pep" id="EPH-LP-Ygg">
-                                            <rect key="frame" x="0.0" y="0.0" width="430" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gSy-7G-vxM">
-                                                    <rect key="frame" x="28" y="11.333333333333336" width="127" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="length" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9g-3X-4Lk">
-                                                    <rect key="frame" x="354" y="11.333333333333336" width="48" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="gSy-7G-vxM" firstAttribute="leading" secondItem="EPH-LP-Ygg" secondAttribute="leadingMargin" constant="8" id="foz-3I-fA1"/>
-                                                <constraint firstItem="U9g-3X-4Lk" firstAttribute="centerY" secondItem="EPH-LP-Ygg" secondAttribute="centerY" id="hXc-bP-gf8"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="U9g-3X-4Lk" secondAttribute="trailing" constant="8" id="jWu-hj-RiI"/>
-                                                <constraint firstItem="gSy-7G-vxM" firstAttribute="centerY" secondItem="EPH-LP-Ygg" secondAttribute="centerY" id="zwJ-GF-myR"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="recordingLengthLabel" destination="U9g-3X-4Lk" id="FQG-4r-4pk"/>
-                                            <outlet property="recordingNameLabel" destination="gSy-7G-vxM" id="rw4-vb-zFs"/>
-                                            <segue destination="aoj-yd-wjG" kind="show" id="nUk-qV-3fb"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6Z-xJ-IG5">
                                 <rect key="frame" x="192.66666666666666" y="848" width="45" height="34"/>
@@ -540,6 +505,7 @@
                     <navigationItem key="navigationItem" id="dDb-UR-ee0"/>
                     <connections>
                         <outlet property="recordingsTableView" destination="RWP-SO-2NG" id="f7u-oe-njw"/>
+                        <segue destination="aoj-yd-wjG" kind="show" id="Z5V-aO-23R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rsv-XE-epa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -675,7 +641,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VTd-kY-q4X"/>
+        <segue reference="l1I-Er-u3S"/>
         <segue reference="Hul-ba-8dh"/>
         <segue reference="Zrg-Wd-jd0"/>
         <segue reference="fSu-ey-dhb"/>
