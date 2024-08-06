@@ -9,7 +9,12 @@ import Foundation
 
 
 struct const {
+    // class name
     static let StoreCell = "StoreTVCell"
+    // cell name
     static let StoreCellReuse = "reusableIdentifierStoreCell"
-    static let EachRecordingCell  = "eachCell"
-}
+    static let EachRecordingCell  = "EachRecordingCell"
+    static let EachRecordingCellReuse  = "eachRecordingCellReuse"
+
+    
+    }
