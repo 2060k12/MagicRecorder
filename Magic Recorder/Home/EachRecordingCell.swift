@@ -12,6 +12,8 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     
 
     
+
+    
     var audioPlayer: AVAudioPlayer!
     var currentRecording : URL!
     

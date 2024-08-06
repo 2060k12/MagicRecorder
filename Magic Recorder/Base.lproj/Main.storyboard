@@ -467,44 +467,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RWP-SO-2NG">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RWP-SO-2NG">
                                 <rect key="frame" x="0.0" y="68.666666666666686" width="430" height="795"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6Z-xJ-IG5">
-                                <rect key="frame" x="192.66666666666666" y="848" width="45" height="34"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="mic" catalog="system" title=""/>
-                                <connections>
-                                    <action selector="recordButton_onPressed:" destination="jLf-0p-aRf" eventType="touchUpInside" id="1BL-kI-9Yk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zd6-XE-cpP">
-                                <rect key="frame" x="185" y="448.66666666666669" width="60" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Stop"/>
-                                <connections>
-                                    <action selector="stopButton_onPressed:" destination="jLf-0p-aRf" eventType="touchUpInside" id="pVy-xx-JAt"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c34-iZ-8Mr">
+                                <rect key="frame" x="190.33333333333334" y="847" width="49.666666666666657" height="35"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6Z-xJ-IG5">
+                                        <rect key="frame" x="0.0" y="0.33333333333337123" width="49.666666666666664" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="record.circle" catalog="system" title="">
+                                            <color key="baseForegroundColor" systemColor="systemPinkColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="recordButton_onPressed:" destination="jLf-0p-aRf" eventType="touchUpInside" id="1BL-kI-9Yk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zd6-XE-cpP">
+                                        <rect key="frame" x="1.6666666666666572" y="0.0" width="46.666666666666664" height="35"/>
+                                        <accessibility key="accessibilityConfiguration" label="stopButton"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="stop.fill" catalog="system" title="">
+                                            <color key="baseForegroundColor" systemColor="systemPinkColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="stopButton_onPressed:" destination="jLf-0p-aRf" eventType="touchUpInside" id="pVy-xx-JAt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="v6Z-xJ-IG5" firstAttribute="centerX" secondItem="c34-iZ-8Mr" secondAttribute="centerX" id="6bh-Za-4Hd"/>
+                                    <constraint firstItem="v6Z-xJ-IG5" firstAttribute="centerY" secondItem="c34-iZ-8Mr" secondAttribute="centerY" id="847-H2-7gf"/>
+                                    <constraint firstItem="Zd6-XE-cpP" firstAttribute="centerX" secondItem="c34-iZ-8Mr" secondAttribute="centerX" id="9Se-rg-ggn"/>
+                                    <constraint firstAttribute="height" constant="35" id="E9T-jQ-E4q"/>
+                                    <constraint firstAttribute="width" constant="49.670000000000002" id="bth-gv-xxp"/>
+                                    <constraint firstItem="Zd6-XE-cpP" firstAttribute="centerY" secondItem="c34-iZ-8Mr" secondAttribute="centerY" id="pwE-P4-rPn"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2V0-xD-9Xi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="RWP-SO-2NG" firstAttribute="centerY" secondItem="jZ7-zP-EAY" secondAttribute="centerY" id="5ZK-B4-lbW"/>
-                            <constraint firstItem="RWP-SO-2NG" firstAttribute="height" secondItem="2V0-xD-9Xi" secondAttribute="height" id="CSx-AI-P3G"/>
-                            <constraint firstItem="v6Z-xJ-IG5" firstAttribute="centerX" secondItem="jZ7-zP-EAY" secondAttribute="centerX" id="MES-EL-gpO"/>
-                            <constraint firstItem="Zd6-XE-cpP" firstAttribute="centerY" secondItem="jZ7-zP-EAY" secondAttribute="centerY" id="VIt-fG-1vP"/>
-                            <constraint firstItem="Zd6-XE-cpP" firstAttribute="centerX" secondItem="jZ7-zP-EAY" secondAttribute="centerX" id="awT-jg-eAd"/>
-                            <constraint firstItem="2V0-xD-9Xi" firstAttribute="bottom" secondItem="v6Z-xJ-IG5" secondAttribute="bottom" constant="16" id="hEx-uB-oXa"/>
-                            <constraint firstItem="RWP-SO-2NG" firstAttribute="width" secondItem="2V0-xD-9Xi" secondAttribute="width" id="ofe-G8-gRm"/>
-                            <constraint firstItem="RWP-SO-2NG" firstAttribute="centerX" secondItem="jZ7-zP-EAY" secondAttribute="centerX" id="pm5-76-g2V"/>
+                            <constraint firstItem="2V0-xD-9Xi" firstAttribute="trailing" secondItem="c34-iZ-8Mr" secondAttribute="trailing" constant="190" id="A2G-Qa-1rO"/>
+                            <constraint firstItem="2V0-xD-9Xi" firstAttribute="bottom" secondItem="c34-iZ-8Mr" secondAttribute="bottom" constant="16" id="H6h-8x-3aF"/>
+                            <constraint firstItem="c34-iZ-8Mr" firstAttribute="leading" secondItem="2V0-xD-9Xi" secondAttribute="leading" constant="190.33000000000001" id="u4m-gI-Ze6"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="house" catalog="system" id="M3I-z4-qvU"/>
                     <navigationItem key="navigationItem" id="dDb-UR-ee0"/>
                     <connections>
+                        <outlet property="recordButton" destination="v6Z-xJ-IG5" id="xBq-Gg-aiy"/>
                         <outlet property="recordingsTableView" destination="RWP-SO-2NG" id="f7u-oe-njw"/>
+                        <outlet property="stopButton" destination="Zd6-XE-cpP" id="dsz-eA-b43"/>
                         <segue destination="aoj-yd-wjG" kind="show" id="Z5V-aO-23R"/>
                     </connections>
                 </viewController>
@@ -650,14 +666,18 @@
     <resources>
         <image name="bag" catalog="system" width="128" height="128"/>
         <image name="house" catalog="system" width="128" height="104"/>
-        <image name="mic" catalog="system" width="110" height="128"/>
         <image name="person" catalog="system" width="128" height="121"/>
         <image name="photo" catalog="system" width="128" height="93"/>
+        <image name="record.circle" catalog="system" width="128" height="123"/>
+        <image name="stop.fill" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

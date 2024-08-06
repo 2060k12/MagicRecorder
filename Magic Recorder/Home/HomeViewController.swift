@@ -12,8 +12,10 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     var listOfRecordings : [URL]!
     @IBOutlet weak var recordingsTableView: UITableView!
     
-    var audioRecorder : AVAudioRecorder!
-    var audioPlayer : AVAudioPlayer!
+    var recorder : AVAudioRecorder!
+    var player : AVAudioPlayer!
+    var timer: Timer?
+    var url:URL?
     var audioRecordingPermission : Bool!
     var isRecordin = false
     var isPlaying = false
@@ -21,14 +23,17 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     
     var selectedIndexPath: IndexPath?
 
-
+    @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var recordButton: UIButton!
     
     // This runs before user is able to see the screen
     override func viewDidLoad() {
+        // initially hide and disable stop button
+        stopButton.isHidden = true
+        stopButton.isEnabled = false
         super.viewDidLoad()
         
-        
-        listOfRecordings = getAlItems(url: savedDirectory())
+       loadRecordings()
 
         Task{
             do{
@@ -50,22 +55,30 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     
     // when record button ios pressed
     @IBAction func recordButton_onPressed(_ sender: UIButton) {
+        recordButton.isHidden = true
+        recordButton.isEnabled = false
+        
+        stopButton.isHidden = false
+        stopButton.isEnabled = true
+        
         setUpRecorder()
-        audioRecorder.delegate = self
+        recorder.delegate = self
 
-        audioRecorder.record()
-        //        meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
     }
    
     // when stop button is pressed
     @IBAction func stopButton_onPressed(_ sender: UIButton) {
-       
-            audioRecorder.stop()
-            print(audioRecorder.currentTime)
-            audioRecorder = nil
-            print("Successfully done")
-            recordingsTableView.reloadData()
+            recordButton.isHidden = false
+            recordButton.isEnabled = true
         
+            stopButton.isHidden = true
+            stopButton.isEnabled = false
+        
+            recorder.stop()
+            print(recorder.currentTime)
+            recorder = nil
+            print("Successfully done")
+            loadRecordings()
     }
     
     
@@ -99,8 +112,6 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         }
     }
         
-        
-        
         func savingDirectory() ->URL {
             let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let documentDirectory = path[0]
@@ -121,23 +132,22 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         func setUpRecorder() {
                 let session = AVAudioSession.sharedInstance()
                 
-                do {
-                    try session.setActive(true)
-                    // audio setting of recorded audio
-                    let setting  = [
-                        AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                        AVSampleRateKey: 44100,
-                        AVNumberOfChannelsKey: 2,
-                        AVEncoderAudioQualityKey:AVAudioQuality.high.rawValue
-                    ]
-                    audioRecorder = try AVAudioRecorder(url: getFileUrl(), settings: setting)
-                    audioRecorder.delegate = self
-                    audioRecorder.isMeteringEnabled = true
-                    audioRecorder.prepareToRecord()
-                    
-                }catch {
-                    print ("\(error.localizedDescription)")
-                }
+            try? session.setCategory(.playAndRecord, options: .defaultToSpeaker)
+            let filePath = getFileUrl()
+            var recordSetting : [AnyHashable: Any] = [
+                AVFormatIDKey : kAudioFormatMPEG4AAC,
+                AVSampleRateKey :  1600.0,
+                AVNumberOfChannelsKey : 1,
+            ]
+            
+            let audioRecorder = try? AVAudioRecorder(url: filePath, settings: (recordSetting as? [String : Any] ?? [:]))
+            print(filePath)
+            self.recorder = audioRecorder
+            self.recorder.delegate = self
+            self.recorder.isMeteringEnabled = true
+            self.recorder.prepareToRecord()
+            self.recorder.record()
+            
         }
         
     
@@ -158,6 +168,11 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             return []
         }
     }
+    
+    func loadRecordings() {
+            listOfRecordings = getAlItems(url: savingDirectory())
+            recordingsTableView.reloadData()
+        }
     
     // for table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -201,15 +216,6 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     }
     
     
-    
-    
-        
-        
-    
-        
-    
-
-
     
 
     /*
