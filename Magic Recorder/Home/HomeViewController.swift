@@ -9,6 +9,10 @@ import UIKit
 import AVFoundation
 class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate {
     
+    // working with Realm Db
+    // it is an offile database which holds all of our reocrdings details
+    let db = OfflineRepository()
+    
     var listOfRecordings : [URL]!
     @IBOutlet weak var recordingsTableView: UITableView!
     
@@ -118,14 +122,14 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             return documentDirectory
         }
         
-        func getFileUrl () -> URL {
+        func getFileUrl () ->( URL, String ) {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyyMMdd_HHmmss"
             let dateString = formatter.string(from: Date())
             let fileName = dateString
             let filePath = savingDirectory().appendingPathComponent(fileName, conformingTo: .mpeg4Audio)
             print (filePath)
-            return filePath
+            return (filePath, fileName)
         }
 
         // todo:: check permission first
@@ -133,7 +137,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
                 let session = AVAudioSession.sharedInstance()
                 
             try? session.setCategory(.playAndRecord, options: .defaultToSpeaker)
-            let filePath = getFileUrl()
+            let filePath = getFileUrl().0
             var recordSetting : [AnyHashable: Any] = [
                 AVFormatIDKey : kAudioFormatMPEG4AAC,
                 AVSampleRateKey :  1600.0,
@@ -142,6 +146,13 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             
             let audioRecorder = try? AVAudioRecorder(url: filePath, settings: (recordSetting as? [String : Any] ?? [:]))
             print(filePath)
+            
+            // Creating an instance of recording class to be stored in RealmDB
+            let recording = Recording(name: getFileUrl().1, savedPath: filePath)
+            db.insertRecording(recording: recording)
+            db.getPathOfRealmDB()
+            
+            
             self.recorder = audioRecorder
             self.recorder.delegate = self
             self.recorder.isMeteringEnabled = true
