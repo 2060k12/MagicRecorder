@@ -148,10 +148,10 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             print(filePath)
             
             // Creating an instance of recording class to be stored in RealmDB
-            let recording = Recording(name: getFileUrl().1, savedPath: filePath)
+            let recording = Recording(name: getFileUrl().1, savedPath: filePath.absoluteString)
+            // add the current recording path and name into database
             db.insertRecording(recording: recording)
-            db.getPathOfRealmDB()
-            
+            db.getPathOfRealmDB() // for debgging purpose
             
             self.recorder = audioRecorder
             self.recorder.delegate = self
@@ -169,6 +169,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     }
     
     func getAlItems (url : URL) -> [URL] {
+        
         let fileManager = FileManager.default
         do {
             let items = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [])

@@ -8,12 +8,19 @@
 import Foundation
 import RealmSwift
 
+
 class Recording : Object {
-    var name : String
-    var savedPath : URL
-    
-    init(name: String, savedPath: URL) {
+    @objc dynamic var id = UUID().uuidString // Generates Primary Key
+    @objc dynamic var name : String!
+    @objc dynamic var savedPath : String!
+    convenience init(name: String, savedPath: String) {
+        self.init()
         self.name = name
         self.savedPath = savedPath
+    }
+    
+    
+    override class func primaryKey() -> String? {
+        return "id"
     }
 }
