@@ -13,7 +13,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     // it is an offile database which holds all of our reocrdings details
     let db = OfflineRepository()
     
-    var listOfRecordings : [URL]!
+    var listOfRecordings : [Recording]!
     @IBOutlet weak var recordingsTableView: UITableView!
     
     var recorder : AVAudioRecorder!
@@ -181,10 +181,30 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         }
     }
     
+    // gets all recordings from realm db
+    func getAllRecordings() -> [Recording] {
+        
+        var recordings = [Recording]()
+        db.getAllRecordings().forEach {
+            recording in
+            recordings.append(recording)
+        }
+        return recordings
+    }
+    
+//    
+//    func loadRecordings() {
+//            listOfRecordings = getAlItems(url: savingDirectory())
+//            recordingsTableView.reloadData()
+//        }
+    
+    
+    
     func loadRecordings() {
-            listOfRecordings = getAlItems(url: savingDirectory())
+            listOfRecordings = getAllRecordings()
             recordingsTableView.reloadData()
         }
+    
     
     // for table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -197,7 +217,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
            if indexPath.row < listOfRecordings.count {
                let recording = listOfRecordings[indexPath.row]
                cell.recordingLengthLabel.text = "0:00"
-               cell.recordingNameLabel.text = recording.absoluteString
+               cell.recordingNameLabel.text = recording.name
                cell.currentRecording = recording
 
            } else {
