@@ -38,17 +38,17 @@
                         <rect key="frame" x="8" y="44.5" width="323" height="161"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="6dR-23-wQg">
-                                <rect key="frame" x="0.0" y="107" width="323" height="34.5"/>
+                                <rect key="frame" x="0.0" y="107" width="323" height="34"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VoO-Hw-RsE">
-                                        <rect key="frame" x="0.0" y="0.0" width="53.5" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50.5" height="34"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Edit"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="slider.horizontal.3" catalog="system" title=""/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDw-8o-g3H">
-                                        <rect key="frame" x="259.5" y="0.0" width="63.5" height="34.5"/>
+                                        <rect key="frame" x="275" y="0.0" width="48" height="34"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="More"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="trash.fill" catalog="system" title=""/>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -152,6 +152,8 @@
         <image name="gobackward" catalog="system" width="119" height="128"/>
         <image name="goforward" catalog="system" width="119" height="128"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="99"/>
+        <image name="trash.fill" catalog="system" width="117" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

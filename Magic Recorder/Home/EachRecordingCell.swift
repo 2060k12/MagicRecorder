@@ -11,6 +11,7 @@ import AVFoundation
 class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     
 
+    let db = OfflineRepository()
     
 
     
@@ -31,9 +32,7 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     @IBOutlet weak var recordingSlider: UISlider!
     
     @IBOutlet weak var editRecordingButton: UIButton!
-    
-    @IBOutlet weak var moreMenuButton: UIButton!
-    
+        
     @IBOutlet weak var sliderMaxLengthLabel: UILabel!
     
     
@@ -52,6 +51,12 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
         playRecording()
     }
     
+    
+    @IBAction func deleteRecording_onClick(_ sender: Any) {
+        
+        db.removeRecording(recording: currentRecording)
+        
+    }
     
     func playRecording() {
         // Convert NSURL to URL if needed

@@ -33,10 +33,28 @@
 		CE776F632C5E67FD008B0CC7 /* StoreTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776F602C5E67FD008B0CC7 /* StoreTVCell.swift */; };
 		CE776F682C5FC9F6008B0CC7 /* EachRecordingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE776F672C5FC9F6008B0CC7 /* EachRecordingCell.xib */; };
 		CE776F692C5FC9F6008B0CC7 /* EachRecordingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE776F662C5FC9F6008B0CC7 /* EachRecordingCell.swift */; };
+		CE8506F22C6456A1003DE5DB /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8506EF2C6456A1003DE5DB /* Recording.swift */; };
+		CE8506F32C6456A1003DE5DB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8506F02C6456A1003DE5DB /* Repository.swift */; };
+		CE8506F62C6456E0003DE5DB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE8506F52C6456E0003DE5DB /* RealmSwift */; };
+		CE8506F72C645755003DE5DB /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = CE8506F52C6456E0003DE5DB /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */; };
 		CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */; };
 		CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5D32C51EDDB005099A5 /* Extensions.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE8506F82C645755003DE5DB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE8506F72C645755003DE5DB /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CE0B9EE42C5138F500CEE369 /* Magic Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Magic Recorder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +81,8 @@
 		CE776F612C5E67FD008B0CC7 /* StoreTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreTVCell.xib; sourceTree = "<group>"; };
 		CE776F662C5FC9F6008B0CC7 /* EachRecordingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EachRecordingCell.swift; sourceTree = "<group>"; };
 		CE776F672C5FC9F6008B0CC7 /* EachRecordingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EachRecordingCell.xib; sourceTree = "<group>"; };
+		CE8506EF2C6456A1003DE5DB /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
+		CE8506F02C6456A1003DE5DB /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		CEB2E5D32C51EDDB005099A5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -76,6 +96,7 @@
 				CE2507F22C53F3C9002A905D /* Kingfisher in Frameworks */,
 				CE1B5E2E2C536F0A00133B40 /* FirebaseAuth in Frameworks */,
 				CE1B5E302C536F0A00133B40 /* FirebaseFirestore in Frameworks */,
+				CE8506F62C6456E0003DE5DB /* RealmSwift in Frameworks */,
 				CE1B5E322C536F0A00133B40 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +123,7 @@
 		CE0B9EE62C5138F500CEE369 /* Magic Recorder */ = {
 			isa = PBXGroup;
 			children = (
+				CE8506F12C6456A1003DE5DB /* RealmDb */,
 				CE776F5E2C5D3A00008B0CC7 /* GoogleService-Info.plist */,
 				CEB2E5D22C51EDCE005099A5 /* Utils */,
 				CEB2E5CF2C514C65005099A5 /* Gallary */,
@@ -143,6 +165,15 @@
 				CE2507EE2C53E223002A905D /* Theme.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		CE8506F12C6456A1003DE5DB /* RealmDb */ = {
+			isa = PBXGroup;
+			children = (
+				CE8506EF2C6456A1003DE5DB /* Recording.swift */,
+				CE8506F02C6456A1003DE5DB /* Repository.swift */,
+			);
+			path = RealmDb;
 			sourceTree = "<group>";
 		};
 		CEB2E5C72C514BA1005099A5 /* Login */ = {
@@ -214,6 +245,7 @@
 				CE0B9EE02C5138F500CEE369 /* Sources */,
 				CE0B9EE12C5138F500CEE369 /* Frameworks */,
 				CE0B9EE22C5138F500CEE369 /* Resources */,
+				CE8506F82C645755003DE5DB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -225,6 +257,7 @@
 				CE1B5E2F2C536F0A00133B40 /* FirebaseFirestore */,
 				CE1B5E312C536F0A00133B40 /* FirebaseStorage */,
 				CE2507F12C53F3C9002A905D /* Kingfisher */,
+				CE8506F52C6456E0003DE5DB /* RealmSwift */,
 			);
 			productName = "Magic Recorder";
 			productReference = CE0B9EE42C5138F500CEE369 /* Magic Recorder.app */;
@@ -257,6 +290,7 @@
 			packageReferences = (
 				CE1B5E2C2C536F0A00133B40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CE2507F02C53F3C9002A905D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				CE8506F42C6456E0003DE5DB /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = CE0B9EE52C5138F500CEE369 /* Products */;
 			projectDirPath = "";
@@ -302,11 +336,13 @@
 				CE1B5E342C538D8400133B40 /* LoginRepository.swift in Sources */,
 				CE0B9EE82C5138F500CEE369 /* AppDelegate.swift in Sources */,
 				CE0C707E2C58C1BD00E7933C /* EditScreenVC.swift in Sources */,
+				CE8506F32C6456A1003DE5DB /* Repository.swift in Sources */,
 				CE2507ED2C53E03C002A905D /* StoreRepository.swift in Sources */,
 				CE1B5E382C53A3B900133B40 /* ProfileViewController.swift in Sources */,
 				CE776F632C5E67FD008B0CC7 /* StoreTVCell.swift in Sources */,
 				CE0B9EEA2C5138F500CEE369 /* SceneDelegate.swift in Sources */,
 				CE776F5B2C5D2EDD008B0CC7 /* Constants.swift in Sources */,
+				CE8506F22C6456A1003DE5DB /* Recording.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +583,14 @@
 				minimumVersion = 7.12.0;
 			};
 		};
+		CE8506F42C6456E0003DE5DB /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -569,6 +613,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE2507F02C53F3C9002A905D /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		CE8506F52C6456E0003DE5DB /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE8506F42C6456E0003DE5DB /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
