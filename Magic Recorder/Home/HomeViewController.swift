@@ -9,7 +9,11 @@ import UIKit
 import AVFoundation
 class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    var listOfRecordings : [URL]!
+    // working with Realm Db
+    // it is an offile database which holds all of our reocrdings details
+    let db = OfflineRepository()
+    
+    var listOfRecordings : [Recording]!
     @IBOutlet weak var recordingsTableView: UITableView!
     
     var recorder : AVAudioRecorder!
@@ -118,14 +122,14 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             return documentDirectory
         }
         
-        func getFileUrl () -> URL {
+        func getFileUrl () ->( URL, String ) {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyyMMdd_HHmmss"
             let dateString = formatter.string(from: Date())
             let fileName = dateString
             let filePath = savingDirectory().appendingPathComponent(fileName, conformingTo: .mpeg4Audio)
             print (filePath)
-            return filePath
+            return (filePath, fileName)
         }
 
         // todo:: check permission first
@@ -133,7 +137,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
                 let session = AVAudioSession.sharedInstance()
                 
             try? session.setCategory(.playAndRecord, options: .defaultToSpeaker)
-            let filePath = getFileUrl()
+            let filePath = getFileUrl().0
             var recordSetting : [AnyHashable: Any] = [
                 AVFormatIDKey : kAudioFormatMPEG4AAC,
                 AVSampleRateKey :  1600.0,
@@ -142,6 +146,13 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             
             let audioRecorder = try? AVAudioRecorder(url: filePath, settings: (recordSetting as? [String : Any] ?? [:]))
             print(filePath)
+            
+            // Creating an instance of recording class to be stored in RealmDB
+            let recording = Recording(name: getFileUrl().1, savedPath: filePath.absoluteString)
+            // add the current recording path and name into database
+            db.insertRecording(recording: recording)
+            db.getPathOfRealmDB() // for debgging purpose
+            
             self.recorder = audioRecorder
             self.recorder.delegate = self
             self.recorder.isMeteringEnabled = true
@@ -158,6 +169,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     }
     
     func getAlItems (url : URL) -> [URL] {
+        
         let fileManager = FileManager.default
         do {
             let items = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [])
@@ -169,10 +181,30 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         }
     }
     
+    // gets all recordings from realm db
+    func getAllRecordings() -> [Recording] {
+        
+        var recordings = [Recording]()
+        db.getAllRecordings().forEach {
+            recording in
+            recordings.append(recording)
+        }
+        return recordings
+    }
+    
+//    
+//    func loadRecordings() {
+//            listOfRecordings = getAlItems(url: savingDirectory())
+//            recordingsTableView.reloadData()
+//        }
+    
+    
+    
     func loadRecordings() {
-            listOfRecordings = getAlItems(url: savingDirectory())
+            listOfRecordings = getAllRecordings()
             recordingsTableView.reloadData()
         }
+    
     
     // for table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -185,7 +217,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
            if indexPath.row < listOfRecordings.count {
                let recording = listOfRecordings[indexPath.row]
                cell.recordingLengthLabel.text = "0:00"
-               cell.recordingNameLabel.text = recording.absoluteString
+               cell.recordingNameLabel.text = recording.name
                cell.currentRecording = recording
 
            } else {

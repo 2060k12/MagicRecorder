@@ -15,7 +15,7 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
 
     
     var audioPlayer: AVAudioPlayer!
-    var currentRecording : URL!
+    var currentRecording : Recording!
     
     @IBOutlet weak var recordingUiView: UIView!
     
@@ -54,11 +54,14 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     
     
     func playRecording() {
-            // Convert NSURL to URL if needed
-            guard let url = currentRecording else {
-                print("No recording URL set")
-                return
-            }
+        // Convert NSURL to URL if needed
+        guard let record = currentRecording else {
+            print("No recording URL set")
+            return
+        }
+        if let url = URL(string: record.savedPath) {
+            print("Valid URL: \(url)")
+            
             
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
@@ -69,8 +72,7 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
                 print("Error initializing AVAudioPlayer: \(error.localizedDescription)")
             }
         }
-        
-            
+    }
         }
     
     
