@@ -1,5 +1,5 @@
 {
-  "originHash" : "e881ff6c697f27a115ace562dae32e8e7b5c6698a1288ae15a9f17acd6687093",
+  "originHash" : "761a3878d9ed0f44fdea7fd7af4d5a1f3017ccf77cff06a702e99f5107211f69",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -143,6 +143,15 @@
       "state" : {
         "revision" : "e17d61f26df0f0e06f58f6977ba05a097a720106",
         "version" : "1.27.1"
+      }
+    },
+    {
+      "identity" : "swift-video-generator",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:dev-labs-bg/swift-video-generator.git",
+      "state" : {
+        "revision" : "0735b1ea6a9cd28e0fd952e4b1801367fddd5501",
+        "version" : "1.4.1"
       }
     }
   ],

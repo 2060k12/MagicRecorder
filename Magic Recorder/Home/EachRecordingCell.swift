@@ -10,14 +10,15 @@ import AVFoundation
 
 class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     
-
     let db = OfflineRepository()
     
+    var timer: Timer?
 
     
     var audioPlayer: AVAudioPlayer!
     var currentRecording : Recording!
     
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var recordingUiView: UIView!
     
     @IBOutlet weak var recordingNameLabel: UILabel!
@@ -32,19 +33,23 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     @IBOutlet weak var recordingSlider: UISlider!
     
     @IBOutlet weak var editRecordingButton: UIButton!
-        
+    
     @IBOutlet weak var sliderMaxLengthLabel: UILabel!
     
     
-
-     override func awakeFromNib() {
-         super.awakeFromNib()
-      
-     }
-
-     override func setSelected(_ selected: Bool, animated: Bool) {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+   
         
-     }
+
+        }
+        
+    
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        
+    }
     
     @IBAction func playButton_onClick(_ sender: Any) {
         
@@ -57,30 +62,42 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
         db.removeRecording(recording: currentRecording)
         
     }
+  
+    
+    func startTimer(){
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { Timer in
+            if let player = self.audioPlayer {
+                self.recordingSlider.value = Float(player.currentTime)
+            }
+        })
+    }
     
     func playRecording() {
-        // Convert NSURL to URL if needed
+       
         guard let record = currentRecording else {
             print("No recording URL set")
             return
         }
-        if let url = URL(string: record.savedPath) {
-            print("Valid URL: \(url)")
+       
+        
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let url = documentsURL.appendingPathComponent(record.name, conformingTo: .mpeg4Audio)
             
-            
-            do {
+        do{
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
                 audioPlayer?.delegate = self
                 audioPlayer?.prepareToPlay()
+                recordingLengthLabel.text = String(audioPlayer.duration.description)
+                recordingSlider.maximumValue = Float(audioPlayer.duration)
                 audioPlayer?.play()
+                startTimer()
+                
             } catch let error as NSError {
                 print("Error initializing AVAudioPlayer: \(error.localizedDescription)")
-            }
+            
         }
     }
-        }
-    
-    
-    
+}
     
 

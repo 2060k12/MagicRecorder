@@ -40,6 +40,7 @@
 		CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */; };
 		CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */; };
 		CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5D32C51EDDB005099A5 /* Extensions.swift */; };
+		CEDC5B4D2C645C5000138D60 /* swift-video-generator in Frameworks */ = {isa = PBXBuildFile; productRef = CEDC5B4C2C645C5000138D60 /* swift-video-generator */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -95,6 +96,7 @@
 			files = (
 				CE2507F22C53F3C9002A905D /* Kingfisher in Frameworks */,
 				CE1B5E2E2C536F0A00133B40 /* FirebaseAuth in Frameworks */,
+				CEDC5B4D2C645C5000138D60 /* swift-video-generator in Frameworks */,
 				CE1B5E302C536F0A00133B40 /* FirebaseFirestore in Frameworks */,
 				CE8506F62C6456E0003DE5DB /* RealmSwift in Frameworks */,
 				CE1B5E322C536F0A00133B40 /* FirebaseStorage in Frameworks */,
@@ -258,6 +260,7 @@
 				CE1B5E312C536F0A00133B40 /* FirebaseStorage */,
 				CE2507F12C53F3C9002A905D /* Kingfisher */,
 				CE8506F52C6456E0003DE5DB /* RealmSwift */,
+				CEDC5B4C2C645C5000138D60 /* swift-video-generator */,
 			);
 			productName = "Magic Recorder";
 			productReference = CE0B9EE42C5138F500CEE369 /* Magic Recorder.app */;
@@ -291,6 +294,7 @@
 				CE1B5E2C2C536F0A00133B40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CE2507F02C53F3C9002A905D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CE8506F42C6456E0003DE5DB /* XCRemoteSwiftPackageReference "realm-swift" */,
+				CEDC5B4B2C645C5000138D60 /* XCRemoteSwiftPackageReference "swift-video-generator" */,
 			);
 			productRefGroup = CE0B9EE52C5138F500CEE369 /* Products */;
 			projectDirPath = "";
@@ -591,6 +595,14 @@
 				kind = branch;
 			};
 		};
+		CEDC5B4B2C645C5000138D60 /* XCRemoteSwiftPackageReference "swift-video-generator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:dev-labs-bg/swift-video-generator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -618,6 +630,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE8506F42C6456E0003DE5DB /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		CEDC5B4C2C645C5000138D60 /* swift-video-generator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEDC5B4B2C645C5000138D60 /* XCRemoteSwiftPackageReference "swift-video-generator" */;
+			productName = "swift-video-generator";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

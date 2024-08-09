@@ -16,7 +16,7 @@ class OfflineRepository {
    
     // this function will be used for development purpose only
     func getPathOfRealmDB() {
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+//        print(Realm.Configuration.defaultConfiguration.fileURL)
     }
     
     // get all recordings from the database
