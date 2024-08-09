@@ -44,6 +44,9 @@
 		CEDC5B502C66284A00138D60 /* UnsplashPhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = CEDC5B4F2C66284A00138D60 /* UnsplashPhotoPicker */; };
 		CEDC5B532C66347100138D60 /* UnsplashImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */; };
 		CEDC5B552C663AE400138D60 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B542C663AE400138D60 /* Config.swift */; };
+		CEDC5B572C665EDF00138D60 /* profileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDC5B562C665EDF00138D60 /* profileCell.xib */; };
+		CEDC5B592C6660E000138D60 /* ProfileCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B582C6660E000138D60 /* ProfileCellVC.swift */; };
+		CEDC5B5B2C6662E400138D60 /* EditedVideos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B5A2C6662E400138D60 /* EditedVideos.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -92,6 +95,9 @@
 		CEB2E5D32C51EDDB005099A5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashImagePicker.swift; sourceTree = "<group>"; };
 		CEDC5B542C663AE400138D60 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		CEDC5B562C665EDF00138D60 /* profileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = profileCell.xib; sourceTree = "<group>"; };
+		CEDC5B582C6660E000138D60 /* ProfileCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellVC.swift; sourceTree = "<group>"; };
+		CEDC5B5A2C6662E400138D60 /* EditedVideos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedVideos.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +186,7 @@
 			children = (
 				CE8506EF2C6456A1003DE5DB /* Recording.swift */,
 				CE8506F02C6456A1003DE5DB /* Repository.swift */,
+				CEDC5B5A2C6662E400138D60 /* EditedVideos.swift */,
 			);
 			path = RealmDb;
 			sourceTree = "<group>";
@@ -199,6 +206,8 @@
 			children = (
 				CE1B5E3F2C53A7D900133B40 /* Data */,
 				CE1B5E372C53A3B900133B40 /* ProfileViewController.swift */,
+				CEDC5B582C6660E000138D60 /* ProfileCellVC.swift */,
+				CEDC5B562C665EDF00138D60 /* profileCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -332,6 +341,7 @@
 				CE776F5F2C5D3A00008B0CC7 /* GoogleService-Info.plist in Resources */,
 				CE0B9EF42C5138F600CEE369 /* Base in Resources */,
 				CE0B9EEF2C5138F500CEE369 /* Base in Resources */,
+				CEDC5B572C665EDF00138D60 /* profileCell.xib in Resources */,
 				CE776F682C5FC9F6008B0CC7 /* EachRecordingCell.xib in Resources */,
 				CE776F622C5E67FD008B0CC7 /* StoreTVCell.xib in Resources */,
 			);
@@ -344,6 +354,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEDC5B592C6660E000138D60 /* ProfileCellVC.swift in Sources */,
+				CEDC5B5B2C6662E400138D60 /* EditedVideos.swift in Sources */,
 				CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */,
 				CE1B5E3C2C53A68F00133B40 /* Profile.swift in Sources */,
 				CE776F592C5D0A8B008B0CC7 /* StoreDetailVC.swift in Sources */,

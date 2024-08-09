@@ -20,7 +20,7 @@ class StoreTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: const.StoreCell, bundle: nil), forCellReuseIdentifier: const.StoreCellReuse)
+        tableView.register(UINib(nibName: Const.StoreCell, bundle: nil), forCellReuseIdentifier: Const.StoreCellReuse)
 
         
         
@@ -47,7 +47,7 @@ class StoreTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: const.StoreCellReuse, for: indexPath) as! StoreTVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Const.StoreCellReuse, for: indexPath) as! StoreTVCell
         let item = listOfThemes[indexPath.row]
         cell.themeNameLabel.text = item.themeName
         

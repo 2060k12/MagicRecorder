@@ -14,11 +14,9 @@ class OfflineRepository {
     
     let realm = try! Realm()
    
-    // this function will be used for development purpose only
-    func getPathOfRealmDB() {
-//        print(Realm.Configuration.defaultConfiguration.fileURL)
-    }
     
+    // MARK: - Recordings
+
     // get all recordings from the database
     func getAllRecordings() -> Results<Recording>{
         let recordings = realm.objects(Recording.self)
@@ -40,5 +38,43 @@ class OfflineRepository {
             realm.delete(recording)
         }
     }
+    
+    // MARK: - Videos
+    
+    
+      // For Videos
+      func getAllVideos() -> Results<EditedVideos> {
+          return realm.objects(EditedVideos.self)
+      }
+      
+      func insertVideo(video: EditedVideos) {
+          do {
+              try realm.write {
+                  realm.add(video)
+              }
+          } catch {
+              print("Error inserting video: \(error.localizedDescription)")
+          }
+      }
+      
+      func removeVideo(video: EditedVideos) {
+          do {
+              try realm.write {
+                  realm.delete(video)
+              }
+          } catch {
+              print("Error removing video: \(error.localizedDescription)")
+          }
+      }
+    
+    
+    
+    // MARK: - Dev Only Functions (Testing Purpose)
+
+    
+//    func getPathOfRealmDB() {
+//    // print(Realm.Configuration.defaultConfiguration.fileURL)
+//    }
+
     
 }

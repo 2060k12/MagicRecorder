@@ -12,12 +12,14 @@ import Photos
 import UnsplashPhotoPicker
 
 
+
 class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVAudioPlayerDelegate{
    
 
-    
-    // getting recording while navigating
-    var recording : Recording!
+    var recording : Recording!     // getting recording while navigating
+    let db = OfflineRepository()    // initializing realmDB
+
+
     var image :UIImage?
     var imagePicker = UIImagePickerController()
     var timer : Timer?
@@ -27,17 +29,16 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     
     // ui elements
     
-    
     @IBOutlet weak var noImageLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var audioMaxLengthLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton! // reference to play and pause button
     @IBOutlet weak var audioSlider: UISlider! // reference to audio slider (changes according to duration)
     @IBOutlet weak var audioCurrentTimeLabel: UILabel! // current time label of audio
+    @IBOutlet weak var addUnsplashImageButton: UIButton!    // Add images from unsplash.com
     
-    @IBOutlet weak var addUnsplashImageButton: UIButton!
     
-    
+    // Finction to update slider when an audio is played
     func startTimer(){
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { Timer in
@@ -174,7 +175,11 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
                                 PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoUrl)
                                 DispatchQueue.main.async {
                                     self.progressBar.isHidden = true
+                                    let video = EditedVideos(videoName: self.recording.name, videosPath: videoUrl.absoluteString, date: Date())
+                                    self.db.insertVideo(video: video)
+                                    
                                 }
+                               
                                 
                             }
                             break
@@ -186,7 +191,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
                         }
                         print(result)
                         
-                                             }
+                        }
                     
                     }
                 

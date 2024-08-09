@@ -45,12 +45,6 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
 
         }
         
-    
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        
-    }
-    
     @IBAction func playButton_onClick(_ sender: Any) {
         
         playRecording()

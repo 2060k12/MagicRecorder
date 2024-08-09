@@ -15,15 +15,25 @@ class ProfileRepository {
     
     // get currentUser
     var currentUSer = Auth.auth().currentUser?.email
-    var userDetails: Profile?
     
-     func getCurrentUserProfileInfo(){
-         let dbRef = db.collection("Users")
-             .document("iampranish@Outlook.com")
-             
-         
-     }
     
+    func getCurrentUserProfileInfo() async -> Profile? {
+        do {
+            let snapshot = try await db.collection("Users")
+                .document("iampranish@Outlookk.com")
+                .getDocument()
+            
+            if let data = snapshot.data() {
+                return Profile(dictionary: data)
+            } else {
+                return nil
+            }
+        } catch {
+            print("Can't get current user info \(error.localizedDescription)")
+            return nil
+        }
+    }
+
     
     
     

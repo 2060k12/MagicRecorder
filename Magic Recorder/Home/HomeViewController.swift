@@ -58,7 +58,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         recordingsTableView.reloadData()
         recordingsTableView.dataSource = self
         recordingsTableView.delegate = self
-        recordingsTableView.register(UINib(nibName: const.EachRecordingCell, bundle: nil), forCellReuseIdentifier: const.EachRecordingCellReuse)
+        recordingsTableView.register(UINib(nibName: Const.EachRecordingCell, bundle: nil), forCellReuseIdentifier: Const.EachRecordingCellReuse)
         
     }
     
@@ -163,7 +163,9 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         let recording = Recording(name: getFileUrl().1, savedPath: filePath.absoluteString)
         // add the current recording path and name into database
         db.insertRecording(recording: recording)
-        db.getPathOfRealmDB() // for debgging purpose
+        
+        
+//        db.getPathOfRealmDB() // for debgging purpose
         
         self.recorder = audioRecorder
         self.recorder.delegate = self
@@ -215,7 +217,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: const.EachRecordingCellReuse, for: indexPath) as! EachRecordingCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Const.EachRecordingCellReuse, for: indexPath) as! EachRecordingCell
         
         
         // Safely access the listOfRecordings array
@@ -257,7 +259,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
 
             
           // todo: Fix this
-        if let destinationVc = storyboard?.instantiateViewController(withIdentifier: const.EditScreenVC) as? EditScreenVC {
+        if let destinationVc = storyboard?.instantiateViewController(withIdentifier: Const.EditScreenVC) as? EditScreenVC {
                 destinationVc.recording = listOfRecordings[selectedIndexPath.row]
                 
                 print("working")

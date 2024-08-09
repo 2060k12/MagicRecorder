@@ -44,13 +44,16 @@ class Profile{
     // constructer which will be used when getting data from database
     convenience init(dictionary:[String : Any]){
         
-        self.init(fullName: dictionary["firstName"] as! String,
+        self.init(fullName: dictionary["fullName"] as! String,
                   profileImage: dictionary["profileImage"] as! String,
-                  premiumMember: dictionary["profileImage"] as! Bool,
+                  premiumMember: dictionary["premiumMember"] as! Bool,
                   registeredAt: dictionary["registeredAt"] as? Timestamp ,
                   email: dictionary["profileImage"] as! String,
                   phoneNumber: dictionary["phoneNumber"] as! String)
         
     }
+    
+    
+    
     
 }
