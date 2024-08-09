@@ -9,11 +9,12 @@ import UIKit
 import AVFoundation
 import SwiftVideoGenerator
 import Photos
+import UnsplashPhotoPicker
+
 
 class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVAudioPlayerDelegate{
+   
 
-  
-    
     
     // getting recording while navigating
     var recording : Recording!
@@ -25,11 +26,17 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     
     
     // ui elements
+    
+    
+    @IBOutlet weak var noImageLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var audioMaxLengthLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton! // reference to play and pause button
     @IBOutlet weak var audioSlider: UISlider! // reference to audio slider (changes according to duration)
     @IBOutlet weak var audioCurrentTimeLabel: UILabel! // current time label of audio
+    
+    @IBOutlet weak var addUnsplashImageButton: UIButton!
+    
     
     func startTimer(){
         
@@ -128,6 +135,8 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         }
         picker.dismiss(animated: true)
         addImageButton.isHidden = true
+        noImageLabel.isHidden = true
+        addUnsplashImageButton.isHidden = true
     }
     
     
@@ -195,8 +204,18 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     
 
     
-   
+    @IBAction func unsplashPhotoPickerButton_onClick(_ sender: Any) {
+        
+        
+        let config = Config()
+        let picker = UnsplashPhotoPicker(configuration: config.unsplashConfig)
+        picker.photoPickerDelegate = self
+        present(picker, animated: true)
+        
+    }
+    
 
+    
     /*
     // MARK: - Navigation
 
@@ -208,3 +227,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     */
 
 }
+
+
+
+

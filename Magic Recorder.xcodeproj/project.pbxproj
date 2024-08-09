@@ -42,6 +42,8 @@
 		CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5D32C51EDDB005099A5 /* Extensions.swift */; };
 		CEDC5B4D2C645C5000138D60 /* swift-video-generator in Frameworks */ = {isa = PBXBuildFile; productRef = CEDC5B4C2C645C5000138D60 /* swift-video-generator */; };
 		CEDC5B502C66284A00138D60 /* UnsplashPhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = CEDC5B4F2C66284A00138D60 /* UnsplashPhotoPicker */; };
+		CEDC5B532C66347100138D60 /* UnsplashImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */; };
+		CEDC5B552C663AE400138D60 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B542C663AE400138D60 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,6 +90,8 @@
 		CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		CEB2E5D32C51EDDB005099A5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashImagePicker.swift; sourceTree = "<group>"; };
+		CEDC5B542C663AE400138D60 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,8 +206,8 @@
 		CEB2E5CD2C514C4B005099A5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				CEDC5B512C66344700138D60 /* EditAudio */,
 				CE1B5E352C53974C00133B40 /* HomeViewController.swift */,
-				CE0C707D2C58C1BD00E7933C /* EditScreenVC.swift */,
 				CE776F662C5FC9F6008B0CC7 /* EachRecordingCell.swift */,
 				CE776F672C5FC9F6008B0CC7 /* EachRecordingCell.xib */,
 			);
@@ -235,8 +239,18 @@
 			children = (
 				CEB2E5D32C51EDDB005099A5 /* Extensions.swift */,
 				CE776F5A2C5D2EDD008B0CC7 /* Constants.swift */,
+				CEDC5B542C663AE400138D60 /* Config.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		CEDC5B512C66344700138D60 /* EditAudio */ = {
+			isa = PBXGroup;
+			children = (
+				CE0C707D2C58C1BD00E7933C /* EditScreenVC.swift */,
+				CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */,
+			);
+			path = EditAudio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,6 +361,8 @@
 				CE8506F32C6456A1003DE5DB /* Repository.swift in Sources */,
 				CE2507ED2C53E03C002A905D /* StoreRepository.swift in Sources */,
 				CE1B5E382C53A3B900133B40 /* ProfileViewController.swift in Sources */,
+				CEDC5B532C66347100138D60 /* UnsplashImagePicker.swift in Sources */,
+				CEDC5B552C663AE400138D60 /* Config.swift in Sources */,
 				CE776F632C5E67FD008B0CC7 /* StoreTVCell.swift in Sources */,
 				CE0B9EEA2C5138F500CEE369 /* SceneDelegate.swift in Sources */,
 				CE776F5B2C5D2EDD008B0CC7 /* Constants.swift in Sources */,
