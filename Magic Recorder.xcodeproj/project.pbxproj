@@ -41,6 +41,7 @@
 		CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */; };
 		CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5D32C51EDDB005099A5 /* Extensions.swift */; };
 		CEDC5B4D2C645C5000138D60 /* swift-video-generator in Frameworks */ = {isa = PBXBuildFile; productRef = CEDC5B4C2C645C5000138D60 /* swift-video-generator */; };
+		CEDC5B502C66284A00138D60 /* UnsplashPhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = CEDC5B4F2C66284A00138D60 /* UnsplashPhotoPicker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -99,6 +100,7 @@
 				CEDC5B4D2C645C5000138D60 /* swift-video-generator in Frameworks */,
 				CE1B5E302C536F0A00133B40 /* FirebaseFirestore in Frameworks */,
 				CE8506F62C6456E0003DE5DB /* RealmSwift in Frameworks */,
+				CEDC5B502C66284A00138D60 /* UnsplashPhotoPicker in Frameworks */,
 				CE1B5E322C536F0A00133B40 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +263,7 @@
 				CE2507F12C53F3C9002A905D /* Kingfisher */,
 				CE8506F52C6456E0003DE5DB /* RealmSwift */,
 				CEDC5B4C2C645C5000138D60 /* swift-video-generator */,
+				CEDC5B4F2C66284A00138D60 /* UnsplashPhotoPicker */,
 			);
 			productName = "Magic Recorder";
 			productReference = CE0B9EE42C5138F500CEE369 /* Magic Recorder.app */;
@@ -295,6 +298,7 @@
 				CE2507F02C53F3C9002A905D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CE8506F42C6456E0003DE5DB /* XCRemoteSwiftPackageReference "realm-swift" */,
 				CEDC5B4B2C645C5000138D60 /* XCRemoteSwiftPackageReference "swift-video-generator" */,
+				CEDC5B4E2C66284A00138D60 /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */,
 			);
 			productRefGroup = CE0B9EE52C5138F500CEE369 /* Products */;
 			projectDirPath = "";
@@ -501,6 +505,8 @@
 				DEVELOPMENT_TEAM = 387X6776F6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Magic Recorder/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone for recording audio.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To save your Exported video, Please Give access to Gallary";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -529,6 +535,8 @@
 				DEVELOPMENT_TEAM = 387X6776F6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Magic Recorder/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone for recording audio.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To save your Exported video, Please Give access to Gallary";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -603,6 +611,14 @@
 				minimumVersion = 1.4.1;
 			};
 		};
+		CEDC5B4E2C66284A00138D60 /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/unsplash/unsplash-photopicker-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -635,6 +651,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CEDC5B4B2C645C5000138D60 /* XCRemoteSwiftPackageReference "swift-video-generator" */;
 			productName = "swift-video-generator";
+		};
+		CEDC5B4F2C66284A00138D60 /* UnsplashPhotoPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEDC5B4E2C66284A00138D60 /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */;
+			productName = UnsplashPhotoPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

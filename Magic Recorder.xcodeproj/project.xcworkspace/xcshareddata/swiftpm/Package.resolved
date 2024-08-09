@@ -1,5 +1,5 @@
 {
-  "originHash" : "761a3878d9ed0f44fdea7fd7af4d5a1f3017ccf77cff06a702e99f5107211f69",
+  "originHash" : "813612fc732c2a44655360370cdc94084548c605ddd896b092b8fe111607f07c",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -152,6 +152,15 @@
       "state" : {
         "revision" : "0735b1ea6a9cd28e0fd952e4b1801367fddd5501",
         "version" : "1.4.1"
+      }
+    },
+    {
+      "identity" : "unsplash-photopicker-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/unsplash/unsplash-photopicker-ios.git",
+      "state" : {
+        "revision" : "7306a92362855ec41149e5e214c63089586653f4",
+        "version" : "1.3.0"
       }
     }
   ],

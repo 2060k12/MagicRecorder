@@ -4,8 +4,6 @@
 <dict>
 	<key>Microphone</key>
 	<true/>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>We need access to your microphone for recording audio.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

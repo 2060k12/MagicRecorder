@@ -7,18 +7,25 @@
 
 import UIKit
 import AVFoundation
+import SwiftVideoGenerator
+import Photos
 
 class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVAudioPlayerDelegate{
 
+  
+    
+    
     // getting recording while navigating
     var recording : Recording!
-    var image :URL?
+    var image :UIImage?
     var imagePicker = UIImagePickerController()
     var timer : Timer?
     var startTime = 0.0
     var audioUrl : URL?
     
+    
     // ui elements
+    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var audioMaxLengthLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton! // reference to play and pause button
     @IBOutlet weak var audioSlider: UISlider! // reference to audio slider (changes according to duration)
@@ -57,7 +64,9 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     @IBOutlet weak var addImageButton: UIButton!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        progressBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
         
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -112,25 +121,79 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         
         if let editedImage = info[.editedImage] as? UIImage {
             editImageView.image = editedImage
+            image = editedImage
             
         }else if let originalImage = info[.originalImage] as? UIImage {
             editImageView.image = originalImage
         }
         picker.dismiss(animated: true)
+        addImageButton.isHidden = true
     }
     
     
 
+    // Todo:: ALert User
     @IBAction func saveEditedVideo_onClick(_ sender: Any) {
         
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            switch status {
+            case .authorized, .limited:
+                if let image = self.image, let audioUrl = self.audioUrl {
+                    let images = [image]
+                    let audioUrls = [audioUrl]
+                    
+                    // Show the progress bar before starting the generation
+                               DispatchQueue.main.async {
+                                   self.progressBar.isHidden = false
+                                   self.progressBar.setProgress(0.0, animated: true)
+                               }
+                    
+                    VideoGenerator.current.generate(withImages: images, andAudios: audioUrls, andType: .single) { progeress in
+                        print("Working")
+
+                        DispatchQueue.main.async {
+                            self.progressBar.setProgress(Float(progeress.fractionCompleted), animated: true)
+                            print(progeress.fractionCompleted)
+                        }
+
+                        
+                    } outcome: { (result) in
+                        
+                        switch result {
+                        case .success(let videoUrl):
+                            PHPhotoLibrary.shared().performChanges {
+                                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoUrl)
+                                DispatchQueue.main.async {
+                                    self.progressBar.isHidden = true
+                                }
+                                
+                            }
+                            break
+                            
+                        case .failure(let err):
+                            print("Unable to export Video \(err.localizedDescription)")
+                            
+                            
+                        }
+                        print(result)
+                        
+                                             }
+                    
+                    }
+                
+        
+            case .denied, .restricted, .notDetermined:
+                print("Permission access was denied")
+               
+            @unknown default:
+                break
+            }
+           
+        }
         
     }
     
-    
-    
-    func mergeAudioAndImageToCreateAVideo(image :UIImage, audioPath : URL, outputUrl : URL, success : @escaping (Bool) -> Void){
-        
-    }
+
     
    
 

@@ -339,7 +339,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuW-aa-8Ba">
                                         <rect key="frame" x="0.0" y="0.0" width="102.66666666666667" height="93.333333333333329"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Reverb"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Effects"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVv-lw-Uv0">
                                         <rect key="frame" x="102.66666666666669" y="0.0" width="102.33333333333331" height="93.333333333333329"/>
@@ -404,15 +404,14 @@
                                 <constraints>
                                     <constraint firstItem="toL-RE-O4U" firstAttribute="leading" secondItem="JSD-a8-pO4" secondAttribute="leading" id="Aem-NV-xMa"/>
                                     <constraint firstItem="toL-RE-O4U" firstAttribute="top" secondItem="Uv6-wx-BfX" secondAttribute="bottom" constant="8" id="CHs-om-bYH"/>
-                                    <constraint firstItem="aMx-fx-qZQ" firstAttribute="top" secondItem="JSD-a8-pO4" secondAttribute="top" constant="4" id="Gab-cv-CEw"/>
-                                    <constraint firstItem="Uv6-wx-BfX" firstAttribute="top" secondItem="aMx-fx-qZQ" secondAttribute="bottom" id="HzN-28-1lN"/>
-                                    <constraint firstItem="aMx-fx-qZQ" firstAttribute="leading" secondItem="JSD-a8-pO4" secondAttribute="leading" constant="16" id="RUF-0L-g9W"/>
-                                    <constraint firstItem="Uv6-wx-BfX" firstAttribute="leading" secondItem="JSD-a8-pO4" secondAttribute="leading" constant="16" id="TUg-Jn-zCL"/>
                                     <constraint firstAttribute="trailing" secondItem="aMx-fx-qZQ" secondAttribute="trailing" constant="16" id="UDp-6f-0R4"/>
                                     <constraint firstAttribute="trailing" secondItem="Uv6-wx-BfX" secondAttribute="trailing" constant="16" id="fZk-Ch-asq"/>
                                     <constraint firstAttribute="trailing" secondItem="toL-RE-O4U" secondAttribute="trailing" id="w9n-at-1so"/>
                                 </constraints>
                             </stackView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="94y-96-JcV">
+                                <rect key="frame" x="30" y="464" width="370" height="4"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CLo-SA-4vK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -420,16 +419,20 @@
                             <constraint firstItem="Md6-yZ-87E" firstAttribute="height" secondItem="00m-QO-U7Y" secondAttribute="height" multiplier="0.1" id="14o-ti-dY0"/>
                             <constraint firstItem="b0Z-Pr-fKA" firstAttribute="leading" secondItem="CLo-SA-4vK" secondAttribute="leading" constant="10" id="4fU-kH-LSl"/>
                             <constraint firstItem="CLo-SA-4vK" firstAttribute="trailing" secondItem="JSD-a8-pO4" secondAttribute="trailing" constant="16" id="5Vs-Fu-ZyC"/>
-                            <constraint firstItem="8cf-W2-6LL" firstAttribute="centerY" secondItem="00m-QO-U7Y" secondAttribute="centerY" id="AcJ-wv-SsG"/>
                             <constraint firstItem="CLo-SA-4vK" firstAttribute="bottom" secondItem="JSD-a8-pO4" secondAttribute="bottom" constant="50" id="BS7-tf-ouk"/>
+                            <constraint firstItem="94y-96-JcV" firstAttribute="centerX" secondItem="00m-QO-U7Y" secondAttribute="centerX" id="Fjp-Ix-9h8"/>
+                            <constraint firstItem="94y-96-JcV" firstAttribute="centerY" secondItem="00m-QO-U7Y" secondAttribute="centerY" id="J4l-Ke-iGP"/>
                             <constraint firstItem="8cf-W2-6LL" firstAttribute="centerX" secondItem="00m-QO-U7Y" secondAttribute="centerX" id="Jdd-WO-PYM"/>
                             <constraint firstItem="Y5M-hh-XBc" firstAttribute="leading" secondItem="CLo-SA-4vK" secondAttribute="leading" constant="10" id="Pae-YM-xRc"/>
                             <constraint firstItem="CLo-SA-4vK" firstAttribute="trailing" secondItem="b0Z-Pr-fKA" secondAttribute="trailing" constant="10" id="V9d-5O-A39"/>
                             <constraint firstItem="b0Z-Pr-fKA" firstAttribute="top" secondItem="CLo-SA-4vK" secondAttribute="top" constant="16" id="V9r-Ml-hpi"/>
+                            <constraint firstItem="CLo-SA-4vK" firstAttribute="trailing" secondItem="94y-96-JcV" secondAttribute="trailing" constant="30" id="Vfj-cz-h5o"/>
+                            <constraint firstItem="8cf-W2-6LL" firstAttribute="centerY" secondItem="00m-QO-U7Y" secondAttribute="centerY" id="XgX-P0-unb"/>
                             <constraint firstItem="CLo-SA-4vK" firstAttribute="trailing" secondItem="Y5M-hh-XBc" secondAttribute="trailing" constant="10" id="hKN-t0-77O"/>
                             <constraint firstItem="Y5M-hh-XBc" firstAttribute="top" secondItem="b0Z-Pr-fKA" secondAttribute="bottom" constant="16" id="idy-nH-tB5"/>
                             <constraint firstItem="JSD-a8-pO4" firstAttribute="leading" secondItem="CLo-SA-4vK" secondAttribute="leading" constant="16" id="oZM-Nj-A9V"/>
                             <constraint firstItem="b0Z-Pr-fKA" firstAttribute="height" secondItem="00m-QO-U7Y" secondAttribute="height" multiplier="0.5" id="r3U-GS-K22"/>
+                            <constraint firstItem="94y-96-JcV" firstAttribute="leading" secondItem="CLo-SA-4vK" secondAttribute="leading" constant="30" id="sql-nQ-eXK"/>
                             <constraint firstItem="Y5M-hh-XBc" firstAttribute="centerX" secondItem="00m-QO-U7Y" secondAttribute="centerX" id="wei-n2-vnJ"/>
                         </constraints>
                     </view>
@@ -447,6 +450,7 @@
                         <outlet property="audioSlider" destination="aMx-fx-qZQ" id="fVL-yK-Hd7"/>
                         <outlet property="editImageView" destination="b0Z-Pr-fKA" id="1rh-Ql-vHW"/>
                         <outlet property="playPauseButton" destination="toL-RE-O4U" id="0iC-9s-4T1"/>
+                        <outlet property="progressBar" destination="94y-96-JcV" id="Y2Z-52-qeS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKA-WF-vxO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
