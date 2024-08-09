@@ -91,19 +91,4 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    
-    // MARK: - Navigation
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.destination.isKind(of: RegisterViewController.self){
-//            let registerVc = segue.destination as! RegisterViewController
-//        }
-        
-//    }
-//    @IBAction func unwindToLoginViewController(_ unwindSegue: UIStoryboardSegue) {
-//        let sourceViewController = unwindSegue.source
-//        // Use data from the view controller which initiated the unwind segue
-//    }
-    
-
 }

@@ -8,7 +8,9 @@
 import UIKit
 import AVFoundation
 class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate {
+  
     
+
     // working with Realm Db
     // it is an offile database which holds all of our reocrdings details
     let db = OfflineRepository()
@@ -26,22 +28,27 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     var meterTimer:Timer!
     
     var selectedIndexPath: IndexPath?
-
+    
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     // This runs before user is able to see the screen
     override func viewDidLoad() {
+
         // initially hide and disable stop button
         stopButton.isHidden = true
         stopButton.isEnabled = false
         super.viewDidLoad()
         
-       loadRecordings()
-
+        loadRecordings()
+        
         Task{
             do{
-                 try await checkRecordPermission()
+                try await checkRecordPermission()
             }catch{
                 print("Error")
             }
@@ -54,7 +61,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         
     }
     
-   
+    
     
     
     // when record button ios pressed
@@ -67,22 +74,22 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         
         setUpRecorder()
         recorder.delegate = self
-
+        
     }
-   
+    
     // when stop button is pressed
     @IBAction func stopButton_onPressed(_ sender: UIButton) {
-            recordButton.isHidden = false
-            recordButton.isEnabled = true
+        recordButton.isHidden = false
+        recordButton.isEnabled = true
         
-            stopButton.isHidden = true
-            stopButton.isEnabled = false
+        stopButton.isHidden = true
+        stopButton.isEnabled = false
         
-            recorder.stop()
-            print(recorder.currentTime)
-            recorder = nil
-            print("Successfully done")
-            loadRecordings()
+        recorder.stop()
+        print(recorder.currentTime)
+        recorder = nil
+        print("Successfully done")
+        loadRecordings()
     }
     
     
@@ -115,52 +122,56 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             fatalError("Something went wrong")
         }
     }
+    
+    func savingDirectory() ->URL {
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = path[0]
+        return documentDirectory
+    }
+    
+    func getFileUrl () ->( URL, String ) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd_HHmmss"
+        let dateString = formatter.string(from: Date())
+        let fileName = dateString
+        let filePath = savingDirectory().appendingPathComponent(fileName, conformingTo: .mpeg4Audio)
+        print (filePath)
+        return (filePath, fileName)
+    }
+    
+    // todo:: check permission first
+    func setUpRecorder() {
+        let session = AVAudioSession.sharedInstance()
         
-        func savingDirectory() ->URL {
-            let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            let documentDirectory = path[0]
-            return documentDirectory
-        }
-        
-        func getFileUrl () ->( URL, String ) {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMdd_HHmmss"
-            let dateString = formatter.string(from: Date())
-            let fileName = dateString
-            let filePath = savingDirectory().appendingPathComponent(fileName, conformingTo: .mpeg4Audio)
-            print (filePath)
-            return (filePath, fileName)
-        }
+        try? session.setCategory(.playAndRecord, options: .defaultToSpeaker)
+        let filePath = getFileUrl().0 // geting the first return value
+        let recordSetting: [AnyHashable: Any] = [
+            AVFormatIDKey: kAudioFormatLinearPCM,
+            AVSampleRateKey: 48000.0,
+            AVNumberOfChannelsKey: 2,
+            AVLinearPCMBitDepthKey: 24,
+            AVLinearPCMIsBigEndianKey: false,
+            AVLinearPCMIsFloatKey: false
+        ]
 
-        // todo:: check permission first
-        func setUpRecorder() {
-                let session = AVAudioSession.sharedInstance()
-                
-            try? session.setCategory(.playAndRecord, options: .defaultToSpeaker)
-            let filePath = getFileUrl().0
-            var recordSetting : [AnyHashable: Any] = [
-                AVFormatIDKey : kAudioFormatMPEG4AAC,
-                AVSampleRateKey :  1600.0,
-                AVNumberOfChannelsKey : 1,
-            ]
-            
-            let audioRecorder = try? AVAudioRecorder(url: filePath, settings: (recordSetting as? [String : Any] ?? [:]))
-            print(filePath)
-            
-            // Creating an instance of recording class to be stored in RealmDB
-            let recording = Recording(name: getFileUrl().1, savedPath: filePath.absoluteString)
-            // add the current recording path and name into database
-            db.insertRecording(recording: recording)
-            db.getPathOfRealmDB() // for debgging purpose
-            
-            self.recorder = audioRecorder
-            self.recorder.delegate = self
-            self.recorder.isMeteringEnabled = true
-            self.recorder.prepareToRecord()
-            self.recorder.record()
-            
-        }
         
+        let audioRecorder = try? AVAudioRecorder(url: filePath, settings: (recordSetting as? [String : Any] ?? [:]))
+        print(filePath)
+        
+        // Creating an instance of recording class to be stored in RealmDB
+        let recording = Recording(name: getFileUrl().1, savedPath: filePath.absoluteString)
+        // add the current recording path and name into database
+        db.insertRecording(recording: recording)
+        db.getPathOfRealmDB() // for debgging purpose
+        
+        self.recorder = audioRecorder
+        self.recorder.delegate = self
+        self.recorder.isMeteringEnabled = true
+        self.recorder.prepareToRecord()
+        self.recorder.record()
+        
+    }
+    
     
     func savedDirectory() ->URL {
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -173,7 +184,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         let fileManager = FileManager.default
         do {
             let items = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [])
-        return items
+            return items
         }
         catch {
             print("\(error.localizedDescription)")
@@ -191,21 +202,12 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         }
         return recordings
     }
-    
-//    
-//    func loadRecordings() {
-//            listOfRecordings = getAlItems(url: savingDirectory())
-//            recordingsTableView.reloadData()
-//        }
-    
-    
-    
+
     func loadRecordings() {
-            listOfRecordings = getAllRecordings()
-            recordingsTableView.reloadData()
-        }
-    
-    
+        listOfRecordings = getAllRecordings()
+        recordingsTableView.reloadData()
+    }
+   
     // for table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listOfRecordings.count
@@ -213,28 +215,63 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: const.EachRecordingCellReuse, for: indexPath) as! EachRecordingCell
-        // Safely access the listOfRecordings array
-           if indexPath.row < listOfRecordings.count {
-               let recording = listOfRecordings[indexPath.row]
-               cell.recordingLengthLabel.text = "0:00"
-               cell.recordingNameLabel.text = recording.name
-               cell.currentRecording = recording
-
-           } else {
-               // Handle the case where the index is out of bounds
-               cell.recordingLengthLabel.text = "Unknown"
-           }
         
+        
+        // Safely access the listOfRecordings array
+        if indexPath.row < listOfRecordings.count {
+            let recording = listOfRecordings[indexPath.row]
+            
+            do {
+                player = try AVAudioPlayer(contentsOf: savedDirectory().appendingPathComponent(recording.name, conformingTo: .mpeg4Audio))
+                
+            }catch {
+                print(error.localizedDescription)
+            }
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.minute, .second]
+            formatter.unitsStyle = .positional
+            formatter.zeroFormattingBehavior = .pad
 
+            if let formattedDuration = formatter.string(from: player.duration) {
+                cell.recordingLengthLabel.text = formattedDuration
+            }
+  
+            cell.recordingNameLabel.text = recording.name
+            cell.currentRecording = recording
+            cell.editButton.addTarget(self, action: #selector(goToEditScreen) , for: .touchUpInside)
+
+        } else {
+            // Handle the case where the index is out of bounds
+            cell.recordingLengthLabel.text = "Unknown"
+        }
+        
+        
         return cell
     }
     
+    @objc func goToEditScreen(){
+        if let  selectedIndexPath {
+
+            
+          // todo: Fix this
+        if let destinationVc = storyboard?.instantiateViewController(withIdentifier: const.EditScreenVC) as? EditScreenVC {
+                destinationVc.recording = listOfRecordings[selectedIndexPath.row]
+                
+                print("working")
+                self.navigationController?.pushViewController(destinationVc, animated: true)
+            }
+          
+        }
+     
+        
+        
+    }
     // changes the height of the selected row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let selectedIndexPath = selectedIndexPath, selectedIndexPath == indexPath {
-                   return 200 // Height when selected
-               }
-               return 50 // Initial height
+            return 200 // Height when selected
+        }
+        return 50 // Initial height
     }
     
     
@@ -243,21 +280,12 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     // which then will be used to change the height of the row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
-             tableView.beginUpdates()
-             tableView.endUpdates()
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+   
+    
 }

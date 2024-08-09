@@ -40,6 +40,10 @@
 		CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */; };
 		CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */; };
 		CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5D32C51EDDB005099A5 /* Extensions.swift */; };
+		CEDC5B4D2C645C5000138D60 /* swift-video-generator in Frameworks */ = {isa = PBXBuildFile; productRef = CEDC5B4C2C645C5000138D60 /* swift-video-generator */; };
+		CEDC5B502C66284A00138D60 /* UnsplashPhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = CEDC5B4F2C66284A00138D60 /* UnsplashPhotoPicker */; };
+		CEDC5B532C66347100138D60 /* UnsplashImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */; };
+		CEDC5B552C663AE400138D60 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B542C663AE400138D60 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +90,8 @@
 		CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		CEB2E5D32C51EDDB005099A5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashImagePicker.swift; sourceTree = "<group>"; };
+		CEDC5B542C663AE400138D60 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +101,10 @@
 			files = (
 				CE2507F22C53F3C9002A905D /* Kingfisher in Frameworks */,
 				CE1B5E2E2C536F0A00133B40 /* FirebaseAuth in Frameworks */,
+				CEDC5B4D2C645C5000138D60 /* swift-video-generator in Frameworks */,
 				CE1B5E302C536F0A00133B40 /* FirebaseFirestore in Frameworks */,
 				CE8506F62C6456E0003DE5DB /* RealmSwift in Frameworks */,
+				CEDC5B502C66284A00138D60 /* UnsplashPhotoPicker in Frameworks */,
 				CE1B5E322C536F0A00133B40 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,8 +206,8 @@
 		CEB2E5CD2C514C4B005099A5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				CEDC5B512C66344700138D60 /* EditAudio */,
 				CE1B5E352C53974C00133B40 /* HomeViewController.swift */,
-				CE0C707D2C58C1BD00E7933C /* EditScreenVC.swift */,
 				CE776F662C5FC9F6008B0CC7 /* EachRecordingCell.swift */,
 				CE776F672C5FC9F6008B0CC7 /* EachRecordingCell.xib */,
 			);
@@ -231,8 +239,18 @@
 			children = (
 				CEB2E5D32C51EDDB005099A5 /* Extensions.swift */,
 				CE776F5A2C5D2EDD008B0CC7 /* Constants.swift */,
+				CEDC5B542C663AE400138D60 /* Config.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		CEDC5B512C66344700138D60 /* EditAudio */ = {
+			isa = PBXGroup;
+			children = (
+				CE0C707D2C58C1BD00E7933C /* EditScreenVC.swift */,
+				CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */,
+			);
+			path = EditAudio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +276,8 @@
 				CE1B5E312C536F0A00133B40 /* FirebaseStorage */,
 				CE2507F12C53F3C9002A905D /* Kingfisher */,
 				CE8506F52C6456E0003DE5DB /* RealmSwift */,
+				CEDC5B4C2C645C5000138D60 /* swift-video-generator */,
+				CEDC5B4F2C66284A00138D60 /* UnsplashPhotoPicker */,
 			);
 			productName = "Magic Recorder";
 			productReference = CE0B9EE42C5138F500CEE369 /* Magic Recorder.app */;
@@ -291,6 +311,8 @@
 				CE1B5E2C2C536F0A00133B40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CE2507F02C53F3C9002A905D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CE8506F42C6456E0003DE5DB /* XCRemoteSwiftPackageReference "realm-swift" */,
+				CEDC5B4B2C645C5000138D60 /* XCRemoteSwiftPackageReference "swift-video-generator" */,
+				CEDC5B4E2C66284A00138D60 /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */,
 			);
 			productRefGroup = CE0B9EE52C5138F500CEE369 /* Products */;
 			projectDirPath = "";
@@ -339,6 +361,8 @@
 				CE8506F32C6456A1003DE5DB /* Repository.swift in Sources */,
 				CE2507ED2C53E03C002A905D /* StoreRepository.swift in Sources */,
 				CE1B5E382C53A3B900133B40 /* ProfileViewController.swift in Sources */,
+				CEDC5B532C66347100138D60 /* UnsplashImagePicker.swift in Sources */,
+				CEDC5B552C663AE400138D60 /* Config.swift in Sources */,
 				CE776F632C5E67FD008B0CC7 /* StoreTVCell.swift in Sources */,
 				CE0B9EEA2C5138F500CEE369 /* SceneDelegate.swift in Sources */,
 				CE776F5B2C5D2EDD008B0CC7 /* Constants.swift in Sources */,
@@ -497,6 +521,8 @@
 				DEVELOPMENT_TEAM = 387X6776F6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Magic Recorder/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone for recording audio.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To save your Exported video, Please Give access to Gallary";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -525,6 +551,8 @@
 				DEVELOPMENT_TEAM = 387X6776F6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Magic Recorder/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone for recording audio.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To save your Exported video, Please Give access to Gallary";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -591,6 +619,22 @@
 				kind = branch;
 			};
 		};
+		CEDC5B4B2C645C5000138D60 /* XCRemoteSwiftPackageReference "swift-video-generator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:dev-labs-bg/swift-video-generator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
+		CEDC5B4E2C66284A00138D60 /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/unsplash/unsplash-photopicker-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -618,6 +662,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE8506F42C6456E0003DE5DB /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		CEDC5B4C2C645C5000138D60 /* swift-video-generator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEDC5B4B2C645C5000138D60 /* XCRemoteSwiftPackageReference "swift-video-generator" */;
+			productName = "swift-video-generator";
+		};
+		CEDC5B4F2C66284A00138D60 /* UnsplashPhotoPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEDC5B4E2C66284A00138D60 /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */;
+			productName = UnsplashPhotoPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

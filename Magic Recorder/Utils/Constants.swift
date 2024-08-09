@@ -15,6 +15,8 @@ struct const {
     static let StoreCellReuse = "reusableIdentifierStoreCell"
     static let EachRecordingCell  = "EachRecordingCell"
     static let EachRecordingCellReuse  = "eachRecordingCellReuse"
+    static let EditScreen = "toEditScreen"
+    static let EditScreenVC = "editScreenVC"
 
     
     }
