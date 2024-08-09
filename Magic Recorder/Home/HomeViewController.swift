@@ -27,6 +27,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     var isPlaying = false
     var meterTimer:Timer!
     
+    var deselectRowAt: IndexPath?
     var selectedIndexPath: IndexPath?
     
     @IBOutlet weak var stopButton: UIButton!
@@ -232,8 +233,10 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             formatter.unitsStyle = .positional
             formatter.zeroFormattingBehavior = .pad
 
-            if let formattedDuration = formatter.string(from: player.duration) {
-                cell.recordingLengthLabel.text = formattedDuration
+            if let player = player {
+                if let formattedDuration = formatter.string(from: player.duration) {
+                    cell.recordingLengthLabel.text = formattedDuration
+                }
             }
   
             cell.recordingNameLabel.text = recording.name
@@ -268,12 +271,19 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     }
     // changes the height of the selected row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let selectedIndexPath = selectedIndexPath, selectedIndexPath == indexPath {
+        if let selectedIndexPath = selectedIndexPath, selectedIndexPath == indexPath  {
             return 200 // Height when selected
         }
+    
         return 50 // Initial height
+        
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        deselectRowAt = indexPath
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
     
     
     // when any row is selected it updates "selectedIndexPath" variable
@@ -283,7 +293,6 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         tableView.beginUpdates()
         tableView.endUpdates()
     }
-    
     
     
    

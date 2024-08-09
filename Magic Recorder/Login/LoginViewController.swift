@@ -64,6 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.progressIndicator.stopAnimating()
                 let mainViewController = self.storyboard?.instantiateViewController(identifier: "MainViewController") as?
                 UITabBarController
+                mainViewController?.selectedIndex = 1
                 self.view.window?.rootViewController = mainViewController
                 self.view.window?.makeKeyAndVisible()
             }
