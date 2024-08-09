@@ -88,7 +88,6 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
                 audioPlayer?.delegate = self
                 audioPlayer?.prepareToPlay()
-                recordingLengthLabel.text = String(audioPlayer.duration.description)
                 recordingSlider.maximumValue = Float(audioPlayer.duration)
                 audioPlayer?.play()
                 startTimer()

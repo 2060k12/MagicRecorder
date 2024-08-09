@@ -32,6 +32,10 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     // This runs before user is able to see the screen
     override func viewDidLoad() {
 

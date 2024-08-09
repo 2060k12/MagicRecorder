@@ -6,22 +6,131 @@
 //
 
 import UIKit
-import SwiftVideoGenerator
-class EditScreenVC: UIViewController {
+import AVFoundation
+
+class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVAudioPlayerDelegate{
 
     // getting recording while navigating
     var recording : Recording!
-    var image : URL?
+    var image :URL?
+    var imagePicker = UIImagePickerController()
+    var timer : Timer?
+    var startTime = 0.0
+    var audioUrl : URL?
+    
+    // ui elements
+    @IBOutlet weak var audioMaxLengthLabel: UILabel!
+    @IBOutlet weak var playPauseButton: UIButton! // reference to play and pause button
+    @IBOutlet weak var audioSlider: UISlider! // reference to audio slider (changes according to duration)
+    @IBOutlet weak var audioCurrentTimeLabel: UILabel! // current time label of audio
+    
+    func startTimer(){
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { Timer in
+            if let player = self.audioPlayer {
+                self.audioSlider.value = Float(player.currentTime)
+                
+                let formatter = DateComponentsFormatter()
+                formatter.allowedUnits = [.minute, .second]
+                formatter.unitsStyle = .positional
+                formatter.zeroFormattingBehavior = .pad
+                
+                if let formattedDuration = formatter.string(from: player.currentTime) {
+                    self.audioCurrentTimeLabel.text = formattedDuration
+                }
+            }
+        })
+    }
+    
+    @IBAction func sliderPosition_onChanged(_ sender: Any) {
+        startTime = Double(audioSlider.value)
+        
+    }
+    
+    
+    
+    
+    // audio player
+    var audioPlayer : AVAudioPlayer?
+
+    @IBOutlet weak var editImageView: UIImageView!
+    @IBOutlet weak var addImageButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
-
         
-        // Do any additional setup after loading the view.
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let url = documentsURL.appendingPathComponent(recording.name, conformingTo: .mpeg4Audio)
+        audioUrl = url
+        audioSlider.value = Float(startTime)
+        
+        
+        do{
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.delegate = self
+            audioPlayer?.prepareToPlay()
+            if let audioPlayer = audioPlayer{
+                audioSlider.maximumValue = Float(audioPlayer.duration)
+                
+                let formatter = DateComponentsFormatter()
+                formatter.allowedUnits = [.minute, .second]
+                formatter.unitsStyle = .positional
+                formatter.zeroFormattingBehavior = .pad
+                
+                if let formattedDuration = formatter.string(from: audioPlayer.duration) {
+                audioMaxLengthLabel.text = formattedDuration
+            }
+                
+            }
+        }catch {
+            print("Error Playing Audio in edit Screen: \(error.localizedDescription)")
+        }
+        
     }
     
     
+    @IBAction func playButton_onClicked(_ sender: Any) {
+        audioPlayer?.play()
+        startTimer()
+        
+    }
+    
+    // Pick image and crop from the gallary
+    @IBAction func addImageButton_onPressed(_ sender: Any) {
+
+        imagePicker.delegate = self
+                 imagePicker.sourceType = .savedPhotosAlbum
+                 imagePicker.allowsEditing = true
+
+                 present(imagePicker, animated: true, completion: nil)
+        
+    
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let editedImage = info[.editedImage] as? UIImage {
+            editImageView.image = editedImage
+            
+        }else if let originalImage = info[.originalImage] as? UIImage {
+            editImageView.image = originalImage
+        }
+        picker.dismiss(animated: true)
+    }
+    
+    
+
+    @IBAction func saveEditedVideo_onClick(_ sender: Any) {
+        
+        
+    }
+    
+    
+    
+    func mergeAudioAndImageToCreateAVideo(image :UIImage, audioPath : URL, outputUrl : URL, success : @escaping (Bool) -> Void){
+        
+    }
     
    
 
