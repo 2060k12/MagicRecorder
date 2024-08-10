@@ -13,6 +13,7 @@ import UnsplashPhotoPicker
 
 
 
+
 class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVAudioPlayerDelegate{
    
 
@@ -78,7 +79,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         tabBarController?.tabBar.isHidden = true
         
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let url = documentsURL.appendingPathComponent(recording.name, conformingTo: .mpeg4Audio)
+        let url = documentsURL.appendingPathComponent(recording.name, conformingTo: .wav)
         audioUrl = url
         audioSlider.value = Float(startTime)
         
@@ -172,12 +173,13 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
                         switch result {
                         case .success(let videoUrl):
                             PHPhotoLibrary.shared().performChanges {
-                                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoUrl)
+//                                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoUrl)
+                                self.saveVideoToCustomAlbum(videoUrl: videoUrl)
+
                                 DispatchQueue.main.async {
                                     self.progressBar.isHidden = true
                                     let video = EditedVideos(videoName: self.recording.name, videosPath: videoUrl.absoluteString, date: Date())
                                     self.db.insertVideo(video: video)
-                                    
                                 }
                                
                                 
@@ -207,6 +209,55 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         
     }
     
+    
+    
+    // Save video to a custom album
+    private func saveVideoToCustomAlbum(videoUrl: URL) {
+        let albumName = "MagicRecorder"
+        
+        // Find or create the album
+        var albumPlaceholder: PHObjectPlaceholder?
+        PHPhotoLibrary.shared().performChanges({
+            let albumChangeRequest: PHAssetCollectionChangeRequest
+            if let album = self.fetchAssetCollectionForAlbum(albumName: albumName) {
+                albumChangeRequest = PHAssetCollectionChangeRequest(for: album)!
+            } else {
+                albumChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: albumName)
+            }
+            let assetChangeRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoUrl)
+            let assetPlaceholder = assetChangeRequest?.placeholderForCreatedAsset
+            let fastEnumeration = NSArray(array: [assetPlaceholder!] as [Any])
+            albumChangeRequest.addAssets(fastEnumeration)
+            albumPlaceholder = assetPlaceholder
+        }) { success, error in
+            DispatchQueue.main.async {
+                self.progressBar.isHidden = true
+                if success {
+                    if albumPlaceholder != nil {
+                        let video = EditedVideos(videoName: self.recording.name, videosPath: videoUrl.absoluteString, date: Date())
+                        self.db.insertVideo(video: video)
+                        // Remove the video file from the file manager
+                                          do {
+                                              try FileManager.default.removeItem(at: videoUrl)
+                                              print("Original video file removed from file manager.")
+                                          } catch {
+                                              print("Error deleting original video file: \(error.localizedDescription)")
+                                          }
+                    }
+                } else if let error = error {
+                    print("Error saving video to custom album: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+
+    // Helper function to fetch asset collection
+    private func fetchAssetCollectionForAlbum(albumName: String) -> PHAssetCollection? {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
+        let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+        return collection.firstObject
+    }
 
     
     @IBAction func unsplashPhotoPickerButton_onClick(_ sender: Any) {

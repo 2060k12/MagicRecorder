@@ -23,4 +23,13 @@ class Recording : Object {
     override class func primaryKey() -> String? {
         return "id"
     }
+    
+    
+    
+    convenience init(dictionary : [String : Any], id: String) {
+        self.init()
+        self.name = dictionary["recordingName"] as? String
+        self.savedPath = dictionary["recordingUrl"] as? String
+        self.id = id
+    }
 }

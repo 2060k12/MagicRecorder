@@ -11,13 +11,18 @@ import AVFoundation
 class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     
     let db = OfflineRepository()
+    let profileRepo = ProfileRepository()
     
     var timer: Timer?
 
     
+    // indicates which screen the user view this cell from
+    var currentScreen : String!
+    
     var audioPlayer: AVAudioPlayer!
     var currentRecording : Recording!
     
+    @IBOutlet weak var syncOnOff: UISwitch!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var recordingUiView: UIView!
     
@@ -41,19 +46,43 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
    
-        
-
+    
         }
         
     @IBAction func playButton_onClick(_ sender: Any) {
-        
         playRecording()
     }
     
     
     @IBAction func deleteRecording_onClick(_ sender: Any) {
         
-        db.removeRecording(recording: currentRecording)
+        switch currentScreen {
+            
+        case Const.HomeScreen:
+            db.removeRecording(recording: currentRecording)
+            break
+            
+        case Const.Profile:
+            profileRepo.removeFromTheCloud(recording: currentRecording) { result  in
+                switch result {
+                case .success():
+                    print("Successfully Deleted")
+                case .failure(_):
+                    print("Something went wrong")
+                }
+                
+            }
+            break
+            
+        case .none:
+            print("Can't delete rn")
+            break
+            
+        case .some(_):
+            print("SOmethig is not right")
+            break
+        }
+        
         
     }
   
@@ -68,17 +97,24 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     }
     
     func playRecording() {
-       
-        guard let record = currentRecording else {
-            print("No recording URL set")
-            return
-        }
-       
         
-        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let url = documentsURL.appendingPathComponent(record.name, conformingTo: .mpeg4Audio)
+        
+        switch currentScreen {
             
-        do{
+            // when the user is in home screen
+        case Const.HomeScreen :
+            
+            guard let record = currentRecording else {
+              
+                print("No recording URL set")
+                return
+            }
+            
+            
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let url = documentsURL.appendingPathComponent(record.name, conformingTo: .wav)
+            
+            do{
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
                 audioPlayer?.delegate = self
                 audioPlayer?.prepareToPlay()
@@ -88,8 +124,80 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
                 
             } catch let error as NSError {
                 print("Error initializing AVAudioPlayer: \(error.localizedDescription)")
+                
+            }
+            break
             
+            
+        case Const.Profile :
+            guard let record = currentRecording else {
+                print("No recording URL set")
+                return
+            }
+            
+            guard let url = URL(string: record.savedPath) else {
+                   print("URL is null or invalid")
+                   return
+               }
+            
+            do{
+                audioPlayer = try AVAudioPlayer(contentsOf: url)
+                audioPlayer?.delegate = self
+                audioPlayer?.prepareToPlay()
+                recordingSlider.maximumValue = Float(audioPlayer.duration)
+                audioPlayer?.play()
+                startTimer()
+                
+            } catch let error as NSError {
+                print("Error initializing AVAudioPlayer: \(error.localizedDescription)")
+                
+            }
+            
+            
+            break
+            
+        case .none:
+            print("Cant play rn")
+            
+        case .some(_):
+            print("Something is not right")
         }
+    }
+    
+    
+    
+    @IBAction func synchStatusChange(_ sender: Any) {
+        if syncOnOff.isOn {
+            profileRepo.addRecordingToCloud(recording: currentRecording) { result in
+                switch result {
+                case .success(()):
+                    print("Done")
+                    self.syncOnOff.isOn = true
+                    break
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    self.syncOnOff.isOn = false
+
+                }
+            }
+        }
+        
+        
+        if !syncOnOff.isOn {
+            profileRepo.removeFromTheCloud(recording: currentRecording) { result in
+                switch result {
+                case .success(()):
+                    print("removed")
+                    break
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    self.syncOnOff.isOn = true
+                }
+            }
+        }
+        
     }
 }
     

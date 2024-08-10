@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bLD-7N-kf6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
@@ -19,13 +19,13 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tU4-Rf-NXe">
                                 <rect key="frame" x="16" y="226.33333333333337" width="398" height="88"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hib-tL-7HN">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12345@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hib-tL-7HN">
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="34"/>
                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cEk-pZ-qnA">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456789" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cEk-pZ-qnA">
                                         <rect key="frame" x="0.0" y="53.999999999999972" width="398" height="34"/>
                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -43,8 +43,8 @@
                                     <action selector="forgotPasswordOnTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cOS-kb-BmJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login to continue," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOJ-6P-Owz">
-                                <rect key="frame" x="16" y="36" width="213" height="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to continue," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOJ-6P-Owz">
+                                <rect key="frame" x="16" y="75" width="398" height="31.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -82,12 +82,12 @@
                             <constraint firstItem="tU4-Rf-NXe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="9st-k1-GHd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tU4-Rf-NXe" secondAttribute="trailing" constant="16" id="MDX-wr-YM0"/>
                             <constraint firstItem="DOJ-6P-Owz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="cCX-4V-ATg"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DOJ-6P-Owz" secondAttribute="trailing" constant="178" id="e4X-Xg-bvN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="upj-ff-7IU" secondAttribute="trailing" constant="16" id="eyK-Xf-9cC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eAe-2M-e2X" secondAttribute="trailing" constant="16" id="fYN-um-1yk"/>
                             <constraint firstItem="ybY-cj-dwg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pPb-Q8-A4Z"/>
                             <constraint firstItem="DOJ-6P-Owz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="pva-Jn-L4E"/>
                             <constraint firstItem="eAe-2M-e2X" firstAttribute="top" secondItem="upj-ff-7IU" secondAttribute="bottom" constant="16" id="qDJ-5S-xy8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DOJ-6P-Owz" secondAttribute="trailing" constant="16" id="u9I-r1-APx"/>
                             <constraint firstItem="upj-ff-7IU" firstAttribute="top" secondItem="tU4-Rf-NXe" secondAttribute="bottom" constant="16" id="xwD-gl-m6I"/>
                             <constraint firstItem="eAe-2M-e2X" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ym1-wr-w1p"/>
                             <constraint firstItem="ybY-cj-dwg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zI5-kJ-vjY"/>
@@ -575,7 +575,7 @@
             <objects>
                 <viewController storyboardIdentifier="StoreDetailVC" id="vxy-eo-33P" customClass="StoreDetailVC" customModule="Magic_Recorder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BCr-dh-ze3">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="922"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RiE-0y-765">
@@ -660,7 +660,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Hul-ba-8dh"/>
+        <segue reference="xSB-Am-oY5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bag" catalog="system" width="128" height="128"/>
@@ -675,7 +675,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

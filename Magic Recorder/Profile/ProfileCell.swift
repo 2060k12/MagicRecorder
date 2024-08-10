@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ProfileCellVC : UITableViewCell {
+class ProfileCell : UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     

@@ -18,8 +18,13 @@ struct Const {
     static let EditScreen = "toEditScreen"
     static let EditScreenVC = "editScreenVC"
     
-    static let ProfileReusableCell = "profileTableReusableCell"
+    static let ProfileReusableCell = "profileReusableCell"
     static let ProfileCell = "ProfileCell"
 
+    
+    // current screen name
+    static let HomeScreen = "home"
+    static let Profile = "profile"
+    static let search = "search"
     
     }

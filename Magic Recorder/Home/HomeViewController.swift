@@ -14,6 +14,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     // working with Realm Db
     // it is an offile database which holds all of our reocrdings details
     let db = OfflineRepository()
+    let profileRepo = ProfileRepository()
     
     var listOfRecordings : [Recording]!
     @IBOutlet weak var recordingsTableView: UITableView!
@@ -135,7 +136,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         formatter.dateFormat = "yyyyMMdd_HHmmss"
         let dateString = formatter.string(from: Date())
         let fileName = dateString
-        let filePath = savingDirectory().appendingPathComponent(fileName, conformingTo: .mpeg4Audio)
+        let filePath = savingDirectory().appendingPathComponent(fileName, conformingTo: .wav)
         print (filePath)
         return (filePath, fileName)
     }
@@ -147,12 +148,12 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         try? session.setCategory(.playAndRecord, options: .defaultToSpeaker)
         let filePath = getFileUrl().0 // geting the first return value
         let recordSetting: [AnyHashable: Any] = [
-            AVFormatIDKey: kAudioFormatLinearPCM,
-            AVSampleRateKey: 48000.0,
-            AVNumberOfChannelsKey: 2,
-            AVLinearPCMBitDepthKey: 24,
-            AVLinearPCMIsBigEndianKey: false,
-            AVLinearPCMIsFloatKey: false
+            AVFormatIDKey: kAudioFormatLinearPCM, // Use Linear PCM for WAV
+                   AVSampleRateKey: 44100.0,             // Common sample rate
+                   AVNumberOfChannelsKey: 2,             // Stereo
+                   AVLinearPCMBitDepthKey: 16,           // 16-bit depth is widely supported
+                   AVLinearPCMIsBigEndianKey: false,     // Little-endian format
+                   AVLinearPCMIsFloatKey: false          // Integer samples
         ]
 
         
@@ -219,13 +220,13 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Const.EachRecordingCellReuse, for: indexPath) as! EachRecordingCell
         
-        
+        cell.currentScreen = Const.HomeScreen
         // Safely access the listOfRecordings array
         if indexPath.row < listOfRecordings.count {
             let recording = listOfRecordings[indexPath.row]
             
             do {
-                player = try AVAudioPlayer(contentsOf: savedDirectory().appendingPathComponent(recording.name, conformingTo: .mpeg4Audio))
+                player = try AVAudioPlayer(contentsOf: savedDirectory().appendingPathComponent(recording.name, conformingTo: .wav))
                 
             }catch {
                 print(error.localizedDescription)
@@ -245,6 +246,16 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             cell.currentRecording = recording
             cell.editButton.addTarget(self, action: #selector(goToEditScreen) , for: .touchUpInside)
 
+            
+            profileRepo.checkIfInTheCloud(recording: recording) { isInDb in
+                if isInDb {
+                    cell.syncOnOff.isOn = true
+                }
+                else {
+                    cell.syncOnOff.isOn = false
+                }
+            }
+            
         } else {
             // Handle the case where the index is out of bounds
             cell.recordingLengthLabel.text = "Unknown"
