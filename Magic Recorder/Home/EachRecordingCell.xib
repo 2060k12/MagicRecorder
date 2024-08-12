@@ -4,24 +4,23 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eachRecordingCellReuse" rowHeight="190" id="KGk-i7-Jjw" customClass="EachRecordingCell" customModule="Magic_Recorder" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="eachRecordingCellReuse" rowHeight="190" id="KGk-i7-Jjw" customClass="EachRecordingCell" customModule="Magic_Recorder" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="339" height="190"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="339" height="190"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="108" translatesAutoresizingMaskIntoConstraints="NO" id="5tO-TD-QPx">
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="126" translatesAutoresizingMaskIntoConstraints="NO" id="5tO-TD-QPx">
                         <rect key="frame" x="16" y="7.9999999999999982" width="307" height="20.333333333333329"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Recording Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54B-ag-o8e">
-                                <rect key="frame" x="0.0" y="0.0" width="146" height="20.333333333333332"/>
+                                <rect key="frame" x="0.0" y="0.0" width="128" height="20.333333333333332"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,20 +39,34 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="6dR-23-wQg">
                                 <rect key="frame" x="0.0" y="107.33333333333331" width="323" height="34.333333333333343"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VoO-Hw-RsE">
-                                        <rect key="frame" x="0.0" y="0.0" width="51" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="slider.horizontal.3" catalog="system" title=""/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDw-8o-g3H">
-                                        <rect key="frame" x="275" y="0.0" width="48" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="trash.fill" catalog="system" title=""/>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" title="Cloud" translatesAutoresizingMaskIntoConstraints="NO" id="VQy-BN-5z3">
+                                        <rect key="frame" x="16" y="0.0" width="51" height="34.333333333333336"/>
                                         <connections>
-                                            <action selector="deleteRecording_onClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Y5n-NX-Hrv"/>
+                                            <action selector="synchStatusChange:" destination="KGk-i7-Jjw" eventType="valueChanged" id="yd8-Pp-0fN"/>
                                         </connections>
-                                    </button>
+                                    </switch>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02E-BJ-aMI">
+                                        <rect key="frame" x="224" y="0.0" width="99" height="34.333333333333336"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDw-8o-g3H">
+                                                <rect key="frame" x="0.0" y="0.0" width="48" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="trash.fill" catalog="system" title=""/>
+                                                <connections>
+                                                    <action selector="deleteRecording_onClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Y5n-NX-Hrv"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VoO-Hw-RsE">
+                                                <rect key="frame" x="48" y="0.0" width="51" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="slider.horizontal.3" catalog="system" title=""/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="VQy-BN-5z3" firstAttribute="leading" secondItem="6dR-23-wQg" secondAttribute="leading" constant="16" id="MIc-j8-uwP"/>
+                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="xYG-JU-uzt">
                                 <rect key="frame" x="0.0" y="16" width="323" height="41"/>
@@ -111,7 +124,6 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xYG-JU-uzt" firstAttribute="top" secondItem="q8O-zi-RzR" secondAttribute="top" constant="16" id="0RO-aT-krW"/>
                             <constraint firstItem="6dR-23-wQg" firstAttribute="top" secondItem="Dia-mD-rh5" secondAttribute="bottom" constant="8" id="0kn-1z-dCz"/>
@@ -146,6 +158,7 @@
                 <outlet property="recordingSlider" destination="4vs-z6-LE3" id="YRI-4k-qQU"/>
                 <outlet property="recordingUiView" destination="H2p-sc-9uM" id="dly-qI-rad"/>
                 <outlet property="sliderMaxLengthLabel" destination="9Ro-B3-mw6" id="JTJ-ly-Iyz"/>
+                <outlet property="syncOnOff" destination="VQy-BN-5z3" id="nkN-Ar-dlD"/>
             </connections>
             <point key="canvasLocation" x="310.68702290076334" y="32.394366197183103"/>
         </tableViewCell>
@@ -156,8 +169,5 @@
         <image name="play.fill" catalog="system" width="117" height="128"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="99"/>
         <image name="trash.fill" catalog="system" width="117" height="128"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

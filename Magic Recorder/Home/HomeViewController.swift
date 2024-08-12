@@ -14,6 +14,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     // working with Realm Db
     // it is an offile database which holds all of our reocrdings details
     let db = OfflineRepository()
+    let profileRepo = ProfileRepository()
     
     var listOfRecordings : [Recording]!
     @IBOutlet weak var recordingsTableView: UITableView!
@@ -27,6 +28,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     var isPlaying = false
     var meterTimer:Timer!
     
+    var deselectRowAt: IndexPath?
     var selectedIndexPath: IndexPath?
     
     @IBOutlet weak var stopButton: UIButton!
@@ -57,7 +59,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         recordingsTableView.reloadData()
         recordingsTableView.dataSource = self
         recordingsTableView.delegate = self
-        recordingsTableView.register(UINib(nibName: const.EachRecordingCell, bundle: nil), forCellReuseIdentifier: const.EachRecordingCellReuse)
+        recordingsTableView.register(UINib(nibName: Const.EachRecordingCell, bundle: nil), forCellReuseIdentifier: Const.EachRecordingCellReuse)
         
     }
     
@@ -134,7 +136,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         formatter.dateFormat = "yyyyMMdd_HHmmss"
         let dateString = formatter.string(from: Date())
         let fileName = dateString
-        let filePath = savingDirectory().appendingPathComponent(fileName, conformingTo: .mpeg4Audio)
+        let filePath = savingDirectory().appendingPathComponent(fileName, conformingTo: .wav)
         print (filePath)
         return (filePath, fileName)
     }
@@ -146,12 +148,12 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         try? session.setCategory(.playAndRecord, options: .defaultToSpeaker)
         let filePath = getFileUrl().0 // geting the first return value
         let recordSetting: [AnyHashable: Any] = [
-            AVFormatIDKey: kAudioFormatLinearPCM,
-            AVSampleRateKey: 48000.0,
-            AVNumberOfChannelsKey: 2,
-            AVLinearPCMBitDepthKey: 24,
-            AVLinearPCMIsBigEndianKey: false,
-            AVLinearPCMIsFloatKey: false
+            AVFormatIDKey: kAudioFormatLinearPCM, // Use Linear PCM for WAV
+                   AVSampleRateKey: 44100.0,             // Common sample rate
+                   AVNumberOfChannelsKey: 2,             // Stereo
+                   AVLinearPCMBitDepthKey: 16,           // 16-bit depth is widely supported
+                   AVLinearPCMIsBigEndianKey: false,     // Little-endian format
+                   AVLinearPCMIsFloatKey: false          // Integer samples
         ]
 
         
@@ -162,7 +164,9 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         let recording = Recording(name: getFileUrl().1, savedPath: filePath.absoluteString)
         // add the current recording path and name into database
         db.insertRecording(recording: recording)
-        db.getPathOfRealmDB() // for debgging purpose
+        
+        
+//        db.getPathOfRealmDB() // for debgging purpose
         
         self.recorder = audioRecorder
         self.recorder.delegate = self
@@ -214,15 +218,15 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: const.EachRecordingCellReuse, for: indexPath) as! EachRecordingCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Const.EachRecordingCellReuse, for: indexPath) as! EachRecordingCell
         
-        
+        cell.currentScreen = Const.HomeScreen
         // Safely access the listOfRecordings array
         if indexPath.row < listOfRecordings.count {
             let recording = listOfRecordings[indexPath.row]
             
             do {
-                player = try AVAudioPlayer(contentsOf: savedDirectory().appendingPathComponent(recording.name, conformingTo: .mpeg4Audio))
+                player = try AVAudioPlayer(contentsOf: savedDirectory().appendingPathComponent(recording.name, conformingTo: .wav))
                 
             }catch {
                 print(error.localizedDescription)
@@ -232,14 +236,26 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             formatter.unitsStyle = .positional
             formatter.zeroFormattingBehavior = .pad
 
-            if let formattedDuration = formatter.string(from: player.duration) {
-                cell.recordingLengthLabel.text = formattedDuration
+            if let player = player {
+                if let formattedDuration = formatter.string(from: player.duration) {
+                    cell.recordingLengthLabel.text = formattedDuration
+                }
             }
   
             cell.recordingNameLabel.text = recording.name
             cell.currentRecording = recording
             cell.editButton.addTarget(self, action: #selector(goToEditScreen) , for: .touchUpInside)
 
+            
+            profileRepo.checkIfInTheCloud(recording: recording) { isInDb in
+                if isInDb {
+                    cell.syncOnOff.isOn = true
+                }
+                else {
+                    cell.syncOnOff.isOn = false
+                }
+            }
+            
         } else {
             // Handle the case where the index is out of bounds
             cell.recordingLengthLabel.text = "Unknown"
@@ -254,7 +270,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
 
             
           // todo: Fix this
-        if let destinationVc = storyboard?.instantiateViewController(withIdentifier: const.EditScreenVC) as? EditScreenVC {
+        if let destinationVc = storyboard?.instantiateViewController(withIdentifier: Const.EditScreenVC) as? EditScreenVC {
                 destinationVc.recording = listOfRecordings[selectedIndexPath.row]
                 
                 print("working")
@@ -268,12 +284,19 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     }
     // changes the height of the selected row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let selectedIndexPath = selectedIndexPath, selectedIndexPath == indexPath {
+        if let selectedIndexPath = selectedIndexPath, selectedIndexPath == indexPath  {
             return 200 // Height when selected
         }
+    
         return 50 // Initial height
+        
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        deselectRowAt = indexPath
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
     
     
     // when any row is selected it updates "selectedIndexPath" variable
@@ -283,7 +306,6 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         tableView.beginUpdates()
         tableView.endUpdates()
     }
-    
     
     
    

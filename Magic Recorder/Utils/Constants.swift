@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct const {
+struct Const {
     // class name
     static let StoreCell = "StoreTVCell"
     // cell name
@@ -17,6 +17,14 @@ struct const {
     static let EachRecordingCellReuse  = "eachRecordingCellReuse"
     static let EditScreen = "toEditScreen"
     static let EditScreenVC = "editScreenVC"
+    
+    static let ProfileReusableCell = "profileReusableCell"
+    static let ProfileCell = "ProfileCell"
 
+    
+    // current screen name
+    static let HomeScreen = "home"
+    static let Profile = "profile"
+    static let search = "search"
     
     }
