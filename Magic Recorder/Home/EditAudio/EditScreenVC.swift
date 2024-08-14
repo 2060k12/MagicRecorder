@@ -110,8 +110,10 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     
     @IBAction func effectsButton_onClick(_ sender: Any) {
         
-        let destinationVC = EffectsVC()
-        destinationVC.recording = recording
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Ensure "Main" is your storyboard name
+           let destinationVC = storyboard.instantiateViewController(withIdentifier: "EffectsVC") as! EffectsVC
+           destinationVC.recording = recording
+           self.present(destinationVC, animated: true)
         
         
     }
