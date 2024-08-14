@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import AudioStreaming
 
 class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     
@@ -141,11 +142,42 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
                }
             
             do{
-                audioPlayer = try AVAudioPlayer(contentsOf: url)
-                audioPlayer?.delegate = self
-                audioPlayer?.prepareToPlay()
-                recordingSlider.maximumValue = Float(audioPlayer.duration)
-                audioPlayer?.play()
+                URLSession.shared
+                    .dataTask(with: url) { [self]  data , response, error in
+                        
+                        if let error = error {
+                               print("Download error: \(error)")
+                               return
+                           }
+                           
+                           guard let data = data else {
+                               print("No data found")
+                               return
+                           }
+
+                           do {
+                               let player = try AVAudioPlayer(data: data)
+                               player.prepareToPlay()
+                               player.delegate = self
+                               DispatchQueue.main.async {
+                                   self.recordingSlider.maximumValue = Float(player.duration)
+                               }
+
+                               player.play()
+                           } catch {
+                               print("Error initializing AVAudioPlayer: \(error)")
+                           }
+                        
+                    }
+                    .resume()
+//                let player = AudioPlayer()
+//                player.play(url: url)
+//                
+//                audioPlayer = try AVAudioPlayer(contentsOf: url)
+//                audioPlayer?.delegate = self
+//                audioPlayer?.prepareToPlay()
+//                recordingSlider.maximumValue = Float(audioPlayer.duration)
+//                audioPlayer?.play()
                 startTimer()
                 
             } catch let error as NSError {

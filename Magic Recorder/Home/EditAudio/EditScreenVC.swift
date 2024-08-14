@@ -30,6 +30,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     
     // ui elements
     
+    @IBOutlet weak var effectsButton: UIButton!
     @IBOutlet weak var noImageLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var audioMaxLengthLabel: UILabel!
@@ -107,6 +108,15 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         
     }
     
+    @IBAction func effectsButton_onClick(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Ensure "Main" is your storyboard name
+           let destinationVC = storyboard.instantiateViewController(withIdentifier: "EffectsVC") as! EffectsVC
+           destinationVC.recording = recording
+           self.present(destinationVC, animated: true)
+        
+        
+    }
     
     @IBAction func playButton_onClicked(_ sender: Any) {
         audioPlayer?.play()
