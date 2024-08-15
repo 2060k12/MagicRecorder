@@ -10,15 +10,24 @@ import AudioKit
 import AVFoundation
 
 
-class EffectsVC: UIViewController {
+class EffectsVC: UIViewController, AVAudioPlayerDelegate {
 
     var engine = AudioEngine()
     var player = AudioPlayer()
     var delay : Delay!
     var reverb: Reverb!
     var buffer : AVAudioPCMBuffer!
+    var timer : Timer?
+    var maxTime : String!
+    var recording: Recording!
+
     
     
+    // slider which indicated current time
+    @IBOutlet weak var currentAudioTimeSlider: UISlider!
+    
+    @IBOutlet weak var maxAudioTime: UILabel!
+    @IBOutlet weak var currentAudioTime: UILabel!
     
     // sliders for delay effects
     @IBOutlet weak var feedback_delay: UISlider!
@@ -32,11 +41,8 @@ class EffectsVC: UIViewController {
     // sliders for reverb effect
     
     @IBOutlet weak var dryWet_reverb: UISlider!
+
     
-    @IBOutlet weak var chooseRoomSize_Reverb: UIButton!
-    
-    
-    var recording: Recording!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,14 +59,54 @@ class EffectsVC: UIViewController {
         feedback_delay.value = 0
         dryWetMixDelay.value = 0
         timeDelay.value = 0
-        
+        maxAudioTime.text = maxTime
+
         // initialize reverb value
         dryWet_reverb.value = 0
         
+        delay = Delay(player)
+        reverb = Reverb(delay)
+        currentAudioTimeSlider.value = 0.0
        
 
     }
     
+    
+    
+    // Finction to update slider when an audio is played
+    func startTimer() {
+        // Ensure the timer runs on the main thread for UI updates
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [weak self] timer in
+                guard let self = self else { return }
+                
+                // Ensure the player is playing and currentTime is valid
+                guard self.player.isPlaying else {
+                    timer.invalidate()
+                    return
+                }
+                
+                // Update the slider position
+                self.currentAudioTimeSlider.value = Float(self.player.currentTime)
+                
+                // Format the current time and update the label
+                let formatter = DateComponentsFormatter()
+                formatter.allowedUnits = [.minute, .second]
+                formatter.unitsStyle = .positional
+                formatter.zeroFormattingBehavior = .pad
+                
+                if let formattedDuration = formatter.string(from: self.player.currentTime) {
+                    self.currentAudioTime.text = formattedDuration
+                }
+            }
+        }
+    }
+
+    
+    @IBAction func currentAudioTImeSlider_OnChanged(_ sender: Any) {
+        
+      
+    }
     
     
     // Below are functions which will handel effects of delay effect
@@ -83,7 +129,7 @@ class EffectsVC: UIViewController {
     // controls delay timer
     @IBAction func timeSlider_Delay(_ sender: Any) {
         if let slider = sender as? UISlider {
-            delay.dryWetMix = slider.value
+            delay.time = slider.value
         }
     }
     
@@ -94,48 +140,12 @@ class EffectsVC: UIViewController {
             reverb.dryWetMix = slider.value
         }
     }
-    
-    @IBAction func reverb_room_Select(_ sender: Any) {
-        
-        guard let button = sender as? UIButton else {
-                   print("Sender is not a UIButton")
-                   return
-               }
-        
-        
-        let select = UIAlertController(title: "Select Room Size", message: nil, preferredStyle: .actionSheet)
-            switch select.title {
-            case "Select Reverb Room Size" :
-                
-                return
-            case "Small Room" :
-                reverb.loadFactoryPreset(.smallRoom)
-                return
-            case "Medium Room" :
-                reverb.loadFactoryPreset(.mediumRoom)
-                return
-            case "Large Room" :
-                reverb.loadFactoryPreset(.largeRoom)
-                return
-            case "Hall" :
-                reverb.loadFactoryPreset(.largeHall)
-                return
-            default:
-                print("Unknown reverb preset selected")
-            }
-        
-        
-            select.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            present(select, animated: true, completion: nil)
 
-    }
-    
     
     
     
     
     @IBAction func playButton_onPressed(_ sender: Any) {
-        
         
         
         guard let recording = recording else {
@@ -155,24 +165,25 @@ class EffectsVC: UIViewController {
                         print("Buffer is nil")
                         return
                     }
-            
+                
                 player = AudioPlayer(buffer: buffer)!
-               player.isLooping = true
+                player.isLooping = true
                
                 delay = Delay(player)
                 delay.feedback = feedback_delay.value
                 delay.time = timeDelay.value
                 delay.dryWetMix = dryWetMixDelay.value * 100
-               
-               engine.output = delay
-            
+                engine.output = delay
             
                 reverb = Reverb(delay)
-            reverb.dryWetMix = dryWet_reverb.value
-            reverb.loadFactoryPreset(.largeRoom2)
+                reverb.dryWetMix = dryWet_reverb.value
+                engine.output = reverb
+                currentAudioTime.text = "0:00"
             
+                currentAudioTimeSlider.maximumValue = Float(player.duration)
+                startTimer()
+                
             
-            engine.output = reverb
                 // Check if the engine is already running
                     if !engine.avEngine.isRunning {
                         try engine.start()

@@ -26,6 +26,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     var timer : Timer?
     var startTime = 0.0
     var audioUrl : URL?
+    var maxLength : String?
     
     
     // ui elements
@@ -61,7 +62,6 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     
     @IBAction func sliderPosition_onChanged(_ sender: Any) {
         startTime = Double(audioSlider.value)
-        
     }
     
     
@@ -98,7 +98,8 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
                 formatter.zeroFormattingBehavior = .pad
                 
                 if let formattedDuration = formatter.string(from: audioPlayer.duration) {
-                audioMaxLengthLabel.text = formattedDuration
+                maxLength = formattedDuration
+                audioMaxLengthLabel.text = maxLength
             }
                 
             }
@@ -113,6 +114,11 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         let storyboard = UIStoryboard(name: "Main", bundle: nil) // Ensure "Main" is your storyboard name
            let destinationVC = storyboard.instantiateViewController(withIdentifier: "EffectsVC") as! EffectsVC
            destinationVC.recording = recording
+        guard let time = maxLength else {
+            print("Audio is empty")
+            return
+        }
+            destinationVC.maxTime = time
            self.present(destinationVC, animated: true)
         
         
