@@ -20,6 +20,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     var recording : Recording!     // getting recording while navigating
     let db = OfflineRepository()    // initializing realmDB
 
+    
 
     var image :UIImage?
     var imagePicker = UIImagePickerController()
@@ -27,6 +28,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     var startTime = 0.0
     var audioUrl : URL?
     var maxLength : String?
+    var currentPath : URL?
     
     
     // ui elements
@@ -81,26 +83,43 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let url = documentsURL.appendingPathComponent(recording.name, conformingTo: .wav)
+        
+        let onlineAudioFolderURL = documentsURL.appendingPathComponent("OnlineAudio", isDirectory: true)
+        let fileURL = onlineAudioFolderURL.appendingPathComponent(recording.name).appendingPathExtension("wav")
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+              // File exists locally, use this file URL
+             currentPath = fileURL
+        } else {
+            
+            currentPath = url
+        }
+        
         audioUrl = url
         audioSlider.value = Float(startTime)
         
         
         do{
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            guard let currentPath = currentPath else{
+                print("Path is Nil")
+                return
+            }
+            
+            audioPlayer = try AVAudioPlayer(contentsOf: currentPath)
             audioPlayer?.delegate = self
             audioPlayer?.prepareToPlay()
-            if let audioPlayer = audioPlayer{
-                audioSlider.maximumValue = Float(audioPlayer.duration)
-                
-                let formatter = DateComponentsFormatter()
-                formatter.allowedUnits = [.minute, .second]
-                formatter.unitsStyle = .positional
-                formatter.zeroFormattingBehavior = .pad
-                
-                if let formattedDuration = formatter.string(from: audioPlayer.duration) {
-                maxLength = formattedDuration
-                audioMaxLengthLabel.text = maxLength
-            }
+                  if let audioPlayer = audioPlayer{
+                      audioSlider.maximumValue = Float(audioPlayer.duration)
+                      
+                      let formatter = DateComponentsFormatter()
+                      formatter.allowedUnits = [.minute, .second]
+                      formatter.unitsStyle = .positional
+                      formatter.zeroFormattingBehavior = .pad
+                      
+                      if let formattedDuration = formatter.string(from: audioPlayer.duration) {
+                          maxLength = formattedDuration
+                          audioMaxLengthLabel.text = maxLength
+                      }
+                  
                 
             }
         }catch {
@@ -165,7 +184,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
             switch status {
             case .authorized, .limited:
-                if let image = self.image, let audioUrl = self.audioUrl {
+                if let image = self.image, let audioUrl = self.currentPath {
                     let images = [image]
                     let audioUrls = [audioUrl]
                     
@@ -287,16 +306,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     }
     
 
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
 }
 

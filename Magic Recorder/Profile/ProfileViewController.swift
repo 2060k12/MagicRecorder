@@ -107,9 +107,28 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.currentRecording = listOfRecordings[indexPath.row]
         cell.currentScreen = Const.Profile
         cell.syncOnOff.isEnabled = false
+        cell.editButton.addTarget(self, action: #selector(goToEditScreen(_:)), for: .touchUpInside)
+
+        
 
         return cell
     }
+    
+    
+    @objc func goToEditScreen(_ sender: UIButton) {
+        let selectedIndexPathRow = sender.tag
+        
+        // Use the row index to get the correct recording
+        let selectedRecording = listOfRecordings[selectedIndexPathRow]
+        
+        if let destinationVc = storyboard?.instantiateViewController(withIdentifier: Const.EditScreenVC) as? EditScreenVC {
+            destinationVc.recording = selectedRecording
+            print("Navigating to edit screen")
+            self.navigationController?.pushViewController(destinationVc, animated: true)
+        }
+    }
+
+ 
     
     // changes the height of the selected row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

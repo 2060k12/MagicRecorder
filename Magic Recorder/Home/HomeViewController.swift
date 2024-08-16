@@ -267,20 +267,14 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     
     @objc func goToEditScreen(){
         if let  selectedIndexPath {
-
-            
-          // todo: Fix this
         if let destinationVc = storyboard?.instantiateViewController(withIdentifier: Const.EditScreenVC) as? EditScreenVC {
                 destinationVc.recording = listOfRecordings[selectedIndexPath.row]
                 
                 print("working")
                 self.navigationController?.pushViewController(destinationVc, animated: true)
             }
-          
         }
      
-        
-        
     }
     // changes the height of the selected row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
