@@ -40,7 +40,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     // function which will show alert Message in the screen
     func alert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default))
                         self.present(alert, animated: true, completion: nil)}
     

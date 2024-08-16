@@ -24,7 +24,7 @@ class LoginRepository{
                     "email": user.email!,
                     "phoneNumber" : user.phoneNumber,
                     "premiumMember" : user.premiumMember,
-                    "profileImage" : user.profileImage,
+//                    "profileImage" : user.profileImage,
                     "registeredAt" : user.registeredAt!
                 ]
                 Auth.auth().createUser(withEmail: user.email!, password: password){

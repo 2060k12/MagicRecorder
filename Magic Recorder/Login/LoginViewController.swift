@@ -5,6 +5,7 @@
 //  Created by Pranish Pathak on 25/7/2024.
 //
 
+import FirebaseAuth
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
@@ -33,14 +34,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // function which will show alert Message in the screen
     func alert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default))
-                        self.present(alert, animated: true, completion: nil)}
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
     
     // functions for all buttons
     // when forgot password button is tapped
     @IBAction func forgotPasswordOnTap(_ sender: Any) {
+        guard let email = emailTextField.text, !emailTextField.text.isNilOrWhiteSpace else {
+              self.alert(title: "Invalid Email", message: "Please enter a valid email address.")
+              return
+          }
+          
+          Auth.auth().sendPasswordReset(withEmail: email) { error in
+              if let error = error {
+                  self.alert(title: "Error", message: "Failed to send reset email: \(error.localizedDescription)")
+              } else {
+                  self.alert(title: "Reset Email Sent", message: "A password reset email has been sent to \(email).")
+              }
+          }
+        
     }
     
     // when login button is pressed
@@ -64,7 +80,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.progressIndicator.stopAnimating()
                 let mainViewController = self.storyboard?.instantiateViewController(identifier: "MainViewController") as?
                 UITabBarController
-                mainViewController?.selectedIndex = 1
                 self.view.window?.rootViewController = mainViewController
                 self.view.window?.makeKeyAndVisible()
             }

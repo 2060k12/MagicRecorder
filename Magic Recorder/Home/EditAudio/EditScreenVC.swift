@@ -14,18 +14,27 @@ import UnsplashPhotoPicker
 
 
 
-class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVAudioPlayerDelegate{
+class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVAudioPlayerDelegate, SendUrl{
+    
+    
+    func passUrlBack(url: URL) {
+        currentPath = url
+    }
+    
    
 
     var recording : Recording!     // getting recording while navigating
     let db = OfflineRepository()    // initializing realmDB
 
+    
 
     var image :UIImage?
     var imagePicker = UIImagePickerController()
     var timer : Timer?
     var startTime = 0.0
     var audioUrl : URL?
+    var maxLength : String?
+    var currentPath : URL?
     
     
     // ui elements
@@ -38,6 +47,13 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     @IBOutlet weak var audioSlider: UISlider! // reference to audio slider (changes according to duration)
     @IBOutlet weak var audioCurrentTimeLabel: UILabel! // current time label of audio
     @IBOutlet weak var addUnsplashImageButton: UIButton!    // Add images from unsplash.com
+    
+    
+    // function which will show alert Message in the screen
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default))
+                        self.present(alert, animated: true, completion: nil)}
     
     
     // Finction to update slider when an audio is played
@@ -61,7 +77,6 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     
     @IBAction func sliderPosition_onChanged(_ sender: Any) {
         startTime = Double(audioSlider.value)
-        
     }
     
     
@@ -81,25 +96,43 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let url = documentsURL.appendingPathComponent(recording.name, conformingTo: .wav)
+        
+        let onlineAudioFolderURL = documentsURL.appendingPathComponent("OnlineAudio", isDirectory: true)
+        let fileURL = onlineAudioFolderURL.appendingPathComponent(recording.name).appendingPathExtension("wav")
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+              // File exists locally, use this file URL
+             currentPath = fileURL
+        } else {
+            
+            currentPath = url
+        }
+        
         audioUrl = url
         audioSlider.value = Float(startTime)
         
         
         do{
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            guard let currentPath = currentPath else{
+                print("Path is Nil")
+                return
+            }
+            
+            audioPlayer = try AVAudioPlayer(contentsOf: currentPath)
             audioPlayer?.delegate = self
             audioPlayer?.prepareToPlay()
-            if let audioPlayer = audioPlayer{
-                audioSlider.maximumValue = Float(audioPlayer.duration)
-                
-                let formatter = DateComponentsFormatter()
-                formatter.allowedUnits = [.minute, .second]
-                formatter.unitsStyle = .positional
-                formatter.zeroFormattingBehavior = .pad
-                
-                if let formattedDuration = formatter.string(from: audioPlayer.duration) {
-                audioMaxLengthLabel.text = formattedDuration
-            }
+                  if let audioPlayer = audioPlayer{
+                      audioSlider.maximumValue = Float(audioPlayer.duration)
+                      
+                      let formatter = DateComponentsFormatter()
+                      formatter.allowedUnits = [.minute, .second]
+                      formatter.unitsStyle = .positional
+                      formatter.zeroFormattingBehavior = .pad
+                      
+                      if let formattedDuration = formatter.string(from: audioPlayer.duration) {
+                          maxLength = formattedDuration
+                          audioMaxLengthLabel.text = maxLength
+                      }
+                  
                 
             }
         }catch {
@@ -113,15 +146,36 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         let storyboard = UIStoryboard(name: "Main", bundle: nil) // Ensure "Main" is your storyboard name
            let destinationVC = storyboard.instantiateViewController(withIdentifier: "EffectsVC") as! EffectsVC
            destinationVC.recording = recording
+        guard let time = maxLength else {
+            print("Audio is empty")
+            return
+        }
+            destinationVC.maxTime = time
            self.present(destinationVC, animated: true)
         
         
     }
     
+    // whne the play button is played
     @IBAction func playButton_onClicked(_ sender: Any) {
-        audioPlayer?.play()
-        startTimer()
+        if let player = audioPlayer {
+              if player.isPlaying {
+                  player.pause()
+                  updatePlayPauseButton()
+              } else {
+                  player.play()
+                  startTimer()
+                  updatePlayPauseButton()
+              }
+          }
         
+    }
+    
+    // after the current recoring is completed
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        DispatchQueue.main.async {
+            self.updatePlayPauseButton()
+        }
     }
     
     // Pick image and crop from the gallary
@@ -152,6 +206,18 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     }
     
     
+    
+    private func updatePlayPauseButton() {
+        let playIcon = UIImage(systemName: "play.fill")  // System icon for play
+        let stopIcon = UIImage(systemName: "stop.fill")  // System icon for stop
+        
+        if let player = audioPlayer, player.isPlaying {
+            playPauseButton.setImage(stopIcon, for: .normal)
+        } else {
+            playPauseButton.setImage(playIcon, for: .normal)
+        }
+    }
+    
 
     // Todo:: ALert User
     @IBAction func saveEditedVideo_onClick(_ sender: Any) {
@@ -159,7 +225,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
             switch status {
             case .authorized, .limited:
-                if let image = self.image, let audioUrl = self.audioUrl {
+                if let image = self.image, let audioUrl = self.currentPath {
                     let images = [image]
                     let audioUrls = [audioUrl]
                     
@@ -190,6 +256,8 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
                                     self.progressBar.isHidden = true
                                     let video = EditedVideos(videoName: self.recording.name, videosPath: videoUrl.absoluteString, date: Date())
                                     self.db.insertVideo(video: video)
+                                    self.alert(title: "Success", message: "Video Exported Successfully")
+                                    
                                 }
                                
                                 
@@ -197,11 +265,11 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
                             break
                             
                         case .failure(let err):
-                            print("Unable to export Video \(err.localizedDescription)")
-                            
+                            self.alert(title: "Error", message: err.localizedDescription)
                             
                         }
                         print(result)
+                        
                         
                         }
                     
@@ -281,18 +349,22 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     }
     
 
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier ==  "EffectsVC" {
+            let effectsVC = segue.destination as! EffectsVC
+            guard let finalURl = effectsVC.finalURl else{
+                print("Url is empty")
+                return
+            }
+            effectsVC.delegate = self
+            passUrlBack(url: finalURl)
+            
+        }
     }
-    */
 
 }
+
 
 
 

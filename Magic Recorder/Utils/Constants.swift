@@ -27,4 +27,8 @@ struct Const {
     static let Profile = "profile"
     static let search = "search"
     
+    
+    // search screen
+    static let searchedTableCell = "searchedTableCell"
+    
     }
