@@ -167,7 +167,7 @@
                 <outlet property="sliderMaxLengthLabel" destination="9Ro-B3-mw6" id="JTJ-ly-Iyz"/>
                 <outlet property="syncOnOff" destination="VQy-BN-5z3" id="nkN-Ar-dlD"/>
             </connections>
-            <point key="canvasLocation" x="310.68702290076334" y="32.394366197183103"/>
+            <point key="canvasLocation" x="297" y="9"/>
         </tableViewCell>
     </objects>
     <resources>

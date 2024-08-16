@@ -277,7 +277,6 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         }
      
         
-        
     }
     // changes the height of the selected row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
