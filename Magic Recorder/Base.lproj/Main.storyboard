@@ -231,7 +231,7 @@
         <!--Profile View Controller-->
         <scene sceneID="qfR-fl-AMm">
             <objects>
-                <viewController id="uPw-rz-vYN" customClass="ProfileViewController" customModule="Magic_Recorder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="uPw-rz-vYN" customClass="ProfileViewController" customModule="Magic_Recorder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bvf-HB-1JL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -955,7 +955,7 @@
                                 <rect key="frame" x="16" y="152" width="343" height="466"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ECE-C8-a86" customClass="searchedUserCell" customModule="Magic_Recorder" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchedTableCell" id="ECE-C8-a86" customClass="searchedUserCell" customModule="Magic_Recorder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="343" height="40.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ECE-C8-a86" id="Z2i-1p-Bow">
@@ -1007,6 +1007,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mFk-TB-LlK"/>
+                    <connections>
+                        <outlet property="searchBar" destination="7pO-w2-PHe" id="7UY-Zf-NWN"/>
+                        <outlet property="searchedUserTableView" destination="SF6-Mj-OI5" id="qJK-Ma-fu5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cON-Jg-yRb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

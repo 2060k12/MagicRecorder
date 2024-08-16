@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     var listOfRecordings = [Recording()]
     var selectedIndexPath : IndexPath?
+    var currentProfile : Profile?
 
 
     // UI elements for Profile View Screen
@@ -27,39 +28,70 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         
        
-        
+        profileTable.register( UINib(nibName: Const.EachRecordingCell, bundle: nil) , forCellReuseIdentifier: Const.EachRecordingCellReuse)
+        profileTable.dataSource = self
+        profileTable.delegate = self
         // initializing repoisitory
         
         let repository = ProfileRepository()
         
     
-        // async requests
-        Task {
-            
-            do{
-                let recordings  = try await repository.getAllRecordings()
-                DispatchQueue.main.async {
-                                    self.listOfRecordings = recordings
-                                    self.profileTable.reloadData()
-                                }
-            }catch {
-                print("Failed to retrieve recordings: \(error.localizedDescription)")
+        if currentProfile == nil {
+            // async requests
+            Task {
+                do{
+                    let recordings  = try await repository.getAllRecordings()
+                    DispatchQueue.main.async {
+                        self.listOfRecordings = recordings
+                        self.profileTable.reloadData()
+                    }
+                }catch {
+                    print("Failed to retrieve recordings: \(error.localizedDescription)")
+                }
+                
+                if let profile = await repository.getCurrentUserProfileInfo() {
+                    self.currentUserName.text = profile.fullName
+                    let url = URL(string: profile.profileImage)
+                    profileImage.kf.setImage(with: url)
+                } else {
+                    print("User Not Found")
+                }
             }
             
-            if let profile = await repository.getCurrentUserProfileInfo() {
-                self.currentUserName.text = profile.fullName
-                let url = URL(string: profile.profileImage)
-                profileImage.kf.setImage(with: url)
-            } else {
-                print("User Not Found")
-            }
+            profileTable.reloadData()
         }
-        profileTable.register( UINib(nibName: Const.EachRecordingCell, bundle: nil) , forCellReuseIdentifier: Const.EachRecordingCellReuse)
-        profileTable.dataSource = self
-        profileTable.delegate = self
-        profileTable.reloadData()
-
-      
+        
+        else{
+            
+            Task {
+                do{
+                    
+                    guard let email = self.currentProfile?.email else {
+                        print("Email is nil")
+                        return
+                    }
+                    let recordings  = try await repository.getRecordings(email: email)
+                    DispatchQueue.main.async {
+                        self.listOfRecordings = recordings
+                        self.profileTable.reloadData()
+                    }
+                }catch {
+                    print("Failed to retrieve recordings: \(error.localizedDescription)")
+                }
+                
+                if let profile = await repository.getUserProfileInfo(email: currentProfile?.email) {
+                    self.currentUserName.text = profile.fullName
+                    
+                    let url = URL(string: profile.profileImage)
+                    profileImage.kf.setImage(with: url)
+                } else {
+                    print("User Not Found")
+                }
+            }
+            
+            profileTable.reloadData()
+            
+        }
 
     }
     

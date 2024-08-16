@@ -49,10 +49,74 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
    
     
         }
+    
+    
+    
+    
+    @IBAction func goBackward_OnPressed(_ sender: Any) {
+        guard let player = audioPlayer else {
+               print("Audio player not initialized")
+               return
+           }
+           
+           // Go backward by 5 seconds
+           let newTime = player.currentTime - 5
+           player.currentTime = max(newTime, 0) // Ensure the time doesn't go below 0
+           recordingSlider.value = Float(player.currentTime)
+        
+    }
+    
+    @IBAction func goForward_OnPressed(_ sender: Any) {
+        guard let player = audioPlayer else {
+               print("Audio player not initialized")
+               return
+           }
+           
+           // Go forward by 5 seconds
+           let newTime = player.currentTime + 5
+           player.currentTime = min(newTime, player.duration) // Ensure the time doesn't exceed the duration
+           recordingSlider.value = Float(player.currentTime)
+        
+    }
+    
         
     @IBAction func playButton_onClick(_ sender: Any) {
-        playRecording()
+        if audioPlayer?.isPlaying == true {
+               stopRecording()
+           } else {
+               playRecording()
+           }
     }
+    
+    
+    // function to stop the current recording if audio is being played
+    func stopRecording() {
+        if audioPlayer?.isPlaying == true {
+            audioPlayer?.stop()
+            timer?.invalidate()
+            
+            // Reset the player to the beginning
+            audioPlayer.currentTime = 0
+            recordingSlider.value = 0
+            
+         
+            // Change button icon back to "Play"
+            let playIcon = UIImage(systemName: "play.fill") // System icon for play
+            playPauseButton.setImage(playIcon, for: .normal)
+        }
+    }
+
+    // when the audio is finished playing, this function will change the icon
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        // Reset the play button icon to "Play"
+        let playIcon = UIImage(systemName: "play.fill")
+        playPauseButton.setImage(playIcon, for: .normal)
+        
+        // Stop the timer
+        timer?.invalidate()
+        recordingSlider.value = 0
+    }
+
     
     
     @IBAction func deleteRecording_onClick(_ sender: Any) {
@@ -116,13 +180,22 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
             let url = documentsURL.appendingPathComponent(record.name, conformingTo: .wav)
             
             do{
-                audioPlayer = try AVAudioPlayer(contentsOf: url)
-                audioPlayer?.delegate = self
-                audioPlayer?.prepareToPlay()
-                recordingSlider.maximumValue = Float(audioPlayer.duration)
+                
+                if audioPlayer == nil {
+                    audioPlayer = try AVAudioPlayer(contentsOf: url)
+                    audioPlayer?.delegate = self
+                    audioPlayer?.prepareToPlay()
+                    recordingSlider.maximumValue = Float(audioPlayer.duration)
+                    
+                }
+                // Set the player to the slider's current position or to the beginning
+                audioPlayer.currentTime = Double(recordingSlider.value)
                 audioPlayer?.play()
                 startTimer()
                 
+                // Change button to "Stop"
+                 let stopIcon = UIImage(systemName: "stop.fill") // System icon for stop
+            playPauseButton.setImage(stopIcon, for: .normal)
             } catch let error as NSError {
                 print("Error initializing AVAudioPlayer: \(error.localizedDescription)")
                 
@@ -142,49 +215,64 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
                }
             
             do{
-                URLSession.shared
-                    .dataTask(with: url) { [self]  data , response, error in
-                        
-                        if let error = error {
-                               print("Download error: \(error)")
-                               return
-                           }
-                           
-                           guard let data = data else {
-                               print("No data found")
-                               return
-                           }
-
-                           do {
-                               let player = try AVAudioPlayer(data: data)
-                               player.prepareToPlay()
-                               player.delegate = self
-                               DispatchQueue.main.async {
-                                   self.recordingSlider.maximumValue = Float(player.duration)
-                               }
-
-                               player.play()
-                           } catch {
-                               print("Error initializing AVAudioPlayer: \(error)")
-                           }
-                        
-                    }
+                if audioPlayer == nil {
+                    URLSession.shared
+                        .dataTask(with: url) { [self]  data , response, error in
+                            
+                            if let error = error {
+                                print("Download error: \(error)")
+                                return
+                            }
+                            
+                            guard let data = data else {
+                                print("No data found")
+                                return
+                            }
+                            
+                            do {
+                                let player = try AVAudioPlayer(data: data)
+                                player.delegate = self
+                                player.prepareToPlay()
+                                
+                                DispatchQueue.main.async {
+                                    self.recordingSlider.maximumValue = Float(player.duration)
+                                }
+                                
+                                player.play()
+                            } catch {
+                                print("Error initializing AVAudioPlayer: \(error)")
+                            }
+                            
+                            // Set the player to the slider's current position or to the beginning
+                            DispatchQueue.main.async {
+                                self.audioPlayer.currentTime = Double(self.recordingSlider.value)
+                                self.audioPlayer.play()
+                                self.startTimer()
+                                // Change button to "Stop"
+                                let stopIcon = UIImage(systemName: "stop.fill") // System icon for stop
+                                self.playPauseButton.setImage(stopIcon, for: .normal)
+                            }
+                            
+                        }
+                    
+          
                     .resume()
-//                let player = AudioPlayer()
-//                player.play(url: url)
-//                
-//                audioPlayer = try AVAudioPlayer(contentsOf: url)
-//                audioPlayer?.delegate = self
-//                audioPlayer?.prepareToPlay()
-//                recordingSlider.maximumValue = Float(audioPlayer.duration)
-//                audioPlayer?.play()
+            } else {
+                // If the player already exists, just resume playback
+                audioPlayer.currentTime = Double(recordingSlider.value)
+                audioPlayer.play()
                 startTimer()
+                
+                // Change button to "Stop"
+                 let stopIcon = UIImage(systemName: "stop.fill") // System icon for stop
+            playPauseButton.setImage(stopIcon, for: .normal)
+            }
+                
                 
             } catch let error as NSError {
                 print("Error initializing AVAudioPlayer: \(error.localizedDescription)")
                 
             }
-            
             
             break
             

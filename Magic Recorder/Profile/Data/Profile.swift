@@ -45,7 +45,7 @@ class Profile{
     convenience init(dictionary:[String : Any]){
         
         self.init(fullName: dictionary["fullName"] as! String,
-                  profileImage: dictionary["profileImage"] as! String,
+                  profileImage: dictionary["profileImage"] as! String? ?? "",
                   premiumMember: dictionary["premiumMember"] as! Bool,
                   registeredAt: dictionary["registeredAt"] as? Timestamp ,
                   email: dictionary["profileImage"] as! String,

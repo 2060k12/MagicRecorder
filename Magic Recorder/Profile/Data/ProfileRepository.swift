@@ -16,10 +16,6 @@ class ProfileRepository {
     let fBStorage = Storage.storage()
     
 
-    
-
-    
-    
     // get currentUser
     var currentUSer = Auth.auth().currentUser?.email
 
@@ -48,12 +44,35 @@ class ProfileRepository {
         }
     }
     
+    func getUserProfileInfo(email: String?) async -> Profile? {
+        do {
+            
+            guard let email = email else {
+                print("Please login or check your internet connection.")
+                return nil
+            }
+            
+            
+            let snapshot = try await db.collection("Users")
+                .document(email)
+                .getDocument()
+            
+            if let data = snapshot.data() {
+                return Profile(dictionary: data)
+            } else {
+                return nil
+            }
+        } catch {
+            print("Can't get current user info \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    
     
     
     func addRecordingToCloud(recording : Recording, callback : @escaping (Result<Void, Error>) -> Void) {
   
-
-        
         
         guard let recordingName = recording.name,
         let recordingUrl = recording.savedPath else {
@@ -146,9 +165,9 @@ class ProfileRepository {
                }
            }
         
-        
     }
     
+    // get recordings for current users
     func getAllRecordings() async throws -> [Recording] {
         guard let currentUser = currentUSer else {
             print("Please login or check your internet connection")
@@ -160,6 +179,30 @@ class ProfileRepository {
         // Fetch documents from Firestore
         let snapshot = try await db.collection("Users")
             .document(currentUser.lowercased())
+            .collection("Recording")
+            .getDocuments()
+        
+        // Process documents
+        let recordings = snapshot.documents.compactMap { doc in
+            let data = doc.data()
+            return Recording(dictionary: data, id: doc.documentID)
+        }
+        
+        return recordings
+    }
+    
+    // get recordings for searched users
+    func getRecordings(email: String?) async throws -> [Recording] {
+        guard let email = email else {
+            print("Email is empty")
+            throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Email not found or no internet connection"])
+        }
+        
+        let db = Firestore.firestore()
+        
+        // Fetch documents from Firestore
+        let snapshot = try await db.collection("Users")
+            .document(email.lowercased())
             .collection("Recording")
             .getDocuments()
         

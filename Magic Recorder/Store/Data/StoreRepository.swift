@@ -14,8 +14,6 @@ class StoreRepository{
     // initializing firestore database
     let db = Firestore.firestore()
   
-    
-    
     func getAllThemes( callback : @escaping ([Themes]) -> Void ){
         
         var tempList = [Themes]()
