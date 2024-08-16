@@ -267,6 +267,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     
     @objc func goToEditScreen(){
         if let  selectedIndexPath {
+
         if let destinationVc = storyboard?.instantiateViewController(withIdentifier: Const.EditScreenVC) as? EditScreenVC {
                 destinationVc.recording = listOfRecordings[selectedIndexPath.row]
                 
@@ -275,6 +276,8 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             }
         }
      
+        
+        
     }
     // changes the height of the selected row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

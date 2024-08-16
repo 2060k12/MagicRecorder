@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 class Profile{
     let fullName : String
-    let profileImage : String
+//    let profileImage : String
     let premiumMember : Bool
     let registeredAt : Timestamp?
     let email :String!
@@ -20,9 +20,10 @@ class Profile{
     
     
     // default constructer for our class
-    init(fullName: String, profileImage: String, premiumMember: Bool, registeredAt: Timestamp?, email: String, phoneNumber : String) {
+//    init(fullName: String, profileImage: String, premiumMember: Bool, registeredAt: Timestamp?, email: String, phoneNumber : String) {
+    init(fullName: String, premiumMember: Bool, registeredAt: Timestamp?, email: String, phoneNumber : String) {
         self.fullName = fullName
-        self.profileImage = profileImage
+//        self.profileImage = profileImage
         self.premiumMember = premiumMember
         self.registeredAt = registeredAt
         self.email = email
@@ -33,7 +34,7 @@ class Profile{
     // constructer used to regester a new user
     convenience init(fullName: String, email: String, phoneNumber: String){
         self.init(fullName: fullName,
-                  profileImage: "",
+//                  profileImage: "",
                   premiumMember: false,
                   registeredAt: Timestamp.init(),
                   email: email,
@@ -45,15 +46,12 @@ class Profile{
     convenience init(dictionary:[String : Any]){
         
         self.init(fullName: dictionary["fullName"] as! String,
-                  profileImage: dictionary["profileImage"] as! String? ?? "",
+//                  profileImage: dictionary["profileImage"] as! String? ?? "",
                   premiumMember: dictionary["premiumMember"] as! Bool,
                   registeredAt: dictionary["registeredAt"] as? Timestamp ,
-                  email: dictionary["profileImage"] as! String,
+                  email: dictionary["email"] as! String,
                   phoneNumber: dictionary["phoneNumber"] as! String)
         
     }
-    
-    
-    
     
 }

@@ -43,12 +43,16 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     @IBOutlet weak var sliderMaxLengthLabel: UILabel!
     
     
+    @IBOutlet weak var deleteButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         
+        
+        
     }
+    
     
     
     
@@ -206,6 +210,8 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
             
             // when the user is in their own profile page or someone else, this will be the one what will run when "play" button is pressed
         case Const.Profile :
+            
+            
             guard let record = currentRecording else {
                 print("No recording URL set")
                 return

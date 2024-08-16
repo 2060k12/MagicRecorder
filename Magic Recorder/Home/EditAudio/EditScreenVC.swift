@@ -14,7 +14,13 @@ import UnsplashPhotoPicker
 
 
 
-class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVAudioPlayerDelegate{
+class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVAudioPlayerDelegate, SendUrl{
+    
+    
+    func passUrlBack(url: URL) {
+        currentPath = url
+    }
+    
    
 
     var recording : Recording!     // getting recording while navigating
@@ -41,6 +47,13 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     @IBOutlet weak var audioSlider: UISlider! // reference to audio slider (changes according to duration)
     @IBOutlet weak var audioCurrentTimeLabel: UILabel! // current time label of audio
     @IBOutlet weak var addUnsplashImageButton: UIButton!    // Add images from unsplash.com
+    
+    
+    // function which will show alert Message in the screen
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default))
+                        self.present(alert, animated: true, completion: nil)}
     
     
     // Finction to update slider when an audio is played
@@ -143,10 +156,26 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         
     }
     
+    // whne the play button is played
     @IBAction func playButton_onClicked(_ sender: Any) {
-        audioPlayer?.play()
-        startTimer()
+        if let player = audioPlayer {
+              if player.isPlaying {
+                  player.pause()
+                  updatePlayPauseButton()
+              } else {
+                  player.play()
+                  startTimer()
+                  updatePlayPauseButton()
+              }
+          }
         
+    }
+    
+    // after the current recoring is completed
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        DispatchQueue.main.async {
+            self.updatePlayPauseButton()
+        }
     }
     
     // Pick image and crop from the gallary
@@ -176,6 +205,18 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         addUnsplashImageButton.isHidden = true
     }
     
+    
+    
+    private func updatePlayPauseButton() {
+        let playIcon = UIImage(systemName: "play.fill")  // System icon for play
+        let stopIcon = UIImage(systemName: "stop.fill")  // System icon for stop
+        
+        if let player = audioPlayer, player.isPlaying {
+            playPauseButton.setImage(stopIcon, for: .normal)
+        } else {
+            playPauseButton.setImage(playIcon, for: .normal)
+        }
+    }
     
 
     // Todo:: ALert User
@@ -215,6 +256,8 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
                                     self.progressBar.isHidden = true
                                     let video = EditedVideos(videoName: self.recording.name, videosPath: videoUrl.absoluteString, date: Date())
                                     self.db.insertVideo(video: video)
+                                    self.alert(title: "Success", message: "Video Exported Successfully")
+                                    
                                 }
                                
                                 
@@ -222,11 +265,11 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
                             break
                             
                         case .failure(let err):
-                            print("Unable to export Video \(err.localizedDescription)")
-                            
+                            self.alert(title: "Error", message: err.localizedDescription)
                             
                         }
                         print(result)
+                        
                         
                         }
                     
@@ -307,8 +350,21 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     
 
  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier ==  "EffectsVC" {
+            let effectsVC = segue.destination as! EffectsVC
+            guard let finalURl = effectsVC.finalURl else{
+                print("Url is empty")
+                return
+            }
+            effectsVC.delegate = self
+            passUrlBack(url: finalURl)
+            
+        }
+    }
 
 }
+
 
 
 

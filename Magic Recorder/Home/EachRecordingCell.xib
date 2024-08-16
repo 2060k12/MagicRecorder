@@ -155,6 +155,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="deleteButton" destination="BDw-8o-g3H" id="6mD-cP-rX6"/>
                 <outlet property="editButton" destination="VoO-Hw-RsE" id="p2r-Bb-APg"/>
                 <outlet property="goBackwardButton" destination="fn2-JZ-2QM" id="LNX-NN-ejN"/>
                 <outlet property="goForwardButton" destination="S9c-0p-4AT" id="ZKU-bj-Uzz"/>

@@ -11,7 +11,7 @@ import AVFoundation
 
 
 class EffectsVC: UIViewController, AVAudioPlayerDelegate {
-
+   
     var engine = AudioEngine()
     var player = AudioPlayer()
     var delay : Delay!
@@ -20,7 +20,17 @@ class EffectsVC: UIViewController, AVAudioPlayerDelegate {
     var timer : Timer?
     var maxTime : String!
     var recording: Recording!
-
+    var currentPath : URL?
+    var delegate : SendUrl?
+    var finalURl : URL?
+    
+    // function which will show alert Message in the screen
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
     
     // slider which indicated current time
@@ -46,6 +56,23 @@ class EffectsVC: UIViewController, AVAudioPlayerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
+        
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let url = documentsURL.appendingPathComponent(recording.name, conformingTo: .wav)
+        
+        let onlineAudioFolderURL = documentsURL.appendingPathComponent("OnlineAudio", isDirectory: true)
+        let fileURL = onlineAudioFolderURL.appendingPathComponent(recording.name).appendingPathExtension("wav")
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+              // File exists locally, use this file URL
+             currentPath = fileURL
+        } else {
+            
+            currentPath = url
+        }
+        
+                
         // Setup the audio session
           do {
               try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
@@ -142,7 +169,78 @@ class EffectsVC: UIViewController, AVAudioPlayerDelegate {
     }
 
     
-    
+    @IBAction func saveButton_OnPressed(_ sender: Any) {
+        guard player.isPlaying else {
+            alert(title: "Error", message: "Audio is not playing. Start playback before saving.")
+            return
+        }
+        
+        // Check if `currentPath` is available
+        guard let currentPath = currentPath else {
+            alert(title: "Error", message: "No file to save. Please load a valid file.")
+            return
+        }
+        
+        // Use the same file URL for the processed audio
+        let processedFileURL = currentPath
+        
+        do {
+            // Create an AVAudioFile to write the processed audio
+            let format = player.buffer?.format
+            guard let format = format else {
+                alert(title: "Error", message: "Unable to retrieve audio format.")
+                return
+            }
+            
+            let outputFile = try AVAudioFile(forWriting: processedFileURL, settings: format.settings)
+            
+            // Create a new audio engine to process and render the audio
+            let renderEngine = AudioEngine()
+            let playerNode = AudioPlayer()
+            let delayNode = Delay(playerNode)
+            let reverbNode = Reverb(delayNode)
+            
+            // Set processing parameters
+            delayNode.feedback = feedback_delay.value
+            delayNode.time = timeDelay.value
+            delayNode.dryWetMix = dryWetMixDelay.value * 100
+            reverbNode.dryWetMix = dryWet_reverb.value
+            
+            // Connect nodes
+            renderEngine.output = reverbNode
+            playerNode.buffer = player.buffer
+            playerNode.isLooping = false
+            
+            // Start the render engine
+            try renderEngine.start()
+            
+            // Render audio to the output file
+            let buffer = player.buffer
+            guard let buffer = buffer else {
+                alert(title: "Error", message: "Unable to retrieve audio buffer.")
+                return
+            }
+            
+            let frameCount = AVAudioFrameCount(buffer.frameLength)
+            try outputFile.write(from: buffer)
+            
+            // Stop the engine and cleanup
+            renderEngine.stop()
+            
+            // Update the delegate with the new URL
+            finalURl = processedFileURL
+            delegate?.passUrlBack(url: finalURl!)
+            
+            // Dismiss the view controller
+            self.dismiss(animated: true, completion: nil)
+            
+        } catch {
+            // Handle errors
+            alert(title: "Error", message: "Failed to save audio: \(error.localizedDescription)")
+        }
+    }
+
+
     
     
     @IBAction func playButton_onPressed(_ sender: Any) {
@@ -154,17 +252,19 @@ class EffectsVC: UIViewController, AVAudioPlayerDelegate {
         }
         
         
-        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let url = documentsURL.appendingPathComponent(recording.name, conformingTo: .wav)
-        print("Playing file at URL: \(url)") // Debug: Check the file path
-
         do {
+            
+            guard let url = currentPath else{
+                print("Invalid URl")
+                return
+            }
+            
                let file = try AVAudioFile(forReading: url)
                buffer = try AVAudioPCMBuffer(file: file)
-            guard let buffer = buffer else {
-                        print("Buffer is nil")
-                        return
-                    }
+                guard let buffer = buffer else {
+                            print("Buffer is nil")
+                            return
+                        }
                 
                 player = AudioPlayer(buffer: buffer)!
                 player.isLooping = true
@@ -206,16 +306,18 @@ class EffectsVC: UIViewController, AVAudioPlayerDelegate {
 
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
-    
+       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           if segue.identifier ==  Const.EditScreenVC {
+               let editVC = segue.destination as! EditScreenVC
+               editVC.currentPath = finalURl
+              
+               
+           }
+       }
 
+}
+
+protocol SendUrl {
+    func passUrlBack(url: URL)
 }

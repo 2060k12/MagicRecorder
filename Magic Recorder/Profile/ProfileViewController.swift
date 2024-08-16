@@ -9,6 +9,8 @@ import UIKit
 import Kingfisher
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    
     
  
 
@@ -51,8 +53,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 if let profile = await repository.getCurrentUserProfileInfo() {
                     self.currentUserName.text = profile.fullName
-                    let url = URL(string: profile.profileImage)
-                    profileImage.kf.setImage(with: url)
+//                    let url = URL(string: profile.profileImage)
+//                    profileImage.kf.setImage(with: url)
                 } else {
                     print("User Not Found")
                 }
@@ -63,9 +65,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         else{
             
+            
             Task {
                 do{
-                    
                     guard let email = self.currentProfile?.email else {
                         print("Email is nil")
                         return
@@ -75,15 +77,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         self.listOfRecordings = recordings
                         self.profileTable.reloadData()
                     }
-                }catch {
+                }
+                catch {
                     print("Failed to retrieve recordings: \(error.localizedDescription)")
                 }
                 
                 if let profile = await repository.getUserProfileInfo(email: currentProfile?.email) {
                     self.currentUserName.text = profile.fullName
                     
-                    let url = URL(string: profile.profileImage)
-                    profileImage.kf.setImage(with: url)
+//                    let url = URL(string: profile.profileImage)
+//                    profileImage.kf.setImage(with: url)
                 } else {
                     print("User Not Found")
                 }
