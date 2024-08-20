@@ -14,12 +14,15 @@ import FirebaseStorage
 class SearchRepository{
     
     
+    // initializing firestore database
     let db = Firestore.firestore()
     
     
+    // function to search User
     func searchUser(searchedText: String, completion: @escaping (Profile?) -> Void) {
         let docRef = db.collection("Users").document(searchedText)
         
+        // get document
         docRef.getDocument { document, error in
             if let document = document, document.exists {
                 guard let data = document.data() else {

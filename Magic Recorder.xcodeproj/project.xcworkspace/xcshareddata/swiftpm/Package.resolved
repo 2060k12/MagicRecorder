@@ -1,5 +1,5 @@
 {
-  "originHash" : "813612fc732c2a44655360370cdc94084548c605ddd896b092b8fe111607f07c",
+  "originHash" : "b2d647baab1aa2f98871894b2271deadb447b5f82d0b842468d04cda2a466c61",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "3b62f154d00019ae29a71e9738800bb6f18b236d",
         "version" : "10.19.2"
+      }
+    },
+    {
+      "identity" : "audiokit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/AudioKit/",
+      "state" : {
+        "revision" : "2ebd422855e4645d3169f83d1765d1c8196b4f46",
+        "version" : "5.6.4"
       }
     },
     {

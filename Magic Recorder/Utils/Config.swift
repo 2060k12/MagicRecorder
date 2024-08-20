@@ -8,6 +8,8 @@
 import Foundation
 import UnsplashPhotoPicker
 
+
+// Unsplash config
 class Config {
     
     let unsplashConfig = UnsplashPhotoPickerConfiguration(

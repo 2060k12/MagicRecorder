@@ -46,7 +46,6 @@ class StoreTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: Const.StoreCellReuse, for: indexPath) as! StoreTVCell
         let item = listOfThemes[indexPath.row]
         cell.themeNameLabel.text = item.themeName

@@ -9,9 +9,11 @@ import Foundation
 
 
 struct Const {
-    // class name
+    
+    
+    // Below are the identifiers 
+    
     static let StoreCell = "StoreTVCell"
-    // cell name
     static let StoreCellReuse = "reusableIdentifierStoreCell"
     static let EachRecordingCell  = "EachRecordingCell"
     static let EachRecordingCellReuse  = "eachRecordingCellReuse"

@@ -58,7 +58,9 @@ extension SearchVC : UITableViewDelegate, UITableViewDataSource {
         cell.userNameLabel.text = searchedProfile?.fullName
         
         
+        // This feature was removed due to lack of time, It doesn't effect the app in anyway
         
+       
         //        if let imageUrlString = self.searchedProfile?.profileImage, let imageUrl = URL(string: imageUrlString) {
         //                   cell.userImageView.kf.setImage(
         //                       with: imageUrl,
@@ -77,8 +79,9 @@ extension SearchVC : UITableViewDelegate, UITableViewDataSource {
             }
         
         
+    
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            guard let profile = searchedProfile else {
+            guard let _ = searchedProfile else {
                 print("No Profile Selected")
                 return
             }

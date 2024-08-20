@@ -16,9 +16,11 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     let db = OfflineRepository()
     let profileRepo = ProfileRepository()
     
+    // holds list of recordisngs
     var listOfRecordings : [Recording]!
     @IBOutlet weak var recordingsTableView: UITableView!
     
+    // all audio elements
     var recorder : AVAudioRecorder!
     var player : AVAudioPlayer!
     var timer: Timer?
@@ -28,9 +30,12 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
     var isPlaying = false
     var meterTimer:Timer!
     
+    // holds the value for selected row
     var deselectRowAt: IndexPath?
     var selectedIndexPath: IndexPath?
     
+    
+    // ui elements for record and stop button
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     
@@ -46,6 +51,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         stopButton.isEnabled = false
         super.viewDidLoad()
         
+        // loads the recording
         loadRecordings()
         
         Task{
@@ -56,9 +62,12 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             }
         }
         
+        // reloads the table and populate the table
         recordingsTableView.reloadData()
         recordingsTableView.dataSource = self
         recordingsTableView.delegate = self
+        
+        // regestering the cell with the table
         recordingsTableView.register(UINib(nibName: Const.EachRecordingCell, bundle: nil), forCellReuseIdentifier: Const.EachRecordingCellReuse)
         
     }
@@ -176,13 +185,15 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
         
     }
     
-    
+    // directory where the audio will be saved
     func savedDirectory() ->URL {
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = path[0]
         return documentDirectory
     }
     
+    
+    // gets all the items  from and set them in an list
     func getAlItems (url : URL) -> [URL] {
         
         let fileManager = FileManager.default
@@ -245,7 +256,7 @@ class HomeViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlay
             cell.recordingNameLabel.text = recording.name
             cell.currentRecording = recording
             cell.editButton.addTarget(self, action: #selector(goToEditScreen) , for: .touchUpInside)
-
+           
             
             profileRepo.checkIfInTheCloud(recording: recording) { isInDb in
                 if isInDb {

@@ -31,9 +31,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     // WHen the Screen loads this function will run
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
-       
+    
         profileTable.register( UINib(nibName: Const.EachRecordingCell, bundle: nil) , forCellReuseIdentifier: Const.EachRecordingCellReuse)
         profileTable.dataSource = self
         profileTable.delegate = self
@@ -182,9 +180,4 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.endUpdates()
     }
     
-    
-    
-
-   
-
 }
