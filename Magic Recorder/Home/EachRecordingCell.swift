@@ -7,10 +7,11 @@
 
 import UIKit
 import AVFoundation
-import AudioStreaming
 
 class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     
+    
+    // initializing repository
     let db = OfflineRepository()
     let profileRepo = ProfileRepository()
     
@@ -20,8 +21,12 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     // indicates which screen the user view this cell from
     var currentScreen : String!
     
+    
     var audioPlayer: AVAudioPlayer!
     var currentRecording : Recording!
+    
+    
+    // Ui Elements for recording cell
     
     @IBOutlet weak var syncOnOff: UISwitch!
     @IBOutlet weak var editButton: UIButton!
@@ -47,8 +52,6 @@ class EachRecordingCell: UITableViewCell, AVAudioPlayerDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
         
         
     }

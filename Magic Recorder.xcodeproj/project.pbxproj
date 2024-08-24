@@ -22,6 +22,7 @@
 		CE1B5E382C53A3B900133B40 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B5E372C53A3B900133B40 /* ProfileViewController.swift */; };
 		CE1B5E3A2C53A3D000133B40 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B5E392C53A3D000133B40 /* ProfileRepository.swift */; };
 		CE1B5E3C2C53A68F00133B40 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B5E3B2C53A68F00133B40 /* Profile.swift */; };
+		CE234A642C6E3C9D0027E7D4 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE234A632C6E3C9D0027E7D4 /* SearchRepository.swift */; };
 		CE2507E92C53DFE9002A905D /* StoreTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2507E82C53DFE9002A905D /* StoreTableVC.swift */; };
 		CE2507ED2C53E03C002A905D /* StoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2507EC2C53E03C002A905D /* StoreRepository.swift */; };
 		CE2507EF2C53E223002A905D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2507EE2C53E223002A905D /* Theme.swift */; };
@@ -37,6 +38,10 @@
 		CE8506F32C6456A1003DE5DB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8506F02C6456A1003DE5DB /* Repository.swift */; };
 		CE8506F62C6456E0003DE5DB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE8506F52C6456E0003DE5DB /* RealmSwift */; };
 		CE8506F72C645755003DE5DB /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = CE8506F52C6456E0003DE5DB /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		CEA777472C67D41E00B50770 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA777462C67D41E00B50770 /* SearchVC.swift */; };
+		CEA777492C67D5B700B50770 /* searchedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA777482C67D5B700B50770 /* searchedUserCell.swift */; };
+		CEA7774C2C68E76F00B50770 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEA7774B2C68E76F00B50770 /* AudioKit */; };
+		CEA7774F2C68E91700B50770 /* EffectsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7774E2C68E91700B50770 /* EffectsVC.swift */; };
 		CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */; };
 		CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */; };
 		CEB2E5D42C51EDDB005099A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2E5D32C51EDDB005099A5 /* Extensions.swift */; };
@@ -44,8 +49,6 @@
 		CEDC5B502C66284A00138D60 /* UnsplashPhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = CEDC5B4F2C66284A00138D60 /* UnsplashPhotoPicker */; };
 		CEDC5B532C66347100138D60 /* UnsplashImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */; };
 		CEDC5B552C663AE400138D60 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B542C663AE400138D60 /* Config.swift */; };
-		CEDC5B572C665EDF00138D60 /* profileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDC5B562C665EDF00138D60 /* profileCell.xib */; };
-		CEDC5B592C6660E000138D60 /* ProfileCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B582C6660E000138D60 /* ProfileCellVC.swift */; };
 		CEDC5B5B2C6662E400138D60 /* EditedVideos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC5B5A2C6662E400138D60 /* EditedVideos.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +81,7 @@
 		CE1B5E372C53A3B900133B40 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE1B5E392C53A3D000133B40 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		CE1B5E3B2C53A68F00133B40 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		CE234A632C6E3C9D0027E7D4 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
 		CE2507E82C53DFE9002A905D /* StoreTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableVC.swift; sourceTree = "<group>"; };
 		CE2507EC2C53E03C002A905D /* StoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreRepository.swift; sourceTree = "<group>"; };
 		CE2507EE2C53E223002A905D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -90,13 +94,14 @@
 		CE776F672C5FC9F6008B0CC7 /* EachRecordingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EachRecordingCell.xib; sourceTree = "<group>"; };
 		CE8506EF2C6456A1003DE5DB /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		CE8506F02C6456A1003DE5DB /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		CEA777462C67D41E00B50770 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		CEA777482C67D5B700B50770 /* searchedUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchedUserCell.swift; sourceTree = "<group>"; };
+		CEA7774E2C68E91700B50770 /* EffectsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsVC.swift; sourceTree = "<group>"; };
 		CEB2E5C82C514BDA005099A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CEB2E5CA2C514BEA005099A5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		CEB2E5D32C51EDDB005099A5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashImagePicker.swift; sourceTree = "<group>"; };
 		CEDC5B542C663AE400138D60 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		CEDC5B562C665EDF00138D60 /* profileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = profileCell.xib; sourceTree = "<group>"; };
-		CEDC5B582C6660E000138D60 /* ProfileCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellVC.swift; sourceTree = "<group>"; };
 		CEDC5B5A2C6662E400138D60 /* EditedVideos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedVideos.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +112,7 @@
 			files = (
 				CE2507F22C53F3C9002A905D /* Kingfisher in Frameworks */,
 				CE1B5E2E2C536F0A00133B40 /* FirebaseAuth in Frameworks */,
+				CEA7774C2C68E76F00B50770 /* AudioKit in Frameworks */,
 				CEDC5B4D2C645C5000138D60 /* swift-video-generator in Frameworks */,
 				CE1B5E302C536F0A00133B40 /* FirebaseFirestore in Frameworks */,
 				CE8506F62C6456E0003DE5DB /* RealmSwift in Frameworks */,
@@ -123,6 +129,7 @@
 			children = (
 				CE0B9EE62C5138F500CEE369 /* Magic Recorder */,
 				CE0B9EE52C5138F500CEE369 /* Products */,
+				CEA7774D2C68E87700B50770 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +144,7 @@
 		CE0B9EE62C5138F500CEE369 /* Magic Recorder */ = {
 			isa = PBXGroup;
 			children = (
+				CEA777452C67D40D00B50770 /* Search */,
 				CE8506F12C6456A1003DE5DB /* RealmDb */,
 				CE776F5E2C5D3A00008B0CC7 /* GoogleService-Info.plist */,
 				CEB2E5D22C51EDCE005099A5 /* Utils */,
@@ -172,6 +180,14 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		CE234A622C6E3C820027E7D4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				CE234A632C6E3C9D0027E7D4 /* SearchRepository.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		CE2507EA2C53E020002A905D /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +207,23 @@
 			path = RealmDb;
 			sourceTree = "<group>";
 		};
+		CEA777452C67D40D00B50770 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				CE234A622C6E3C820027E7D4 /* Data */,
+				CEA777482C67D5B700B50770 /* searchedUserCell.swift */,
+				CEA777462C67D41E00B50770 /* SearchVC.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		CEA7774D2C68E87700B50770 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CEB2E5C72C514BA1005099A5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,8 +239,6 @@
 			children = (
 				CE1B5E3F2C53A7D900133B40 /* Data */,
 				CE1B5E372C53A3B900133B40 /* ProfileViewController.swift */,
-				CEDC5B582C6660E000138D60 /* ProfileCellVC.swift */,
-				CEDC5B562C665EDF00138D60 /* profileCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -258,6 +289,7 @@
 			children = (
 				CE0C707D2C58C1BD00E7933C /* EditScreenVC.swift */,
 				CEDC5B522C66347100138D60 /* UnsplashImagePicker.swift */,
+				CEA7774E2C68E91700B50770 /* EffectsVC.swift */,
 			);
 			path = EditAudio;
 			sourceTree = "<group>";
@@ -287,6 +319,7 @@
 				CE8506F52C6456E0003DE5DB /* RealmSwift */,
 				CEDC5B4C2C645C5000138D60 /* swift-video-generator */,
 				CEDC5B4F2C66284A00138D60 /* UnsplashPhotoPicker */,
+				CEA7774B2C68E76F00B50770 /* AudioKit */,
 			);
 			productName = "Magic Recorder";
 			productReference = CE0B9EE42C5138F500CEE369 /* Magic Recorder.app */;
@@ -322,6 +355,7 @@
 				CE8506F42C6456E0003DE5DB /* XCRemoteSwiftPackageReference "realm-swift" */,
 				CEDC5B4B2C645C5000138D60 /* XCRemoteSwiftPackageReference "swift-video-generator" */,
 				CEDC5B4E2C66284A00138D60 /* XCRemoteSwiftPackageReference "unsplash-photopicker-ios" */,
+				CEA7774A2C68E76F00B50770 /* XCRemoteSwiftPackageReference "AudioKit" */,
 			);
 			productRefGroup = CE0B9EE52C5138F500CEE369 /* Products */;
 			projectDirPath = "";
@@ -341,7 +375,6 @@
 				CE776F5F2C5D3A00008B0CC7 /* GoogleService-Info.plist in Resources */,
 				CE0B9EF42C5138F600CEE369 /* Base in Resources */,
 				CE0B9EEF2C5138F500CEE369 /* Base in Resources */,
-				CEDC5B572C665EDF00138D60 /* profileCell.xib in Resources */,
 				CE776F682C5FC9F6008B0CC7 /* EachRecordingCell.xib in Resources */,
 				CE776F622C5E67FD008B0CC7 /* StoreTVCell.xib in Resources */,
 			);
@@ -354,8 +387,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEDC5B592C6660E000138D60 /* ProfileCellVC.swift in Sources */,
 				CEDC5B5B2C6662E400138D60 /* EditedVideos.swift in Sources */,
+				CEA777472C67D41E00B50770 /* SearchVC.swift in Sources */,
+				CEA7774F2C68E91700B50770 /* EffectsVC.swift in Sources */,
 				CEB2E5C92C514BDA005099A5 /* LoginViewController.swift in Sources */,
 				CE1B5E3C2C53A68F00133B40 /* Profile.swift in Sources */,
 				CE776F592C5D0A8B008B0CC7 /* StoreDetailVC.swift in Sources */,
@@ -364,9 +398,11 @@
 				CEB2E5CB2C514BEA005099A5 /* RegisterViewController.swift in Sources */,
 				CE2507EF2C53E223002A905D /* Theme.swift in Sources */,
 				CE1B5E3A2C53A3D000133B40 /* ProfileRepository.swift in Sources */,
+				CE234A642C6E3C9D0027E7D4 /* SearchRepository.swift in Sources */,
 				CE776F692C5FC9F6008B0CC7 /* EachRecordingCell.swift in Sources */,
 				CE2507E92C53DFE9002A905D /* StoreTableVC.swift in Sources */,
 				CE1B5E362C53974C00133B40 /* HomeViewController.swift in Sources */,
+				CEA777492C67D5B700B50770 /* searchedUserCell.swift in Sources */,
 				CE1B5E342C538D8400133B40 /* LoginRepository.swift in Sources */,
 				CE0B9EE82C5138F500CEE369 /* AppDelegate.swift in Sources */,
 				CE0C707E2C58C1BD00E7933C /* EditScreenVC.swift in Sources */,
@@ -533,6 +569,7 @@
 				DEVELOPMENT_TEAM = 387X6776F6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Magic Recorder/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone for recording audio.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To save your Exported video, Please Give access to Gallary";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -563,6 +600,7 @@
 				DEVELOPMENT_TEAM = 387X6776F6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Magic Recorder/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone for recording audio.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To save your Exported video, Please Give access to Gallary";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -631,6 +669,14 @@
 				kind = branch;
 			};
 		};
+		CEA7774A2C68E76F00B50770 /* XCRemoteSwiftPackageReference "AudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKit/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.4;
+			};
+		};
 		CEDC5B4B2C645C5000138D60 /* XCRemoteSwiftPackageReference "swift-video-generator" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:dev-labs-bg/swift-video-generator.git";
@@ -674,6 +720,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE8506F42C6456E0003DE5DB /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		CEA7774B2C68E76F00B50770 /* AudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEA7774A2C68E76F00B50770 /* XCRemoteSwiftPackageReference "AudioKit" */;
+			productName = AudioKit;
 		};
 		CEDC5B4C2C645C5000138D60 /* swift-video-generator */ = {
 			isa = XCSwiftPackageProductDependency;

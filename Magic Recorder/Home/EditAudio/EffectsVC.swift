@@ -12,6 +12,9 @@ import AVFoundation
 
 class EffectsVC: UIViewController, AVAudioPlayerDelegate {
    
+        
+    // all elemets of audio, for audio editing
+    
     var engine = AudioEngine()
     var player = AudioPlayer()
     var delay : Delay!
@@ -58,10 +61,12 @@ class EffectsVC: UIViewController, AVAudioPlayerDelegate {
         super.viewDidLoad()
         
        
+        // file path in device
         
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let url = documentsURL.appendingPathComponent(recording.name, conformingTo: .wav)
         
+        // filepath if it's downloaded from online
         let onlineAudioFolderURL = documentsURL.appendingPathComponent("OnlineAudio", isDirectory: true)
         let fileURL = onlineAudioFolderURL.appendingPathComponent(recording.name).appendingPathExtension("wav")
         if FileManager.default.fileExists(atPath: fileURL.path) {
@@ -221,7 +226,7 @@ class EffectsVC: UIViewController, AVAudioPlayerDelegate {
                 return
             }
             
-            let frameCount = AVAudioFrameCount(buffer.frameLength)
+            let _ = AVAudioFrameCount(buffer.frameLength)
             try outputFile.write(from: buffer)
             
             // Stop the engine and cleanup
@@ -243,15 +248,15 @@ class EffectsVC: UIViewController, AVAudioPlayerDelegate {
 
     
     
+    // when the play button is pressed
     @IBAction func playButton_onPressed(_ sender: Any) {
         
         
-        guard let recording = recording else {
+        guard let _ = recording else {
             print("No recording found")
             return
         }
-        
-        
+
         do {
             
             guard let url = currentPath else{
@@ -266,6 +271,8 @@ class EffectsVC: UIViewController, AVAudioPlayerDelegate {
                             return
                         }
                 
+            
+                // add effects to the audio when playing
                 player = AudioPlayer(buffer: buffer)!
                 player.isLooping = true
                
@@ -301,9 +308,12 @@ class EffectsVC: UIViewController, AVAudioPlayerDelegate {
            }
     }
     
+        // when audio is stopped
     @IBAction func pauseButton_onPress(_ sender: Any) {
-        player.stop() // This stops the playback
-
+        
+        if(player.isPlaying) {
+            player.stop() // This stops the playback
+        }
     }
     
     

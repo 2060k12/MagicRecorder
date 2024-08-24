@@ -21,13 +21,11 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         currentPath = url
     }
     
-   
-
     var recording : Recording!     // getting recording while navigating
     let db = OfflineRepository()    // initializing realmDB
 
     
-
+    // Essential variables
     var image :UIImage?
     var imagePicker = UIImagePickerController()
     var timer : Timer?
@@ -38,7 +36,6 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     
     
     // ui elements
-    
     @IBOutlet weak var effectsButton: UIButton!
     @IBOutlet weak var noImageLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
@@ -56,18 +53,21 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
                         self.present(alert, animated: true, completion: nil)}
     
     
-    // Finction to update slider when an audio is played
+    // function to update slider when an audio is played
     func startTimer(){
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { Timer in
             if let player = self.audioPlayer {
                 self.audioSlider.value = Float(player.currentTime)
                 
+                // formats the date
                 let formatter = DateComponentsFormatter()
                 formatter.allowedUnits = [.minute, .second]
                 formatter.unitsStyle = .positional
                 formatter.zeroFormattingBehavior = .pad
                 
+                
+                // add the formatted date
                 if let formattedDuration = formatter.string(from: player.currentTime) {
                     self.audioCurrentTimeLabel.text = formattedDuration
                 }
@@ -75,16 +75,17 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         })
     }
     
+    
+    // when the slider is used
     @IBAction func sliderPosition_onChanged(_ sender: Any) {
         startTime = Double(audioSlider.value)
     }
     
     
-    
-    
     // audio player
     var audioPlayer : AVAudioPlayer?
 
+    // ui elements
     @IBOutlet weak var editImageView: UIImageView!
     @IBOutlet weak var addImageButton: UIButton!
     
@@ -94,9 +95,11 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         progressBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
         
+        // document path for the recording
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let url = documentsURL.appendingPathComponent(recording.name, conformingTo: .wav)
         
+        // online audio path
         let onlineAudioFolderURL = documentsURL.appendingPathComponent("OnlineAudio", isDirectory: true)
         let fileURL = onlineAudioFolderURL.appendingPathComponent(recording.name).appendingPathExtension("wav")
         if FileManager.default.fileExists(atPath: fileURL.path) {
@@ -112,11 +115,14 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         
         
         do{
+            // checks if the current path is nil
             guard let currentPath = currentPath else{
                 print("Path is Nil")
                 return
             }
             
+            
+            // function to load audio and set the ui accordingly
             audioPlayer = try AVAudioPlayer(contentsOf: currentPath)
             audioPlayer?.delegate = self
             audioPlayer?.prepareToPlay()
@@ -141,9 +147,12 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         
     }
     
+    
+    // when the effects button is pressed
     @IBAction func effectsButton_onClick(_ sender: Any) {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Ensure "Main" is your storyboard name
+//        initializing storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
            let destinationVC = storyboard.instantiateViewController(withIdentifier: "EffectsVC") as! EffectsVC
            destinationVC.recording = recording
         guard let time = maxLength else {
@@ -184,7 +193,6 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         imagePicker.delegate = self
                  imagePicker.sourceType = .savedPhotosAlbum
                  imagePicker.allowsEditing = true
-
                  present(imagePicker, animated: true, completion: nil)
         
     
@@ -338,6 +346,7 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
     }
 
     
+    // opens nsplash image pickers
     @IBAction func unsplashPhotoPickerButton_onClick(_ sender: Any) {
         
         
@@ -348,7 +357,6 @@ class EditScreenVC: UIViewController, UINavigationControllerDelegate, UIImagePic
         
     }
     
-
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier ==  "EffectsVC" {

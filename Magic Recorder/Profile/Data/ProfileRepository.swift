@@ -20,6 +20,7 @@ class ProfileRepository {
     var currentUSer = Auth.auth().currentUser?.email
 
     
+    // gets current logged in user info
     func getCurrentUserProfileInfo() async -> Profile? {
         do {
             
@@ -44,6 +45,9 @@ class ProfileRepository {
         }
     }
     
+    
+    
+    // gets an user profile info when their "email" is passed as parameter
     func getUserProfileInfo(email: String?) async -> Profile? {
         do {
             
@@ -70,12 +74,13 @@ class ProfileRepository {
     
     
     
+    // add a recording to the cloud, firestore db and firebase storeage
     
     func addRecordingToCloud(recording : Recording, callback : @escaping (Result<Void, Error>) -> Void) {
   
         
-        guard let recordingName = recording.name,
-        let recordingUrl = recording.savedPath else {
+        guard let _ = recording.name,
+        let _ = recording.savedPath else {
             print("Data not complete, Please Check everything before trying again")
             callback(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Incomplete recording data"])))
             return
@@ -88,20 +93,19 @@ class ProfileRepository {
                 return
             }
         
-            
+            // storage ref
             let storageRef = fBStorage.reference()
             let recRef = storageRef.child("\(currentUser)/\(recording.id)")
         
+            // Document url
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             let audioUrl = documentsURL.appendingPathComponent(recording.name, conformingTo: .wav)
             
     
-            let uploadTask = recRef.putFile(from: audioUrl){ metadata, error in
+            let _ = recRef.putFile(from: audioUrl){ metadata, error in
         
             recRef.downloadURL { url, error in
                 guard let downloadUrl = url else {
-                    
-                    
                     print("Can't fetch download Url")
                     return
                     
@@ -134,11 +138,9 @@ class ProfileRepository {
             
         }
         
-             
-                
-          
-        
     }
+    
+    // removes a recording from the cloud
     
     func removeFromTheCloud(recording : Recording, callback : @escaping(Result<Void, Error>) -> Void ){
         guard let currentUSer = currentUSer else {
@@ -216,6 +218,7 @@ class ProfileRepository {
     }
 
 
+    // checks if the recording is in the cloud
     func checkIfInTheCloud(recording: Recording, callback : @escaping (Bool) -> Void) {
         guard let currentUser = currentUSer else {
             print("Please login or check your internet connection")
